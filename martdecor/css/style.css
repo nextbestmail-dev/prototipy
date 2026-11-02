@@ -1,6 +1,6 @@
 /* Палитра — из логотипа: бордо, зелёный, камень, чёрные колонны */
 :root{
-  --paper:#f5f2ea;--card:#fffdf8;--ink:#1f1b19;--muted:#675f57;--line:#d9d2c3;
+  --paper:#ffffff;--card:#f7f7f6;--ink:#1f1b19;--muted:#615f5b;--line:#e3e2de;
   --wine:#6b2230;--wine-d:#4d1722;--green:#5f7a52;--stone:#aea58e;--sage:#c6cabf;
   --r:6px;--wrap:1240px;
   --head:"Forum",Georgia,serif;--body:"Golos Text",system-ui,sans-serif;
@@ -104,7 +104,7 @@ section{padding:88px 0}
 .secs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .sec{display:grid;grid-template-columns:130px 1fr;gap:18px;text-decoration:none;background:var(--card);padding:16px;border-radius:var(--r);border:1px solid var(--line);transition:border-color .2s}
 .sec:hover{border-color:var(--wine)}
-.arch{display:block;overflow:hidden;border-radius:999px 999px 0 0;background:#ece7db}
+.arch{display:block;overflow:hidden;border-radius:999px 999px 0 0;background:#f3f3f1}
 .arch img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 a:hover>.arch img,.arch:hover img,.sec:hover img{transform:scale(1.04)}
 .sec .arch{height:178px}
@@ -139,8 +139,8 @@ a:hover>.arch img,.arch:hover img,.sec:hover img{transform:scale(1.04)}
 .pro-g{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .pro ul{list-style:none;padding:0;margin:24px 0 30px}
 .pro li{padding:12px 0;border-top:1px solid rgba(255,255,255,.2)}
-.pro .btn{background:#f5f2ea;color:var(--wine-d);border-color:#f5f2ea}
-.pro .btn:hover{background:#fff}
+.pro .btn{background:#fff;color:var(--wine-d);border-color:#fff}
+.pro .btn:hover{background:#f3f3f1}
 .pro blockquote{font:400 clamp(25px,2.6vw,34px)/1.22 var(--head);margin:0 0 16px}
 .pro figure{margin:0}
 
@@ -164,7 +164,7 @@ details.faq p{margin:10px 0 0;color:var(--muted)}
 .info dd{margin:2px 0 0}
 .need{border:1px dashed var(--wine);border-radius:var(--r);padding:12px 14px;font-size:15px;margin:12px 0}
 .need b{font-weight:500;color:var(--wine)}
-.ph{background:repeating-linear-gradient(135deg,#ece7db 0 14px,#e4decf 14px 28px);border-radius:var(--r);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);font-size:15px;min-height:220px}
+.ph{background:repeating-linear-gradient(135deg,#f3f3f1 0 14px,#ebebe8 14px 28px);border-radius:var(--r);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);font-size:15px;min-height:220px}
 
 /* Каталог */
 .page-h{padding:48px 0 28px}
@@ -228,7 +228,7 @@ details.faq p{margin:10px 0 0;color:var(--muted)}
 /* Подвал */
 #site-footer{background:var(--ink);color:#d9d3c6;padding:56px 0 24px;font-size:15px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
-.foot img{background:#f5f2ea;border-radius:4px;margin-bottom:12px}
+.foot img{background:#fff;border-radius:4px;margin-bottom:12px}
 .foot h4{font:400 21px var(--head);color:#fff;margin:0 0 10px}
 .foot a{color:inherit}
 .legal{margin-top:32px;padding-top:16px;border-top:1px solid #443d38;font-size:13px;color:#a79f92}
