@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Фитнес с&nbsp;Настей&nbsp;— анализ и&nbsp;предложение по&nbsp;сайту</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Роли цветов постоянные, значения — под клиента: акцент из логотипа или обложки группы */
+:root{
+  --sage:#597D8A; --sage-dark:#4A372B; --sage-ink:#3F5F6B; --gold:#A67C5A; --mint:#DCC9B2;
+  --bg:#FBF7F2;--tint:#EEF2F1; --warn:#FBF3E2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.65 Manrope,system-ui,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+h1{font-size:46px;margin-bottom:16px}
+h2{font-size:32px;margin:0 0 6px}
+h3{font-size:22px;margin:0 0 6px}
+p{margin:11px 0}
+.sub{color:var(--muted);font-size:14.5px}
+p.sub{max-width:72ch}
+header{background:var(--sage-dark);color:#fff;padding:56px 0 48px}
+header .eyebrow{letter-spacing:3.4px;text-transform:uppercase;font-size:12px;color:var(--mint);margin-bottom:18px}
+header h1{color:#fff;max-width:24ch}
+header p{color:#E4E9E1;max-width:64ch}
+header .sub{color:#AEB9AE;margin-top:20px}
+header a{color:#E4E9E1}
+section{padding:46px 0 6px}
+.sec-num{display:block;width:max-content;font-size:12px;letter-spacing:2.6px;text-transform:uppercase;color:var(--sage);border-bottom:2px solid var(--sage);padding-bottom:5px;margin-bottom:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:22px 24px;margin:14px 0}
+.card .n{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--sage);line-height:1;margin-bottom:6px}
+.grid.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid.two{grid-template-columns:1fr} h1{font-size:36px}}
+.adv{list-style:none;padding:0;margin:14px 0}
+.adv li{padding:11px 0 11px 26px;border-bottom:1px solid var(--line);position:relative}
+.adv li:before{content:"";position:absolute;left:4px;top:21px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.adv li:last-child{border:0}
+.why{background:var(--tint);border-left:3px solid var(--sage);border-radius:0 9px 9px 0;padding:11px 16px;margin-top:12px;font-size:15.5px}
+.seg{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin:12px 0}
+.tag{display:inline-block;background:var(--tint);color:var(--sage-ink);font-size:12.5px;letter-spacing:.4px;padding:3px 11px;border-radius:999px;margin-bottom:8px}
+.src{color:var(--muted);font-size:14px;margin-top:2px}
+.note{background:var(--warn);border-radius:12px;padding:16px 20px;margin:18px 0;font-size:15.5px}
+.note strong{color:#7A5A22}
+ol.tasks{padding-left:22px}
+ol.tasks li{margin:12px 0}
+.cta{background:var(--sage-dark);color:#fff;border-radius:16px;padding:34px;text-align:center;margin:22px 0}
+.cta h3{color:#fff;font-size:28px}
+.cta a.btn{display:inline-block;background:var(--mint);color:var(--sage-dark);padding:14px 30px;border-radius:999px;text-decoration:none;font-weight:700;margin-top:14px}
+.cta .url{display:block;margin-top:13px;color:#D6DED4;font-size:15px;word-break:break-all}
+.cta p{color:#DCE3DA;max-width:56ch;margin:0 auto}
+.offer{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:22px 24px;margin:14px 0}
+.offer-main{border:2px solid var(--sage);background:#FAFCF8}
+.badge{display:inline-block;background:var(--sage);color:#fff;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;padding:3px 11px;border-radius:6px;margin-bottom:9px}
+blockquote{margin:14px 0;padding:14px 20px;background:var(--paper);border-left:3px solid var(--gold);border-radius:0 9px 9px 0;font-style:italic;color:#353B36}
+footer{margin-top:56px;padding:30px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer p{max-width:70ch}
+footer a{color:var(--sage-dark)}
+@media print{
+  body{background:#fff;font-size:11.5pt}
+  .wrap{max-width:100%;padding:0 14mm}
+  header{padding:16mm 0 11mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{padding:7mm 0 0}
+  h2{margin-top:2mm}
+  .adv li{padding:7px 0 7px 24px}
+  p{margin:8px 0}
+  .card,.seg,.offer,.cta,.note,.why,blockquote{page-break-inside:avoid;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,.sec-num{page-break-after:avoid;break-after:avoid}
+  .card,.seg,.offer{padding:16px 20px;margin:10px 0}
+  .why{margin-top:9px;padding:9px 14px}
+  .cta{padding:24px;margin:16px 0}
+  footer{margin-top:28px;padding:18px 0 20px}
+  h1{font-size:28pt}h2{font-size:20pt}h3{font-size:14pt}
+  a{color:inherit;text-decoration:none}
+  @page{margin:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Анализ и&nbsp;предложение · Ольга</div>
+    <h1>Фитнес с&nbsp;Настей: разбор группы, конкурентов и&nbsp;предложение по&nbsp;сайту</h1>
+    <p>Анастасия, перед&nbsp;тем&nbsp;как&nbsp;что-то предлагать, я&nbsp;разобрала все&nbsp;140 постов вашей группы ВКонтакте за&nbsp;два года, ленту Telegram-канала и&nbsp;Instagram: форматы, расписание, цены, отзывы и&nbsp;то,&nbsp;какие посты люди смотрят больше всего. Отдельно посмотрела, где&nbsp;ещё&nbsp;в&nbsp;Саратове ищут тренировки для&nbsp;женщин. Ниже&nbsp;— что&nbsp;я&nbsp;увидела и&nbsp;что&nbsp;предлагаю сделать.</p>
+    <p class="sub">Источники: сообщество <a href="https://vk.com/fitness_s_nastya">vk.com/fitness_s_nastya</a>, Telegram t.me/stepnova_fitness, Instagram @stepnova_fitness, Profi.ru, Яндекс Карты. Данные собраны 3 ноября 2026 года.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <span class="sec-num">01 · Главные выводы</span>
+  <h2>Пять вещей, которые я&nbsp;увидела</h2>
+  <div class="card">
+    <div class="n">1</div>
+    <h3>Группу ВКонтакте вы&nbsp;сейчас растите, но&nbsp;в&nbsp;ней пока видно только онлайн-программу</h3>
+    <p>Ваши основные площадки&nbsp;— Instagram (6&nbsp;283 подписчицы) и&nbsp;Telegram, а&nbsp;группу ВК вы&nbsp;развиваете: в&nbsp;ней пока 86 подписчиков, и&nbsp;посты в&nbsp;Telegram зовут «выбирай свой формат» именно туда. Но&nbsp;в&nbsp;описании группы рассказано только об&nbsp;онлайн-программе, а&nbsp;тренировки в&nbsp;зале и&nbsp;расписание приходится искать по&nbsp;ленте. Ссылка на&nbsp;сайт в&nbsp;описании группы покажет новым подписчикам оба формата сразу.</p>
+  </div>
+  <div class="card">
+    <div class="n">2</div>
+    <h3>Цены не&nbsp;найти, а&nbsp;у&nbsp;онлайн-программы в&nbsp;постах три разные цены</h3>
+    <p>Стоимость тренировок в&nbsp;зале не&nbsp;указана ни&nbsp;в&nbsp;одной соцсети. Онлайн-программа в&nbsp;постах стоит то&nbsp;1&nbsp;990&nbsp;₽ (весенняя скидка вместо 3&nbsp;000&nbsp;₽, май), то&nbsp;2&nbsp;900&nbsp;₽ (июнь). Девушке, которая хочет просто узнать цену, приходится писать и&nbsp;ждать ответа.</p>
+  </div>
+  <div class="card">
+    <div class="n">3</div>
+    <h3>Онлайн-формат интересен людям: пост про&nbsp;него&nbsp;— самый просматриваемый в&nbsp;группе</h3>
+    <p>Пост про&nbsp;тренировки по&nbsp;20 минут дома (27.08.2026) набрал 3&nbsp;257 просмотров при&nbsp;обычных 12 на&nbsp;пост. Пост про&nbsp;«Здоровую спину»&nbsp;— 2&nbsp;044. Но&nbsp;ссылка из&nbsp;них ведёт сразу в&nbsp;закрытый Телеграм-канал&nbsp;— прочитать о&nbsp;программе до&nbsp;входа больше негде.</p>
+  </div>
+  <div class="card">
+    <div class="n">4</div>
+    <h3>Отзывы есть, но&nbsp;спрятаны</h3>
+    <p>Три тёплых отзыва с&nbsp;результатами («сейчас уже&nbsp;минус 4 кг») опубликованы картинками в&nbsp;одном посте сентября 2025 года и&nbsp;в&nbsp;«Актуальном» Instagram. Новая подписчица до&nbsp;них не&nbsp;долистает.</p>
+  </div>
+  <div class="card">
+    <div class="n">5</div>
+    <h3>В&nbsp;поиске по&nbsp;Саратову первыми стоят агрегаторы и&nbsp;студии</h3>
+    <p>По&nbsp;запросам о&nbsp;групповых тренировках для&nbsp;женщин в&nbsp;Саратове на&nbsp;первых местах Profi.ru, где&nbsp;тренер&nbsp;— одна из&nbsp;десятков анкет, и&nbsp;карточки студий с&nbsp;разовыми занятиями. Сейчас человеку, который нашёл вас в&nbsp;Instagram, тоже некуда перейти, чтобы&nbsp;за&nbsp;минуту увидеть оба формата, цены и&nbsp;отзывы,&nbsp;— сайт закрывает именно это.</p>
+  </div>
+</section>
+
+<section>
+  <span class="sec-num">02 · Ваши преимущества</span>
+  <h2>Что&nbsp;у&nbsp;вас уже&nbsp;сильного</h2>
+  <p class="sub">Это&nbsp;не&nbsp;мои придумки&nbsp;— всё взято из&nbsp;ваших постов в&nbsp;ВКонтакте, Telegram и&nbsp;Instagram.</p>
+  <ul class="adv">
+    <li><b>Личная история, которая продаёт сама.</b> «Твой&nbsp;тренер родила двоих и&nbsp;сбросила 20 кг»&nbsp;— первая строка вашего Instagram. Лучшего обещания для&nbsp;мам и&nbsp;занятых женщин не&nbsp;придумать.</li>
+    <li><b>Две понятные линейки.</b> Живые тренировки в&nbsp;Саратове и&nbsp;закрытый онлайн-проект на&nbsp;30 дней&nbsp;— можно предложить формат каждой.</li>
+    <li><b>Чёткое расписание.</b> Спорткомплекс F1&nbsp;— понедельник, среда, пятница в&nbsp;20:00; в&nbsp;тёплое время ещё&nbsp;и&nbsp;стадион «Сокол» по&nbsp;утрам.</li>
+    <li><b>Онлайн без&nbsp;отговорок.</b> «20 минут, чтобы&nbsp;переписать историю своего тела», тренировки в&nbsp;записи, 3–4 раза в&nbsp;неделю, каждую неделю новая нагрузка.</li>
+    <li><b>Питание без&nbsp;запретов.</b> «Ничего не&nbsp;запрещено&nbsp;— можно кушать всё, но&nbsp;грамотно распределять», меню и&nbsp;простые рецепты.</li>
+    <li><b>Вход для&nbsp;новичков.</b> «Любой уровень подготовки или&nbsp;совсем без&nbsp;подготовки&nbsp;— я&nbsp;помогу и&nbsp;направлю».</li>
+    <li><b>Своё направление для&nbsp;спины.</b> «Здоровая спина / мягкая сила»&nbsp;— соматический фитнес, пост о&nbsp;нём набрал 2&nbsp;044 просмотра.</li>
+    <li><b>Сообщество, а&nbsp;не&nbsp;просто зал.</b> Совместные мероприятия, прогулки, девичники, вечера с&nbsp;участницами.</li>
+    <li><b>Публичность.</b> Выступление спикером на&nbsp;женском форуме в&nbsp;марте 2026 года.</li>
+    <li><b>Красивые профессиональные фото.</b> Их&nbsp;десятки&nbsp;— сайт можно собрать целиком на&nbsp;ваших снимках, без&nbsp;стоковых картинок.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="sec-num">03 · Сейчас</span>
+  <h2>Что&nbsp;работает и&nbsp;что&nbsp;провисает</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>Работает</h3>
+      <ul class="adv">
+        <li>Instagram с&nbsp;аудиторией 6&nbsp;283 подписчицы</li>
+        <li>Регулярные видео с&nbsp;упражнениями</li>
+        <li>Живые фото с&nbsp;тренировок и&nbsp;встреч</li>
+        <li>Тёплые отзывы с&nbsp;результатами</li>
+        <li>Телефон и&nbsp;мессенджеры для&nbsp;связи</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Провисает</h3>
+      <ul class="adv">
+        <li>Нет&nbsp;сайта&nbsp;— некуда отправить человека, чтобы&nbsp;он&nbsp;за&nbsp;минуту понял, какие есть форматы и&nbsp;сколько они&nbsp;стоят</li>
+        <li>Нет&nbsp;цены на&nbsp;тренировки в&nbsp;зале</li>
+        <li>Расписание и&nbsp;адрес только в&nbsp;постах</li>
+        <li>Отзывы спрятаны в&nbsp;старом посте</li>
+        <li>Форматы описаны по&nbsp;кусочкам на&nbsp;пяти площадках: Instagram, ВК, Telegram, MAX, закрытый канал&nbsp;— всё вместе не&nbsp;видно нигде</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-num">04 · Конкуренты</span>
+  <h2>Где&nbsp;ещё&nbsp;в&nbsp;Саратове ищут тренировки для&nbsp;женщин</h2>
+  <p>Я&nbsp;посмотрела, что&nbsp;показывает поиск по&nbsp;запросам «групповые тренировки для&nbsp;женщин Саратов», «фитнес похудение Саратов», и&nbsp;проверила, у&nbsp;кого есть свой сайт и&nbsp;цены на&nbsp;виду.</p>
+  <div class="card">
+    <span class="tag">агрегатор</span>
+    <h3>Profi.ru, фитнес для&nbsp;женщин в&nbsp;Саратове</h3>
+    <p class="src">profi.ru · анкеты тренеров, часть объявлений старше года</p>
+    <p>Услуги от&nbsp;540&nbsp;₽. Тренер здесь&nbsp;— одна из&nbsp;десятков одинаковых анкет, выбирают по&nbsp;цене.</p>
+    <div class="why">Сайт даёт вам то,&nbsp;чего нет&nbsp;в&nbsp;анкете: историю «родила двоих и&nbsp;сбросила 20 кг», сообщество и&nbsp;живые фото. Сравнивают уже&nbsp;не&nbsp;цену, а&nbsp;человека.</div>
+  </div>
+  <div class="card">
+    <span class="tag">студия</span>
+    <h3>Студия пилатеса Wings, Московская, 49</h3>
+    <p class="src">Яндекс Карты · разовое занятие 1&nbsp;200&nbsp;₽</p>
+    <p>Групповые занятия в&nbsp;малых группах, цена на&nbsp;виду.</p>
+    <div class="why">Студии показывают цену сразу&nbsp;— и&nbsp;вам это&nbsp;тоже нужно. А&nbsp;онлайн-проекта за&nbsp;2&nbsp;900&nbsp;₽ в&nbsp;месяц у&nbsp;студий нет:&nbsp;это&nbsp;ваш&nbsp;аргумент для&nbsp;тех, кто не&nbsp;может ходить в&nbsp;зал.</div>
+  </div>
+  <div class="note"><strong>Что&nbsp;это&nbsp;значит для&nbsp;сайта.</strong> Первые строки поиска занимают агрегаторы и&nbsp;карты, и&nbsp;сам по&nbsp;себе сайт туда не&nbsp;попадёт&nbsp;— для&nbsp;этого его&nbsp;отдельно продвигают, это&nbsp;можно обсудить позже. Главная задача сайта на&nbsp;старте&nbsp;— стать одной ссылкой, куда&nbsp;вы&nbsp;ведёте подписчиц из&nbsp;Instagram, Telegram и&nbsp;ВК, и&nbsp;где&nbsp;они&nbsp;сразу записываются.</div>
+</section>
+
+<section>
+  <span class="sec-num">05 · Клиентки</span>
+  <h2>Кто к&nbsp;вам приходит</h2>
+  <div class="seg"><span class="tag">главный продукт</span>
+    <h3>Занятые мамы, которым некогда в&nbsp;зал</h3>
+    <p>Хотят понять, правда&nbsp;ли хватит 20 минут дома и&nbsp;сколько это&nbsp;стоит. Им&nbsp;— онлайн-проект.</p></div>
+  <div class="seg"><span class="tag">Саратов</span>
+    <h3>Те,&nbsp;кому нужна компания и&nbsp;энергия</h3>
+    <p>Спрашивают, где&nbsp;зал, во&nbsp;сколько и&nbsp;сколько стоит абонемент. Им&nbsp;— группа в&nbsp;F1 и&nbsp;девичники.</p></div>
+  <div class="seg"><span class="tag">новички</span>
+    <h3>«Я&nbsp;совсем не&nbsp;спортивный человек»</h3>
+    <p>Боятся не&nbsp;потянуть. Им важно прочитать, что&nbsp;подойдёт любой уровень, и&nbsp;увидеть таких&nbsp;же девушек на&nbsp;фото.</p></div>
+  <div class="seg"><span class="tag">спина и&nbsp;самочувствие</span>
+    <h3>Женщины с&nbsp;зажимами и&nbsp;болью в&nbsp;спине</h3>
+    <p>Ищут не&nbsp;похудение, а&nbsp;мягкую нагрузку. Им&nbsp;— «Здоровая спина / мягкая сила».</p></div>
+  <div class="seg"><span class="tag">35–50 лет</span>
+    <h3>Те,&nbsp;кто следит за&nbsp;здоровьем</h3>
+    <p>Им близки ваши посты про&nbsp;анализы и&nbsp;питание: нужна уверенность, что&nbsp;тренер учтёт возраст и&nbsp;ограничения.</p></div>
+</section>
+
+<section>
+  <span class="sec-num">06 · Логика сайта</span>
+  <h2>Что&nbsp;должен решать сайт</h2>
+  <ol class="tasks">
+    <li><b>Собирать людей со&nbsp;всех площадок.</b> Одна ссылка для&nbsp;шапки Instagram, описания Telegram-канала и&nbsp;группы ВК&nbsp;— человек сразу видит оба формата. Сайт не&nbsp;заменяет соцсети: с&nbsp;него можно перейти в&nbsp;группу ВК и&nbsp;Telegram.</li>
+    <li><b>Отвечать на&nbsp;вопрос цены.</b> Стоимость онлайн-проекта и&nbsp;тренировок в&nbsp;зале на&nbsp;первом&nbsp;же экране формата.</li>
+    <li><b>Помогать выбрать формат.</b> Короткий тест из&nbsp;трёх вопросов подсказывает: зал, онлайн или&nbsp;«Здоровая спина».</li>
+    <li><b>Показывать вас.</b> Ваши фото, история и&nbsp;выступления&nbsp;— люди идут к&nbsp;тренеру, а&nbsp;не&nbsp;в&nbsp;зал.</li>
+    <li><b>Снимать страх новичка.</b> Отзывы с&nbsp;результатами, ответы на&nbsp;частые вопросы, фото сообщества.</li>
+    <li><b>Превращать интерес в&nbsp;запись.</b> Заявка с&nbsp;выбранным форматом приходит вам в&nbsp;Telegram.</li>
+  </ol>
+</section>
+
+<section>
+  <span class="sec-num">07 · Прототип</span>
+  <h2>Чтобы&nbsp;не&nbsp;объяснять словами</h2>
+  <p>Я&nbsp;собрала прототип сайта на&nbsp;ваших материалах: фото, текстах постов, расписании и&nbsp;отзывах. Он&nbsp;сделан в&nbsp;спокойной песочно-кофейной гамме с&nbsp;морскими оттенками, на&nbsp;полупрозрачных «стеклянных» панелях&nbsp;— так&nbsp;ваши снимки остаются главными.</p>
+  <p>На&nbsp;одной странице&nbsp;— обе линейки, тест для&nbsp;выбора формата, упражнения из&nbsp;ваших видео, сообщество, отзывы, частые вопросы и&nbsp;заявка.</p>
+  <p>Дальше проще один раз открыть и&nbsp;посмотреть самой.</p>
+  <div class="cta">
+    <h3>Прототип сайта «Фитнес с&nbsp;Настей»</h3>
+    <p>Открывается с&nbsp;компьютера и&nbsp;телефона, регистрация не&nbsp;нужна.</p>
+    <a class="btn" href="https://nextbestmail-dev.github.io/prototipy/stepnova/">Открыть прототип</a>
+    <span class="url">nextbestmail-dev.github.io/prototipy/stepnova</span>
+  </div>
+  <p class="sub">Честно: все&nbsp;фото&nbsp;— ваши, из&nbsp;соцсетей, на&nbsp;сайте заменим на&nbsp;оригиналы. Цену тренировок в&nbsp;зале и&nbsp;адрес F1 я&nbsp;не&nbsp;нашла&nbsp;— на&nbsp;их&nbsp;месте пометки. Форма ничего не&nbsp;отправляет&nbsp;— это&nbsp;демонстрация, а&nbsp;не&nbsp;готовый сайт.</p>
+</section>
+
+<section>
+  <span class="sec-num">08 · Чем&nbsp;зацепить клиентку</span>
+  <h2>Варианты, из&nbsp;которых можно выбрать</h2>
+  <div class="offer offer-main">
+    <span class="badge">заложено в&nbsp;прототип</span>
+    <h3>А.&nbsp;«Выбери свой формат» за&nbsp;одну минуту</h3>
+    <p>Вы&nbsp;и&nbsp;так&nbsp;пишете «выбирай свой формат» почти в&nbsp;каждом посте. На&nbsp;сайте это&nbsp;становится тестом из&nbsp;трёх вопросов: в&nbsp;конце&nbsp;— подходящий формат и&nbsp;кнопка записи.</p>
+  </div>
+  <div class="offer">
+    <h3>Б. Старт потока с&nbsp;датой</h3>
+    <p>Как&nbsp;ваш&nbsp;марафон «Похудеть к&nbsp;Новому году» в&nbsp;2024 году: онлайн-проект стартует в&nbsp;конкретный день, на&nbsp;сайте&nbsp;— дата и&nbsp;счётчик мест. Дата подталкивает решиться.</p>
+  </div>
+  <div class="offer">
+    <h3>В.&nbsp;Пробная тренировка в&nbsp;зале</h3>
+    <p>Первое занятие в&nbsp;F1 по&nbsp;особой цене для&nbsp;тех, кто пришёл с&nbsp;сайта. Снимает главный страх новичка&nbsp;— «не&nbsp;потяну».</p>
+  </div>
+  <div class="offer">
+    <h3>Г. «Приходи с&nbsp;подругой»</h3>
+    <p>Ваше сообщество держится на&nbsp;девичниках и&nbsp;встречах. Скидка обеим, если&nbsp;приходят вдвоём,&nbsp;— и&nbsp;группа растёт через&nbsp;своих.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    <p>Данные собраны 3 ноября 2026 года: сообщество <a href="https://vk.com/fitness_s_nastya">vk.com/fitness_s_nastya</a>, Telegram-канал t.me/stepnova_fitness, Instagram @stepnova_fitness, поиск по&nbsp;Саратову, Profi.ru, Яндекс Карты.</p>
+    <p><b>Ольга</b> — разработка сайтов для&nbsp;малого бизнеса. Прототип: nextbestmail-dev.github.io/prototipy/stepnova · <a href="KP-Фитнес-с-Настей.pdf">PDF-версия этого документа</a></p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

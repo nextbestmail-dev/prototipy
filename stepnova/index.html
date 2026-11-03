@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Фитнес с Настей — тренировки в Саратове и онлайн</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Marck+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="dock glass" aria-label="Быстрая навигация">
+  <a href="#top" class="on"><i class="ti ti-home"></i><span>Главная</span></a>
+  <a href="#formats"><i class="ti ti-calendar-event"></i><span>Расписание</span></a>
+  <a href="#online"><i class="ti ti-device-mobile"></i><span>Онлайн</span></a>
+  <a href="#project"><i class="ti ti-users"></i><span>Проект</span></a>
+  <a href="#reviews"><i class="ti ti-heart"></i><span>Отзывы</span></a>
+  <a href="#contact"><i class="ti ti-message-circle"></i><span>Запись</span></a>
+</nav>
+
+<!-- 1. Первый экран -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="window glass dark">
+      <aside class="side">
+        <div class="logo">Фитнес с&nbsp;Настей<small>Анастасия Степнова · тренер</small></div>
+        <div class="group">Формат <i class="ti ti-chevron-down"></i></div>
+        <nav>
+          <a href="#online" class="on"><i class="ti ti-bolt"></i>Онлайн</a>
+          <a href="#formats"><i class="ti ti-calendar"></i>Расписание</a>
+          <a href="#project"><i class="ti ti-sparkles"></i>Проект</a>
+          <a href="#trainings"><i class="ti ti-barbell"></i>Тренировки</a>
+          <a href="#reviews"><i class="ti ti-message-heart"></i>Отзывы</a>
+          <a href="#about"><i class="ti ti-user"></i>Обо&nbsp;мне</a>
+        </nav>
+        <div class="mini">Запись и&nbsp;вопросы<a href="tel:+79272216503">+7&nbsp;927&nbsp;221-65-03</a></div>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <span class="chip"><i class="ti ti-map-pin"></i>Саратов и&nbsp;онлайн</span>
+          <span class="chip"><i class="ti ti-brand-instagram"></i>Более 6&nbsp;000 подписчиц в&nbsp;Instagram</span>
+        </div>
+
+        <div class="banner">
+          <img src="img/p622_4.jpg" alt="Анастасия Степнова">
+          <div class="txt">
+            <div class="verified"><i class="ti ti-rosette-discount-check-filled"></i>Тренер, мама двоих детей</div>
+            <h1>Похудеть легче, чем&nbsp;ты&nbsp;думаешь</h1>
+            <p>Твой&nbsp;тренер родила двоих и&nbsp;сбросила 20&nbsp;кг. Занимайся со&nbsp;мной в&nbsp;зале в&nbsp;Саратове или&nbsp;дома в&nbsp;закрытом онлайн-проекте.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="#formats" class="btn btn-main"><i class="ti ti-player-play-filled"></i>Выбрать формат</a>
+          <a href="#quiz" class="btn btn-ghost">Подобрать за&nbsp;1&nbsp;минуту</a>
+          <div class="right"><a href="https://t.me/stepnova_fitness">Telegram</a><a href="https://www.instagram.com/stepnova_fitness/">Instagram</a><a href="https://vk.com/fitness_s_nastya">ВКонтакте</a></div>
+        </div>
+
+        <div class="list-title" id="trainings">Упражнения, которые любят участницы <small>нажми, чтобы&nbsp;посмотреть видео</small></div>
+        <div class="tracks" id="tracks"></div>
+
+        <div class="player">
+          <div class="ctrl"><i class="ti ti-player-skip-back-filled" data-p="prev"></i><i class="ti ti-player-play-filled" data-p="play" id="playBtn"></i><i class="ti ti-player-skip-forward-filled" data-p="next"></i></div>
+          <div class="now"><img id="nowImg" src="img/p137_1.jpg" alt=""><div style="min-width:0"><b id="nowTitle">Красивые ягодицы</b><small>Закрытый проект · 20&nbsp;минут в&nbsp;день</small></div></div>
+          <div class="bar"><span id="bar"></span></div>
+          <a href="#online" class="chip" style="background:rgba(255,255,255,.14);color:var(--cream)">Все&nbsp;тренировки <i class="ti ti-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Два формата -->
+<section id="formats">
+  <div class="wrap">
+    <div class="head reveal">
+      <div><div class="eyebrow">Выбирай свой формат</div><h2>В&nbsp;зале или <span class="hand">дома</span></h2></div>
+      <p class="lead">Две линейки «Фитнес с&nbsp;Настей»: живые тренировки в&nbsp;Саратове и&nbsp;закрытый онлайн-проект на&nbsp;30&nbsp;дней. Подходят для&nbsp;любого уровня, даже совсем без&nbsp;подготовки.</p>
+    </div>
+
+    <div class="formats">
+      <article class="fmt glass reveal">
+        <div class="ph"><img src="img/p562_7.jpg" alt="Групповая тренировка"><span class="chip tag"><i class="ti ti-map-pin"></i>Офлайн · Саратов</span></div>
+        <div class="body">
+          <h3>Тренировки в&nbsp;клубе</h3>
+          <div class="sched">
+            <div class="slot"><small>Спорткомплекс F1</small><b>Пн · Ср · Пт</b><small>в&nbsp;20:00, весь&nbsp;год</small></div>
+            <div class="slot"><small>Стадион «Сокол», 3-я Дачная</small><b>Вт · Чт</b><small>в&nbsp;9:00, в&nbsp;тёплое время года</small></div>
+          </div>
+          <ul>
+            <li><i class="ti ti-check"></i>Зажигательные и&nbsp;результативные тренировки в&nbsp;группе</li>
+            <li><i class="ti ti-check"></i>Любой уровень подготовки&nbsp;— я&nbsp;помогу и&nbsp;направлю</li>
+            <li><i class="ti ti-check"></i>Совместные мероприятия, прогулки и&nbsp;девичники для&nbsp;участниц</li>
+          </ul>
+          <div class="need"><b>Нужно от&nbsp;вас</b>Стоимость разового занятия и&nbsp;абонемента, адрес F1</div>
+          <a href="#contact" class="btn btn-warm" data-fmt="Тренировки в клубе">Записаться в&nbsp;группу</a>
+        </div>
+      </article>
+
+      <article class="fmt glass reveal" id="online">
+        <div class="ph"><img src="img/p622_1.jpg" alt="Анастасия Степнова" style="object-position:center 20%"><span class="chip tag"><i class="ti ti-lock"></i>Закрытый проект · онлайн</span></div>
+        <div class="body">
+          <h3>Программа стройности на&nbsp;30&nbsp;дней</h3>
+          <ul>
+            <li><i class="ti ti-clock"></i>Тренировки по&nbsp;20&nbsp;минут в&nbsp;записи&nbsp;— занимайся в&nbsp;любое время</li>
+            <li><i class="ti ti-calendar-repeat"></i>Каждую неделю новая нагрузка, 3–4&nbsp;раза в&nbsp;неделю</li>
+            <li><i class="ti ti-salad"></i>Меню: вкусно, доступно, без&nbsp;экзотики и&nbsp;запретов</li>
+            <li><i class="ti ti-brand-telegram"></i>Всё лежит в&nbsp;закрытом Телеграм-канале. Нужен только телефон</li>
+          </ul>
+          <div class="price"><b>2&nbsp;900&nbsp;₽</b><span>за&nbsp;30&nbsp;дней</span></div>
+          <a href="#contact" class="btn btn-main" data-fmt="Закрытый онлайн-проект">Войти в&nbsp;проект</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="back glass reveal" id="back">
+      <div class="back-pics">
+        <img src="img/p121_2.jpg" alt="Тренировка «Здоровая спина»">
+        <img src="img/p121_3.jpg" alt="">
+        <img src="img/p121_4.jpg" alt="">
+      </div>
+      <div class="back-txt">
+        <div class="eyebrow">Отдельное направление · в&nbsp;зале и&nbsp;онлайн</div>
+        <h3>«Здоровая спина / мягкая сила»</h3>
+        <p class="lead">Соматический фитнес&nbsp;— не&nbsp;йога, не&nbsp;пилатес и&nbsp;не&nbsp;классический стретчинг. Это&nbsp;техники из&nbsp;нейрофизиологии, остеопатии и&nbsp;дыхательных практик, собранные под&nbsp;задачу современного человека: снять напряжение и&nbsp;вернуть контроль над&nbsp;телом меньше чем&nbsp;за&nbsp;час.</p>
+        <p>Подойдёт, если&nbsp;сейчас хочется не&nbsp;интенсива, а&nbsp;мягкой работы с&nbsp;телом: спина зажата после&nbsp;сидячего дня, нет&nbsp;гибкости, тело устало.</p>
+        <ul class="back-list">
+          <li><i class="ti ti-arrows-diagonal"></i>Развитие гибкости</li>
+          <li><i class="ti ti-feather"></i>Снятие зажимов</li>
+          <li><i class="ti ti-barbell"></i>Мягкая подкачка мышц</li>
+          <li><i class="ti ti-stretching"></i>Стретчинг</li>
+          <li><i class="ti ti-wind"></i>Дыхательная практика&nbsp;— перезагрузка тела и&nbsp;нервной системы</li>
+        </ul>
+        <div class="back-modes">
+          <div><b><i class="ti ti-building"></i>Офлайн</b>Занятия в&nbsp;зале и&nbsp;на&nbsp;стадионе в&nbsp;Саратове</div>
+          <div><b><i class="ti ti-home"></i>Онлайн</b>Занятия в&nbsp;записи&nbsp;— дома, в&nbsp;любое время</div>
+        </div>
+        <div class="need"><b>Нужно от&nbsp;вас</b>Расписание и&nbsp;цена «Здоровой спины»</div>
+        <div class="back-btns">
+          <a href="#contact" class="btn btn-main" data-fmt="Здоровая спина">Записаться</a>
+          <a href="https://t.me/stepnova_fitness" class="btn btn-ghost" style="border-color:var(--caramel)">Задать вопрос в&nbsp;Telegram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Что получишь -->
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <div><div class="eyebrow">Что&nbsp;ты&nbsp;получишь</div><h2>Без&nbsp;голода<br>и&nbsp;<span class="hand">изнуряющих</span> тренировок</h2></div>
+    </div>
+    <div class="gets">
+      <div class="get glass reveal"><i class="ti ti-scale"></i><b>−4–8 кг за&nbsp;месяц</b><p>Без&nbsp;жёстких ограничений и&nbsp;голода. Начнёшь худеть, даже если&nbsp;раньше ничего не&nbsp;помогало.</p></div>
+      <div class="get glass reveal"><i class="ti ti-hanger"></i><b>−1–2 размера</b><p>Уходят живот, спина и&nbsp;бока, подтягиваются мышцы.</p></div>
+      <div class="get glass reveal"><i class="ti ti-sun"></i><b>Энергия с&nbsp;утра</b><p>Нормализуется сон, уходят усталость и&nbsp;отёки.</p></div>
+      <div class="get glass reveal"><i class="ti ti-droplet"></i><b>Гладкая кожа</b><p>Работаем не&nbsp;только с&nbsp;весом, но&nbsp;и&nbsp;с&nbsp;тонусом: меньше целлюлита и&nbsp;дряблости.</p></div>
+      <div class="get glass reveal"><i class="ti ti-heart-handshake"></i><b>Без&nbsp;срывов</b><p>Любимые продукты остаются: ничего не&nbsp;запрещено, важно грамотно распределять.</p></div>
+      <div class="get glass reveal"><i class="ti ti-user-heart"></i><b>Подход к&nbsp;каждой</b><p>Учитываю возраст, вес, питание и&nbsp;ограничения по&nbsp;спорту.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Море -->
+<section>
+  <div class="wrap">
+    <div class="sea reveal">
+      <img src="img/p533_3.jpg" alt="Анастасия на море">
+      <div class="q glass">
+        <p>«Ты&nbsp;здесь не&nbsp;для&nbsp;того, чтобы&nbsp;похудеть,&nbsp;— ты&nbsp;здесь для&nbsp;того, чтобы&nbsp;полюбить себя»</p>
+        <div class="src">Анастасия Степнова</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Обо мне -->
+<section id="about">
+  <div class="wrap about">
+    <div class="collage reveal">
+      <img src="img/p631_3.jpg" alt="Анастасия Степнова">
+      <img src="img/p564_1.jpg" alt="Анастасия Степнова">
+      <img src="img/p704_1.jpg" alt="Анастасия Степнова">
+    </div>
+    <div class="txt glass reveal">
+      <div class="eyebrow">Обо&nbsp;мне</div>
+      <h2>Анастасия <span class="hand">Степнова</span></h2>
+      <p class="big">Родила двоих и&nbsp;сбросила 20&nbsp;кг&nbsp;— знаю, как&nbsp;это&nbsp;работает, изнутри.</p>
+      <p>Веду проект стройности «Фитнес с&nbsp;Настей»: тренировки в&nbsp;Саратове, онлайн-программу и&nbsp;женское сообщество. Выступала спикером на&nbsp;женском форуме&nbsp;— рассказывала о&nbsp;своём видении женской красоты. Когда-то вела детские тренировки, и&nbsp;дети до&nbsp;сих пор просят остаться у&nbsp;них учителем физкультуры.</p>
+      <div class="facts">
+        <div><b>6&nbsp;000+</b>подписчиц в&nbsp;Instagram</div>
+        <div><b>2 формата</b>в&nbsp;зале и&nbsp;онлайн</div>
+      </div>
+      <div class="need"><b>Нужно от&nbsp;вас</b>Образование, сертификаты, сколько лет тренируете</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4а. Спикер форума -->
+<section id="forum">
+  <div class="wrap">
+    <div class="forum glass reveal">
+      <div class="forum-pics">
+        <img src="img/p626_1.jpg" alt="Анастасия выступает на женском форуме">
+        <img src="img/p626_6.jpg" alt="">
+        <img src="img/p626_9.jpg" alt="">
+      </div>
+      <div class="forum-txt">
+        <div class="eyebrow">Март 2026 · выступление</div>
+        <h2>Спикер <span class="hand">женского форума</span></h2>
+        <p class="big">Рассказывала о&nbsp;своём видении женской красоты и&nbsp;знакомила гостей форума с&nbsp;проектом стройности «Фитнес с&nbsp;Настей».</p>
+        <div class="need"><b>Нужно от&nbsp;вас</b>Название форума, тема выступления, сколько было гостей, короткая цитата из&nbsp;выступления. Были другие выступления&nbsp;— добавим и&nbsp;их</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Проект -->
+<section id="project">
+  <div class="wrap">
+    <div class="head reveal">
+      <div><div class="eyebrow">Проект «Фитнес с&nbsp;Настей»</div><h2>Больше,&nbsp;чем<br><span class="hand">тренировки</span></h2></div>
+      <p class="lead">Яркие совместные мероприятия и&nbsp;незабываемые встречи «между&nbsp;нами девочками» в&nbsp;самых достойных локациях.</p>
+    </div>
+    <div class="masonry" id="gallery">
+      <figure class="reveal"><img src="img/p562_2.jpg" alt=""><figcaption>Тренировка участниц проекта</figcaption></figure>
+      <figure class="reveal"><img src="img/p676_3.jpg" alt=""><figcaption>Вечер с&nbsp;участницами</figcaption></figure>
+      <figure class="reveal"><img src="img/p126_3.jpg" alt=""><figcaption>Прогулка с&nbsp;девочками</figcaption></figure>
+      <figure class="reveal"><img src="img/p562_4.jpg" alt=""><figcaption>После&nbsp;тренировки</figcaption></figure>
+      <figure class="reveal"><img src="img/p676_2.jpg" alt=""><figcaption>Наше дружное сообщество</figcaption></figure>
+      <figure class="reveal"><img src="img/p126_1.jpg" alt=""><figcaption>Вечер «между&nbsp;нами девочками»</figcaption></figure>
+      <figure class="reveal"><img src="img/p533_2.jpg" alt=""><figcaption>Море, солнце, спорт</figcaption></figure>
+      <figure class="reveal"><img src="img/p562_5.jpg" alt=""><figcaption>Фитнес-семья</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Отзывы -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">Отзывы</div><h2>Спасибо за&nbsp;<span class="hand">обратную связь</span></h2></div></div>
+    <div class="reviews" id="revList"></div>
+  </div>
+</section>
+
+<!-- 7. Квиз -->
+<section id="quiz">
+  <div class="wrap">
+    <div class="quiz glass reveal">
+      <img src="img/p172_1.jpg" alt="" style="object-position:top">
+      <div class="q-body">
+        <div class="eyebrow">Подбор формата</div>
+        <h2 style="font-size:40px">Какой формат подойдёт тебе?</h2>
+        <div class="steps"><span class="on"></span><span></span><span></span></div>
+        <div id="qBox"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Вопросы -->
+<section>
+  <div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">Частые вопросы</div><h2>Перед&nbsp;первой <span class="hand">тренировкой</span></h2></div></div>
+    <div class="faq">
+      <details class="glass reveal"><summary>Я&nbsp;никогда не&nbsp;занималась. Мне подойдёт?</summary><p>Да.&nbsp;На&nbsp;тренировки приходят с&nbsp;любым уровнем подготовки или&nbsp;совсем без&nbsp;неё&nbsp;— я&nbsp;помогу и&nbsp;направлю.</p></details>
+      <details class="glass reveal"><summary>Когда&nbsp;заниматься в&nbsp;онлайн-проекте?</summary><p>Когда&nbsp;удобно: в&nbsp;обед, вечером или&nbsp;даже в&nbsp;5 утра. Все&nbsp;тренировки уже&nbsp;записаны и&nbsp;лежат в&nbsp;Телеграме.</p></details>
+      <details class="glass reveal"><summary>Сколько времени это&nbsp;занимает?</summary><div class="faq-two"><p><b>Онлайн-проект.</b> 20 минут 3–4 раза в&nbsp;неделю, дома, в&nbsp;любое удобное время. Каждую неделю новая нагрузка.</p><p><b>Тренировки в&nbsp;клубе.</b> Три вечера в&nbsp;неделю в&nbsp;спорткомплексе F1: понедельник, среда, пятница в&nbsp;20:00. Утренние тренировки на&nbsp;стадионе «Сокол»&nbsp;— 45 минут, вторник и&nbsp;четверг в&nbsp;9:00, в&nbsp;тёплое время года.</p><p><b>«Здоровая спина».</b> Занятие&nbsp;— меньше часа.</p><div class="need"><b>Нужно от&nbsp;вас</b>Сколько длится тренировка в&nbsp;F1</div></div></details>
+      <details class="glass reveal"><summary>Придётся сидеть на&nbsp;диете?</summary><p>Нет.&nbsp;Питание вкусное и&nbsp;доступное, без&nbsp;экзотики. Любимые продукты остаются&nbsp;— нужно исключить некоторые и&nbsp;снизить порции.</p></details>
+      <details class="glass reveal"><summary>Где&nbsp;проходят тренировки в&nbsp;Саратове?</summary><p>В&nbsp;спорткомплексе F1 в&nbsp;понедельник, среду и&nbsp;пятницу в&nbsp;20:00. В&nbsp;тёплое время года ещё&nbsp;и&nbsp;на&nbsp;стадионе «Сокол» по&nbsp;утрам.</p></details>
+      <details class="glass reveal"><summary>Что&nbsp;такое соматический фитнес?</summary><p>Это&nbsp;не&nbsp;йога, не&nbsp;пилатес и&nbsp;не&nbsp;классический стретчинг. Техники из&nbsp;нейрофизиологии, остеопатии и&nbsp;дыхательных практик, чтобы&nbsp;снять напряжение и&nbsp;вернуть контроль над&nbsp;телом.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Запись -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact glass dark reveal">
+      <div class="c-l">
+        <div class="eyebrow" style="color:var(--sand)">Запись</div>
+        <h2>Хватит смотреть&nbsp;— <span class="hand" style="color:var(--sand)">пора начинать</span></h2>
+        <p style="opacity:.85">Сколько раз ты&nbsp;обещала себе начать заниматься? Напиши мне&nbsp;— подскажу формат и&nbsp;время.</p>
+        <div class="links">
+          <a href="tel:+79272216503"><i class="ti ti-phone"></i>+7&nbsp;927&nbsp;221-65-03</a>
+          <a href="https://t.me/stepnova_fitness"><i class="ti ti-brand-telegram"></i>Telegram</a>
+          <a href="https://www.instagram.com/stepnova_fitness/"><i class="ti ti-brand-instagram"></i>Instagram</a>
+          <a href="https://vk.com/fitness_s_nastya"><i class="ti ti-brand-vk"></i>ВКонтакте</a>
+        </div>
+      </div>
+      <form id="form">
+        <h3>Оставь заявку</h3>
+        <input required placeholder="Как тебя зовут">
+        <input required type="tel" placeholder="Телефон или ник в Telegram">
+        <select id="fmtSel">
+          <option>Тренировки в&nbsp;клубе</option>
+          <option>Закрытый онлайн-проект</option>
+          <option>Здоровая спина</option>
+          <option>Пока не&nbsp;знаю, помогите выбрать</option>
+        </select>
+        <button class="btn btn-main" style="justify-content:center">Отправить</button>
+        <div class="ok" id="ok">Спасибо! Анастасия свяжется с&nbsp;тобой. (В&nbsp;прототипе форма ничего не&nbsp;отправляет.)</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>Прототип сайта для&nbsp;Анастасии Степновой · фото и&nbsp;тексты из&nbsp;её&nbsp;соцсетей, ноябрь 2026 · Ольга, разработка сайтов</footer>
+
+<div class="lb" id="lb"><img alt=""></div>
+
+<div class="ex" id="ex" role="dialog" aria-modal="true" aria-labelledby="exTitle">
+  <div class="ex-card glass">
+    <button class="ex-x" type="button" aria-label="Закрыть"><i class="ti ti-x"></i></button>
+    <img id="exImg" alt="">
+    <div class="ex-body">
+      <div class="eyebrow" id="exTag"></div>
+      <h3 id="exTitle"></h3>
+      <p id="exText"></p>
+      <div class="ex-btns">
+        <a id="exVid" class="btn btn-main" target="_blank" rel="noopener"><i class="ti ti-brand-vk"></i>Смотреть видео</a>
+        <a href="#contact" class="btn btn-ghost" data-fmt="Закрытый онлайн-проект" data-close>Хочу заниматься</a>
+      </div>
+      <p class="ex-note">Видео открывается в&nbsp;группе ВКонтакте. На&nbsp;готовом сайте ролик будет играть прямо здесь.</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/typo.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
