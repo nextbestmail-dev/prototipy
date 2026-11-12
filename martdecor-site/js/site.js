@@ -183,20 +183,35 @@
   d.querySelectorAll('form[data-form]').forEach(function (f) {
     var state = f.querySelector('.form-state'), btn = f.querySelector('button[type=submit]');
     function show(el, bad) { var e = el.closest('.fld') ? el.closest('.fld').querySelector('.err') : f.querySelector('.err-agree'); if (e) e.hidden = !bad; el.setAttribute('aria-invalid', bad); }
+    // Телефон: маска +7 (999) 123-45-67, восьмёрка в начале превращается в +7
+    var telIn = f.elements.tel;
+    function telDigits(v) { var d = v.replace(/\D/g, ''); if (!d) return ''; if (d[0] === '8') d = '7' + d.slice(1); else if (d[0] !== '7') d = '7' + d; return d.slice(0, 11); }
+    function telFmt(d) { if (!d) return ''; var r = '+7'; if (d.length > 1) r += ' (' + d.slice(1, 4); if (d.length >= 4) r += ')'; if (d.length > 4) r += ' ' + d.slice(4, 7); if (d.length > 7) r += '-' + d.slice(7, 9); if (d.length > 9) r += '-' + d.slice(9, 11); return r; }
+    telIn.addEventListener('input', function (e) { if (e.inputType && e.inputType.indexOf('delete') === 0) return; telIn.value = telFmt(telDigits(telIn.value)); });
+    telIn.addEventListener('focus', function () { if (!telIn.value) telIn.value = '+7 ('; });
+    telIn.addEventListener('blur', function () { if (telDigits(telIn.value).length <= 1) telIn.value = ''; });
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = f.elements.name, tel = f.elements.tel, agree = f.elements.agree, ok = true;
-      var digits = tel.value.replace(/\D/g, '');
-      show(name, !name.value.trim()); if (!name.value.trim()) ok = false;
-      show(tel, digits.length < 10 || digits.length > 11); if (digits.length < 10 || digits.length > 11) ok = false;
-      show(agree, !agree.checked); if (!agree.checked) ok = false;
-      if (!ok) { state.className = 'form-state fail'; state.textContent = 'Проверьте отмеченные поля.'; f.querySelector('[aria-invalid="true"]').focus(); return; }
-      var text = 'Заявка с сайта МАРТдекор\nИмя: ' + name.value.trim() + '\nТелефон: ' + tel.value.trim() + '\n' + f.elements.topic.labels[0].textContent + ': ' + f.elements.topic.value + (f.elements.msg.value.trim() ? '\nКомментарий: ' + f.elements.msg.value.trim() : '') + (f.hasAttribute('data-pick') ? pickText() : '');
+      var name = f.elements.name, tel = telIn, topic = f.elements.topic, msg = f.elements.msg, agree = f.elements.agree, ok = true;
+      function need(el, bad) { show(el, bad); if (bad) ok = false; }
+      need(name, name.value.trim().length < 2);
+      need(tel, telDigits(tel.value).length !== 11);
+      need(topic, !topic.value);
+      need(msg, msg.value.trim().length < 3);
+      need(agree, !agree.checked);
+      if (!ok) { state.className = 'form-state fail'; state.textContent = 'Заполните отмеченные поля.'; f.querySelector('[aria-invalid="true"]').focus(); return; }
+      tel.value = telFmt(telDigits(tel.value));
+      var text = 'Заявка с сайта МАРТдекор\nИмя: ' + name.value.trim() + '\nТелефон: ' + tel.value.trim() + '\n' + topic.labels[0].textContent + ': ' + topic.value + '\nКомментарий: ' + msg.value.trim() + (f.hasAttribute('data-pick') ? pickText() : '');
       var endpoint = f.getAttribute('data-endpoint');
       if (endpoint) {
         btn.disabled = true; state.className = 'form-state'; state.textContent = 'Отправляем…';
-        fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ form: f.getAttribute('data-form'), name: name.value, tel: tel.value, topic: f.elements.topic.value, msg: f.elements.msg.value, pick: f.hasAttribute('data-pick') ? pickText() : '' }) })
-          .then(function (r) { if (!r.ok) throw 0; state.className = 'form-state ok'; state.textContent = 'Спасибо! Заявка отправлена, менеджер свяжется с вами в рабочее время.'; f.reset(); })
+        var data = new FormData(f);
+        data.append('forma', (f.querySelector('.form-h') || {}).textContent || 'Заявка');
+        data.append('stranica', location.href);
+        if (f.hasAttribute('data-pick')) data.append('pick', pickText().split('\n').slice(2).join('\n'));
+        fetch(endpoint, { method: 'POST', body: data })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (!j || !j.ok) throw 0; state.className = 'form-state ok'; state.textContent = 'Спасибо! Заявка отправлена, менеджер свяжется с вами в рабочее время.'; f.reset(); state.scrollIntoView({ block: 'center', behavior: 'smooth' }); })
           .catch(function () { state.className = 'form-state fail'; state.innerHTML = 'Не получилось отправить. Позвоните нам или <a target="_blank" rel="noopener" href="https://wa.me/' + f.getAttribute('data-wa') + '?text=' + encodeURIComponent(text) + '">напишите в WhatsApp</a>.'; })
           .finally(function () { btn.disabled = false; });
       } else {

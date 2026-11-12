@@ -687,3 +687,7 @@ html,body{overflow-x:clip}
 .about-hero .about-facts li:last-child{border-bottom:1px solid var(--color-gold-line)}
 .about-hero .about-facts b{font-size:26px}
 @media (max-width:1024px){.about-hero{grid-template-columns:1fr;gap:28px;margin-bottom:32px}.about-hero .about-facts b{font-size:21px}.about-hero .about-facts li{padding:14px 0}}
+
+/* Заявки: ловушка для ботов (невидима людям) и кнопка WhatsApp под формой */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form .btn-wa{margin-top:10px}
