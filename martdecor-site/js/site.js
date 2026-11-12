@@ -120,6 +120,54 @@
     lb.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') showLb(gi + 1); if (e.key === 'ArrowLeft') showLb(gi - 1); });
   }
 
+
+  // Лента материалов: медленно едет сама, её можно листать мышкой (перетаскиванием), пальцем и тачпадом
+  var ts = d.querySelector('.tex-scroll');
+  if (ts) {
+    var tt = ts.firstElementChild, half = 0, pos = 0, hold = false, dragging = false, resumeAt = 0, last = 0, sx = 0, sl = 0, moved = 0;
+    var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function measure() { half = tt.scrollWidth / 2; }
+    function wrap() { if (!half) return; if (ts.scrollLeft < 4) { ts.scrollLeft += half; pos = ts.scrollLeft; } else if (ts.scrollLeft > half * 2 - ts.clientWidth - 4) { ts.scrollLeft -= half; pos = ts.scrollLeft; } }
+    function pause(ms) { resumeAt = Date.now() + (ms || 0); }
+    measure(); addEventListener('resize', measure); addEventListener('load', measure);
+    ts.addEventListener('scroll', function () { wrap(); if (hold || dragging || Date.now() < resumeAt) pos = ts.scrollLeft; });
+    ts.addEventListener('mouseenter', function () { hold = true; });
+    ts.addEventListener('mouseleave', function () { hold = false; pause(600); });
+    ts.addEventListener('touchstart', function () { hold = true; }, { passive: true });
+    ts.addEventListener('touchend', function () { hold = false; pause(2500); }, { passive: true });
+    ts.addEventListener('wheel', function () { pause(1500); }, { passive: true });
+    ts.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button !== 0) return; dragging = true; moved = 0; sx = e.clientX; sl = ts.scrollLeft; e.preventDefault(); });
+    addEventListener('pointermove', function (e) { if (!dragging) return; var dx = e.clientX - sx; moved = Math.max(moved, Math.abs(dx)); if (moved > 4) ts.classList.add('drag'); ts.scrollLeft = sl - dx; });
+    addEventListener('pointerup', function () { if (!dragging) return; dragging = false; setTimeout(function () { ts.classList.remove('drag'); }, 0); pause(800); });
+    ts.addEventListener('click', function (e) { if (moved > 4) { e.preventDefault(); moved = 0; } }, true);
+    ts.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    ts.scrollLeft = 8; pos = ts.scrollLeft;
+    function step(t) {
+      var dt = last ? Math.min(t - last, 50) : 0; last = t;
+      if (!still && !hold && !dragging && Date.now() >= resumeAt && half) {
+        pos += dt * 0.04;
+        if (pos > half * 2 - ts.clientWidth - 4) pos -= half;
+        ts.scrollLeft = pos;
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+
+  // Заголовки без переносов: если длинное слово не помещается в ширину (телефон), чуть уменьшаем шрифт заголовка
+  function fitHeads() {
+    d.querySelectorAll('h1, h2').forEach(function (h) {
+      h.style.fontSize = '';
+      var fs = parseFloat(getComputedStyle(h).fontSize), n = 0;
+      while (h.scrollWidth > h.clientWidth + 1 && fs > 16 && n < 40) { fs -= 1; h.style.fontSize = fs + 'px'; n++; }
+    });
+  }
+  fitHeads();
+  if (d.fonts && d.fonts.ready) d.fonts.ready.then(fitHeads);
+  addEventListener('load', fitHeads);
+  var fitT; addEventListener('resize', function () { clearTimeout(fitT); fitT = setTimeout(fitHeads, 150); });
+
   // Отзывы
   var slides = d.querySelectorAll('[data-slide]'), simgs = d.querySelectorAll('[data-slide-img]'), dots = d.querySelectorAll('.rv-dots i'), cur = 0;
   function showRv(n) {
