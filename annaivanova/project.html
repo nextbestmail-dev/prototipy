@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Спецпроект — ANNAIVANOVA</title>
+<meta name="description" content="Спецпроект ANNAIVANOVA: образы из съёмки и показа, которые можно заказать.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body data-page="projects">
+<div id="site-header"></div>
+
+<div class="banner" style="height:calc(100vh - 150px);max-height:820px">
+  <div id="p-ph"></div>
+  <div class="banner-in" id="p-head"></div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Образы из&nbsp;проекта</div><h2>Хочу такое&nbsp;же</h2>
+      <p>Модель из&nbsp;кадра можно сразу заказать. Если&nbsp;её&nbsp;нет&nbsp;в&nbsp;каталоге или&nbsp;нет&nbsp;вашего размера&nbsp;— менеджер подберёт похожую, а&nbsp;мастерская Модного дома сошьёт её&nbsp;по&nbsp;вашим меркам.</p></div>
+    </div>
+    <div class="looks" id="looks"></div>
+    <div class="need" style="margin-top:32px"><b>Нужно от&nbsp;вас</b>Какие модели были в&nbsp;кадре&nbsp;— сейчас образы привязаны к&nbsp;товарам для&nbsp;примера. И&nbsp;оригиналы фото из&nbsp;съёмки.</div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap split">
+    <h2 style="font-size:36px">Над&nbsp;проектом работали</h2>
+    <ul class="credits" id="credits"></ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Другие спецпроекты</h2></div><a href="specprojects.html" class="link">Все&nbsp;спецпроекты</a></div>
+    <div class="proj-grid" id="more" style="grid-template-columns:repeat(2,1fr)"></div>
+  </div>
+</section>
+
+<div class="modal" id="want" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('want').classList.remove('on')" aria-label="Закрыть">×</button>
+    <div class="eyebrow">Менеджер Модного дома</div>
+    <h3>Хочу такой&nbsp;же образ</h3>
+    <p class="muted" id="want-what"></p>
+    <form class="form-grid" onsubmit="event.preventDefault();document.getElementById('want').classList.remove('on');toast('Заявка принята (демо): менеджер напишет вам')">
+      <label>Имя<input required autocomplete="name"></label>
+      <label>Телефон<input required inputmode="tel" autocomplete="tel"></label>
+      <label>Ваш&nbsp;размер<select><option>42</option><option selected>44</option><option>46</option><option>48</option><option>50</option><option>Нужен пошив по&nbsp;меркам</option></select></label>
+      <label>Где&nbsp;удобнее ответить<select><option>WhatsApp</option><option>Telegram</option><option>MAX</option></select></label>
+      <button class="btn wide" type="submit">Отправить менеджеру</button>
+      <span class="demo-note">Демо: форма ничего не&nbsp;отправляет. На&nbsp;сайте заявка придёт менеджеру вместе с&nbsp;названием проекта и&nbsp;номером образа.</span>
+    </form>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/data.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
+<script>
+const P = PROJECTS.find(x => x.id === qs.get('id')) || PROJECTS[0];
+function want(n) {
+  document.getElementById('want-what').innerHTML = `${P.media}: <b>${P.title}</b>, образ ${n}. Менеджер подскажет, какая это модель и&nbsp;есть&nbsp;ли ваш размер, или предложит пошив по&nbsp;меркам.`;
+  document.getElementById('want').classList.add('on');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.title = P.title + ' — ANNAIVANOVA';
+  document.getElementById('p-ph').innerHTML = phTone(P.tone, '');
+  document.getElementById('p-head').innerHTML = `<div class="eyebrow">${P.type} <i>\\</i> ${P.media} <i>\\</i> ${P.date}</div>
+    <h1 style="font-size:clamp(44px,6vw,92px);max-width:16ch">${nb(P.title)}</h1>
+    <div class="meta" style="text-transform:none;letter-spacing:0;font:400 17px/1.5 var(--body);max-width:52ch">${P.lead}</div>
+    <a href="#looks" class="btn">Образы из&nbsp;проекта</a>`;
+  document.getElementById('looks').innerHTML = P.looks.map((l, i) => {
+    const pr = l.product && byId(l.product);
+    return `<div class="look">
+      ${phTone(l.tone, 'Образ ' + (i + 1))}
+      <h3>${pr ? nb(pr.name) : (l.note || 'Образ ' + (i + 1) + ' из съёмки')}</h3>
+      ${pr ? priceHTML(pr) : '<div class="edition">Подберём модель или сошьём по&nbsp;меркам</div>'}
+      <div class="act">
+        ${pr ? `<a href="product.html?id=${pr.id}" class="btn">Смотреть модель</a>` : ''}
+        <button class="btn ${pr ? 'line' : ''}" onclick="want(${i + 1})">Хочу такое&nbsp;же</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('credits').innerHTML = P.credits.map(c => `<li>${c}</li>`).join('');
+  document.getElementById('more').innerHTML = PROJECTS.filter(x => x.id !== P.id).slice(0, 2).map(p =>
+    `<a class="proj" href="project.html?id=${p.id}" style="grid-column:auto">${phTone(p.tone, '')}<div class="proj-cap"><small>${p.type} · ${p.media}</small><b>${nb(p.title)}</b></div></a>`).join('');
+});
+</script>
+</body>
+</html>

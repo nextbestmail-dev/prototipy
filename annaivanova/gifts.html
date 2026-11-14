@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gift Edit — ANNAIVANOVA</title>
+<meta name="description" content="Подарочные сертификаты, платки «Саратов. Вдохновение», лимитированные выпуски и подарки для компаний от ANNAIVANOVA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body data-page="gifts">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ Gift Edit</div>
+  <h1 style="font-size:clamp(40px,5vw,72px)">Gift Edit</h1>
+  <p>Подарок с&nbsp;именем дизайнера: сертификаты, платки с&nbsp;принтами старого Саратова и&nbsp;лимитированные выпуски Анны Ивановой.</p>
+</div></div>
+
+<section style="padding-top:56px">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Сертификаты</h2></div><span class="muted" style="font-size:14px">Действуют на&nbsp;все&nbsp;сезонные коллекции, кроме Outlet</span></div>
+    <div class="goods" id="certs"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">Коллаборация с&nbsp;Александром Дегтярёвым</div><h2>«Саратов. Вдохновение»</h2></div></div>
+    <div class="goods" id="scarves"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">Лимитированные выпуски</div><h2>Тираж разобран</h2>
+      <p>Оставьте почту&nbsp;— напишем, когда&nbsp;выйдет новый.</p></div></div>
+    <div class="goods c3" id="limited"></div>
+    <form class="sub" style="margin-top:40px;padding:32px 36px" onsubmit="event.preventDefault();this.querySelector('input').value='';toast('Готово (демо): напишем о следующем выпуске')">
+      <div><h3 style="font-size:28px">Узнать о&nbsp;новом выпуске первой</h3></div>
+      <div style="display:flex"><input type="email" placeholder="Ваша почта" required aria-label="Электронная почта" style="border-right:0"><button class="btn" type="submit">Подписаться</button></div>
+    </form>
+    <p class="demo-note" style="margin-top:12px">Состояние «тираж разобран»&nbsp;— для&nbsp;примера: на&nbsp;сайте выпуск появится с&nbsp;ценой и&nbsp;кнопкой покупки, когда&nbsp;он&nbsp;будет в&nbsp;наличии.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="tg">
+      <div><div class="eyebrow">Для&nbsp;компаний</div><h2 style="font-size:40px">Подарки партнёрам и&nbsp;гостям</h2>
+      <p>Платки, сертификаты и&nbsp;лимитированные выпуски тиражом, с&nbsp;упаковкой и&nbsp;открыткой.</p></div>
+      <button class="btn" onclick="document.getElementById('corp').classList.add('on')">Оставить заявку</button>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="corp" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('corp').classList.remove('on')" aria-label="Закрыть">×</button>
+    <div class="eyebrow">Подарки для&nbsp;компаний</div>
+    <h3>Заявка менеджеру</h3>
+    <form class="form-grid" onsubmit="event.preventDefault();document.getElementById('corp').classList.remove('on');toast('Заявка принята (демо): менеджер свяжется с вами')">
+      <label>Компания<input required></label>
+      <label>Имя и&nbsp;телефон<input required inputmode="tel"></label>
+      <label>Что&nbsp;и&nbsp;сколько<textarea placeholder="Например: 30 платков к 1 декабря, упаковка с логотипом"></textarea></label>
+      <button class="btn wide" type="submit">Отправить</button>
+      <span class="demo-note">Демо: форма ничего не&nbsp;отправляет.</span>
+    </form>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/data.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('certs').innerHTML = PRODUCTS.filter(p => p.cat === 'gift').map(cardHTML).join('');
+  document.getElementById('scarves').innerHTML = PRODUCTS.filter(p => p.coll === 'pf25' && p.cat === 'acc').map(cardHTML).join('');
+  document.getElementById('limited').innerHTML = LIMITED.map(l => `<article class="card">
+    <div class="card-media"><div class="tags"><span class="tag">Тираж разобран</span></div>${phTone(l.tone, 'Лимитированный выпуск')}</div>
+    <h3>${l.name}</h3><div class="edition">${l.note}</div></article>`).join('');
+});
+</script>
+</body>
+</html>

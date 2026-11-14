@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=9">
 <style>
 .ways{display:grid;gap:10px;margin-top:22px}
 .way{border:1px solid var(--line);background:#fff;padding:18px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:block;width:100%}
@@ -45,7 +45,7 @@
     <form class="form-grid" id="mgr-form" onsubmit="sendToManager(event)">
       <input required placeholder="Имя" autocomplete="name" aria-label="Имя">
       <input required placeholder="Телефон" inputmode="tel" autocomplete="tel" aria-label="Телефон">
-      <select aria-label="Где удобнее ответить"><option>Написать в&nbsp;WhatsApp</option><option>Написать в&nbsp;Telegram</option><option>Позвонить</option></select>
+      <select aria-label="Где удобнее ответить"><option>Написать в&nbsp;WhatsApp</option><option>Написать в&nbsp;Telegram</option><option>Написать в&nbsp;MAX</option></select>
       <textarea placeholder="Комментарий: рост, параметры, когда удобно приехать на примерку" aria-label="Комментарий"></textarea>
       <button class="btn wide" type="submit">Отправить менеджеру</button>
       <span class="demo-note">Состав корзины уйдёт менеджеру вместе с&nbsp;заявкой. Оплачивать сейчас не&nbsp;нужно.</span>
@@ -54,8 +54,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="js/data.js"></script>
-<script src="js/main.js"></script>
+<script src="js/data.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
 <script>
 function sendToManager(e) {
   e.preventDefault();

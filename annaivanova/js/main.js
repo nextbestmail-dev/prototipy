@@ -9,7 +9,7 @@ const plural = (n, a, b, c) => { const m = n % 100, k = n % 10; return n + ' ' 
 /* ---------- плейсхолдер вместо фото ---------- */
 function ph(p, label, cls = '') {
   const t = TONES[(p && p.tone) || 'choc'] || TONES.choc;
-  return `<div class="ph ${cls}" style="--c1:${t[0]};--c2:${t[1]}" data-label="${label || 'фото'}"><span class="mono">ANNA\\IVANOVA</span></div>`;
+  return `<div class="ph ${cls}${p && p.tone === 'ceiling' ? ' ceiling' : ''}" style="--c1:${t[0]};--c2:${t[1]}" data-label="${label || 'фото'}"><span class="mono">ANNA\\IVANOVA</span></div>`;
 }
 function phTone(tone, label, cls = '') { return ph({ tone }, label, cls); }
 
@@ -45,17 +45,17 @@ function paintChrome(active) {
   const header = `
   <div class="demo-bar"><b>Прототип сайта для&nbsp;ANNAIVANOVA.</b> Тексты, цены и&nbsp;факты&nbsp;— с&nbsp;сайта, wfolio и&nbsp;соцсетей бренда; вместо фотографий&nbsp;— заглушки, формы ничего не&nbsp;отправляют.</div>
   <div class="topline"><div class="wrap">
-    <span>Доставка по&nbsp;России · отправка на&nbsp;следующий рабочий день</span>
-    <span class="hide-m">Модный дом: Саратов, ул.&nbsp;Советская,&nbsp;3/5 · пн–пт 9:00–18:00</span>
+    <a href="info.html">Покупателям: доставка по&nbsp;России, размеры, пошив&nbsp;→</a>
+    <a href="house.html" class="hide-m">Модный дом: Саратов, ул.&nbsp;Советская,&nbsp;3/5 · пн–пт 9:00–18:00</a>
     <a href="tel:+79271174763" class="hide-m">+7&nbsp;927&nbsp;117-47-63</a>
   </div></div>
   <header class="site"><div class="head">
     <nav class="main" id="nav">
-      <a href="catalog.html" ${a('catalog')}>Магазин</a>
-      <a href="catalog.html?coll=fw27" ${a('fw27')}>«Метель»</a>
-      <a href="designer.html" ${a('designer')}>Анна Иванова</a>
       <a href="events.html" ${a('events')}>Афиша</a>
-      <a href="info.html" ${a('info')}>Покупателям</a>
+      <a href="catalog.html" ${a('catalog')}>Магазин</a>
+      <a href="designer.html" ${a('designer')}>Анна Иванова</a>
+      <a href="specprojects.html" ${a('projects')}>Спецпроекты</a>
+      <a href="gifts.html" ${a('gifts')}>Gift Edit</a>
     </nav>
     <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Меню">Меню</button>
     <a href="index.html" class="logo" aria-label="ANNAIVANOVA, на главную">ANNA<span>\\</span>IVANOVA</a>
@@ -70,18 +70,18 @@ function paintChrome(active) {
     <div class="f-grid">
       <div>
         <a href="index.html" class="logo">ANNA<span>\\</span>IVANOVA</a>
-        <p style="font-size:14.5px;max-width:36ch;margin-top:18px">Модный дом дизайнера Анны Ивановой. Собственное производство, авторские принты, лимитированные коллекции. Саратов, с&nbsp;1998 года.</p>
+        <p style="font-size:14.5px;max-width:36ch;margin-top:18px">Модный дом дизайнера Анны Ивановой. Авторские принты, ограниченные тиражи, мастерская в&nbsp;здании 1911 года. Саратов, с&nbsp;1998 года.</p>
       </div>
       <div><h4>Магазин</h4><ul>
         <li><a href="catalog.html?coll=fw27">Осень-зима 2027 «Метель»</a></li>
         <li><a href="catalog.html?coll=pf25">«Саратов. Вдохновение»</a></li>
-        <li><a href="catalog.html?cat=dresses">Платья</a></li>
-        <li><a href="catalog.html?cat=gift">Сертификаты</a></li>
+        <li><a href="catalog.html?coll=outlet">Outlet</a></li>
+        <li><a href="gifts.html">Gift Edit: сертификаты и&nbsp;подарки</a></li>
       </ul></div>
       <div><h4>Модный дом</h4><ul>
         <li><a href="designer.html">Анна Иванова</a></li>
-        <li><a href="designer.html#house">Модный дом</a></li>
-        <li><a href="designer.html#press">Пресса</a></li>
+        <li><a href="house.html">Модный дом</a></li>
+        <li><a href="specprojects.html">Спецпроекты</a></li>
         <li><a href="events.html">Афиша</a></li>
       </ul></div>
       <div><h4>Покупателям</h4><ul>
@@ -94,7 +94,7 @@ function paintChrome(active) {
       </ul></div>
     </div>
     <div class="f-bottom">
-      <span>© 2026 ANNAIVANOVA · <a href="https://t.me/annaivanovasaratov">Telegram</a> · <a href="https://www.instagram.com/annaivanova_fashion/">Instagram</a> · <a href="https://www.instagram.com/annaivanova_designer/">Блог Анны</a> · <a href="https://vk.com/annaivanova_shop">ВКонтакте</a></span>
+      <span>© 2026 ANNAIVANOVA® — зарегистрированный товарный знак · <a href="https://t.me/annaivanovasaratov">Telegram</a> · <a href="https://www.instagram.com/annaivanova_fashion/">Instagram</a> · <a href="https://www.instagram.com/annaivanova_designer/">Блог Анны</a> · <a href="https://vk.com/annaivanova_shop">ВКонтакте</a></span>
       <span>Прототип собрала: Ольга</span>
     </div>
   </div></footer>
@@ -107,7 +107,8 @@ function paintChrome(active) {
       <p class="muted" id="fit-what">Подберём образы к&nbsp;вашему визиту и&nbsp;подготовим размеры. Не&nbsp;в&nbsp;Саратове&nbsp;— ассистент проведёт подбор онлайн.</p>
       <form class="form-grid" onsubmit="event.preventDefault();closeFitting();toast('Заявка принята (демо): ассистент свяжется с вами')">
         <label>Имя<input required autocomplete="name"></label>
-        <label>Телефон или Telegram<input required inputmode="tel" autocomplete="tel"></label>
+        <label>Телефон<input required inputmode="tel" autocomplete="tel"></label>
+        <label>Где удобнее ответить<select><option>WhatsApp</option><option>Telegram</option><option>MAX</option></select></label>
         <label>Как удобнее
           <select><option>Примерка в Модном доме, Саратов</option><option>Онлайн-подбор с ассистентом</option><option>Индивидуальный пошив по меркам</option></select>
         </label>
@@ -140,7 +141,7 @@ function cardHTML(p) {
   if (p.status === 'pre') tags.push('<span class="tag pre">Предзаказ</span>');
   if (p.old) tags.push(`<span class="tag sale">−${Math.round((1 - p.price / p.old) * 100)}%</span>`);
   if (p.isNew) tags.push('<span class="tag">Новинка</span>');
-  const ed = p.stockSizes ? `<div class="edition">В наличии: размер ${p.stockSizes.join(', ')} · тираж 1–3 экземпляра</div>` : '';
+  const ed = p.stockSizes ? `<div class="edition">В наличии: размер ${p.stockSizes.join(', ')} · ограниченный тираж</div>` : '';
   return `<article class="card">
     <a href="product.html?id=${p.id}">
       <div class="card-media"><div class="tags">${tags.join('')}</div>${ph(p, COLLECTIONS[p.coll].short)}</div>

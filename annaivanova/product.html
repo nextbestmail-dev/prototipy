@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Модель — ANNAIVANOVA</title>
-<meta name="description" content="Дизайнерская одежда ANNAIVANOVA: собственное производство, лимитированный тираж, доставка по России.">
+<meta name="description" content="Авторская модель Анны Ивановой: история коллекции, ограниченный тираж, мастерская Модного дома в Саратове.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body data-page="catalog">
 <div id="site-header"></div>
@@ -55,7 +55,7 @@
       <label>Имя<input required autocomplete="name"></label>
       <label>Телефон<input required inputmode="tel" autocomplete="tel"></label>
       <label>Где&nbsp;удобнее ответить
-        <select><option>WhatsApp</option><option>Telegram</option><option>Позвонить</option></select>
+        <select><option>WhatsApp</option><option>Telegram</option><option>MAX</option></select>
       </label>
       <label>Вопрос (необязательно)<textarea placeholder="Например: какой размер взять при росте 168 и обхвате груди 90?"></textarea></label>
       <button class="btn wide" type="submit">Отправить менеджеру</button>
@@ -65,8 +65,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="js/data.js"></script>
-<script src="js/main.js"></script>
+<script src="js/data.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
 <script>
 let size = null;
 const p = byId(qs.get('id')) || PRODUCTS[0];
@@ -81,18 +81,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const coll = COLLECTIONS[p.coll], cat = CATEGORIES.find(c => c.id === p.cat);
   document.getElementById('crumbs').innerHTML = `<a href="index.html">Главная</a> \\ <a href="catalog.html?cat=${p.cat}">${cat.name}</a> \\ ${p.name}`;
   const shots = p.coll === 'gift' ? ['Сертификат'] : ['На модели', 'Сзади', 'Деталь ткани', 'В движении'];
-  document.getElementById('gallery').innerHTML = shots.map(s => ph(p, s)).join('');
+  document.getElementById('gallery').innerHTML = (p.video ? ph(p, p.video, 'video').replace('</div>', '<span class="play" role="button" aria-label="Смотреть видео"></span></div>') : '') + shots.slice(p.video ? 1 : 0).map(s => ph(p, s)).join('');
 
   const sizes = p.oneSize ? [] : SIZES_ALL;
   const avail = s => p.stockSizes ? p.stockSizes.includes(s) : true;
   const status = p.status === 'pre'
     ? `<div class="pdp-row"><h4>Предзаказ</h4><p style="margin:0;font-size:15px">Модель отшивается после заказа на&nbsp;собственном производстве.</p><div class="need" style="margin-top:12px"><b>Нужно от вас</b>Сроки пошива, размерный ряд и&nbsp;условия предоплаты по&nbsp;коллекции FW27.</div></div>`
-    : p.stockSizes ? `<div class="pdp-row"><h4>Лимитированная коллекция</h4><p style="margin:0;font-size:15px">Каждая модель&nbsp;— тиражом 1–3 экземпляра. Сейчас в&nbsp;наличии размер ${p.stockSizes.join(', ')}; другой размер можно сшить по&nbsp;меркам.</p></div>` : '';
+    : p.stockSizes ? `<div class="pdp-row"><h4>Лимитированная коллекция</h4><p style="margin:0;font-size:15px">Каждая модель выходит ограниченным тиражом. Сейчас в&nbsp;наличии размер ${p.stockSizes.join(', ')}; другой размер можно сшить по&nbsp;меркам.</p></div>` : '';
 
   document.getElementById('info').innerHTML = `
-    <a href="catalog.html?coll=${p.coll}" class="coll" style="font:400 11px var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none">${coll.name}</a>
+    <a href="${p.old ? 'catalog.html?coll=outlet' : 'catalog.html?coll=' + p.coll}" class="coll" style="font:400 11px var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none">${p.old ? 'Outlet · ' + coll.name : coll.name}</a>
     <h1>${nb(p.name)}</h1>
     ${priceHTML(p)}
+    ${p.cat === 'gift' ? '' : '<div class="author-line">Авторская модель Анны Ивановой · ограниченный тираж</div>'}
     ${p.art ? `<div class="art">Артикул ${p.art}</div>` : ''}
     ${status}
     ${sizes.length ? `<div class="pdp-row"><h4>Размер <button onclick="document.getElementById('sizes').classList.add('on')">Как выбрать размер</button></h4>
@@ -103,10 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
       <button class="btn line wide" onclick="openManager()">Уточнить у&nbsp;менеджера</button>
     </div>
     <p style="font-size:13.5px;color:var(--muted);margin:12px 0 0">Можно сразу оплатить на&nbsp;сайте или отправить заказ менеджеру&nbsp;— он&nbsp;уточнит размер и&nbsp;пришлёт ссылку на&nbsp;оплату.</p>
-    <div class="sign">${phTone('choc', '')}<p><b>Дизайнер Анна Иванова.</b> Собственное производство в&nbsp;Саратове. Сделано в&nbsp;России.</p></div>
+    <div class="sign">${phTone('choc', '')}<p><b>Автор модели&nbsp;— Анна Иванова.</b> Сшито в&nbsp;мастерской Модного дома в&nbsp;Саратове, в&nbsp;здании 1911 года.</p></div>
     <details open><summary>Описание</summary><div>${p.desc}</div></details>
     <details><summary>Состав и&nbsp;уход</summary><div>${p.comp ? 'Состав: ' + p.comp + '.' : '<span class="need" style="display:block"><b>Нужно от вас</b>Состав ткани и рекомендации по уходу.</span>'}</div></details>
-    <details><summary>Доставка и&nbsp;примерка</summary><div>По&nbsp;России&nbsp;— СДЭК и&nbsp;MajorExpress, отправка на&nbsp;следующий рабочий день для вещей в&nbsp;наличии. Саратов&nbsp;— курьер или самовывоз из&nbsp;Модного дома на&nbsp;Советской,&nbsp;3/5. <a href="info.html#delivery">Все условия</a></div></details>
+    <details><summary>Доставка и&nbsp;примерка</summary><div>По&nbsp;Саратову&nbsp;— курьер в&nbsp;удобное время или&nbsp;примерка на&nbsp;Советской. По&nbsp;России&nbsp;— курьером до&nbsp;двери, отправка на&nbsp;следующий рабочий день. <a href="info.html#delivery">Подробнее</a></div></details>
     <details><summary>Пошив по&nbsp;меркам</summary><div>Если модели нет в&nbsp;вашем размере, мастера сошьют её по&nbsp;вашим параметрам с&nbsp;сохранением фирменного качества. Такие изделия не&nbsp;подлежат возврату, кроме случаев брака.</div></details>`;
 
   document.querySelectorAll('#sz .size:not(.off)').forEach(b => b.onclick = () => {
@@ -118,8 +119,21 @@ document.addEventListener('DOMContentLoaded', () => {
     cartAdd(p.id, size || '—');
   };
 
-  const pairs = (PAIRS[p.id] || PRODUCTS.filter(x => x.coll === p.coll && x.id !== p.id).map(x => x.id)).slice(0, 4).map(byId);
+  const st = storyOf(p);
+  const sign = document.querySelector('.sign');
+  if (st) sign.insertAdjacentHTML('afterend', `<div class="story"><small>История вещи</small><b>${st.title}</b><p>${st.text}</p></div>`);
+  if (p.cat !== 'gift') (st ? document.querySelector('.story') : sign).insertAdjacentHTML('afterend', `<details open><summary>Что вы&nbsp;получаете вместе с&nbsp;вещью</summary><div><ul class="incl">
+    <li>Примерка в&nbsp;Модном доме или подбор образа онлайн с&nbsp;ассистентом</li>
+    <li>Пошив по&nbsp;вашим меркам, если нет нужного размера</li>
+    <li>Доставка до&nbsp;двери или&nbsp;примерка в&nbsp;Модном доме</li>
+    <li>Покупка засчитывается в&nbsp;клубную систему: от&nbsp;50&nbsp;000&nbsp;₽&nbsp;— уровень «Друг»</li>
+  </ul></div></details>`);
+  const proj = PROJECTS.find(x => x.looks.some(l => l.product === p.id));
+  if (proj) document.querySelector('.pdp-act').insertAdjacentHTML('afterend',
+    `<a class="from-proj" href="project.html?id=${proj.id}"><span class="slash" style="font-size:20px">\\</span><span>Где носили: <b>${proj.title}</b> · ${proj.media}</span></a>`);
+  const pairs = (PAIRS[p.id] || PRODUCTS.filter(x => x.coll === p.coll && x.id !== p.id).map(x => x.id)).map(byId).filter(x => x && !!x.old === !!p.old && x.cat !== 'gift').slice(0, 4);
   document.getElementById('pairs').innerHTML = pairs.map(cardHTML).join('');
+  if (!pairs.length) document.getElementById('pairs').closest('section').style.display = 'none';
 });
 </script>
 </body>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body data-page="info">
 <div id="site-header"></div>
@@ -26,9 +26,13 @@
   <div class="wrap split">
     <h2>Доставка</h2>
     <div>
-      <p class="lead">По&nbsp;всей России&nbsp;— курьерскими службами СДЭК и&nbsp;MajorExpress, домой или&nbsp;на&nbsp;работу. Отправляем на&nbsp;следующий рабочий день после&nbsp;заказа, если&nbsp;вещь в&nbsp;наличии; номер для&nbsp;отслеживания пришлём сами.</p>
-      <table style="margin-top:24px"><tr><th>Куда</th><th>Стоимость</th></tr><tbody id="dtable"></tbody></table>
-      <div class="need" style="margin-top:20px"><b>Нужно от&nbsp;вас</b>На&nbsp;текущей странице доставки по&nbsp;Саратову указано и&nbsp;«350&nbsp;р.», и&nbsp;«бесплатно». Какой вариант верный?</div>
+      <p class="lead">Вещь приезжает к&nbsp;вам так&nbsp;же бережно, как&nbsp;её&nbsp;шили.</p>
+      <div class="svc">
+        <div><b>Саратов</b><span>Курьер привезёт заказ в&nbsp;удобное вам время&nbsp;— или&nbsp;встреча в&nbsp;Модном доме на&nbsp;Советской с&nbsp;примеркой.</span></div>
+        <div><b>Вся&nbsp;Россия</b><span>Курьерская доставка до&nbsp;двери. Отправляем на&nbsp;следующий рабочий день и&nbsp;сами присылаем номер для&nbsp;отслеживания.</span></div>
+        <div><b>Если&nbsp;не&nbsp;подошёл размер</b><span>Менеджер поможет подобрать другой размер, а&nbsp;если&nbsp;нужного нет&nbsp;— модель сошьют по&nbsp;вашим меркам в&nbsp;мастерской Модного дома.</span></div>
+      </div>
+      <div class="need" style="margin-top:28px"><b>Нужно от&nbsp;вас</b>Условия доставки для&nbsp;сайта. Для&nbsp;вещей такого уровня обычно доставка бесплатная: по&nbsp;Саратову&nbsp;— всегда, по&nbsp;России&nbsp;— от&nbsp;суммы заказа. Сейчас на&nbsp;сайте тарифы от&nbsp;350 до&nbsp;1&nbsp;500&nbsp;₽, а&nbsp;по&nbsp;Саратову указано и&nbsp;«350&nbsp;р.», и&nbsp;«бесплатно».</div>
     </div>
   </div>
 </section>
@@ -97,11 +101,10 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="js/data.js"></script>
-<script src="js/main.js"></script>
+<script src="js/data.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('dtable').innerHTML = DELIVERY.map(d => `<tr><td>${d.name}<br><span class="muted" style="font-size:13px">${d.note}</span></td><td>${d.price ? RUB(d.price) : 'бесплатно'}</td></tr>`).join('');
 });
 </script>
 </body>

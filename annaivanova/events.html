@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body data-page="events">
 <div id="site-header"></div>
@@ -61,6 +61,7 @@
     <form class="form-grid" onsubmit="event.preventDefault();document.getElementById('reg').classList.remove('on');toast('Вы зарегистрированы (демо). Напоминание придёт за день')">
       <label>Имя<input required autocomplete="name"></label>
       <label>Телефон<input required inputmode="tel" autocomplete="tel"></label>
+      <label>Где&nbsp;удобнее ответить<select><option>WhatsApp</option><option>Telegram</option><option>MAX</option></select></label>
       <label>Сколько гостей<select><option>1</option><option>2</option></select></label>
       <button class="btn wide" type="submit">Зарегистрироваться</button>
       <span class="demo-note">Демо: форма ничего не&nbsp;отправляет.</span>
@@ -69,8 +70,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="js/data.js"></script>
-<script src="js/main.js"></script>
+<script src="js/data.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
 <script>
 function reg(t) { document.getElementById('reg-t').textContent = t; document.getElementById('reg').classList.add('on'); }
 function buyTicket(go) {
