@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Корзина — ANNAIVANOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.ways{display:grid;gap:10px;margin-top:22px}
+.way{border:1px solid var(--line);background:#fff;padding:18px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:block;width:100%}
+.way.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.way b{font:400 12px var(--label);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px}
+.way span{font-size:13.5px;color:var(--muted);line-height:1.45;display:block}
+#mgr-form{display:none;margin-top:16px}
+#mgr-form.on{display:grid}
+</style>
+</head>
+<body data-page="cart">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ Корзина</div>
+  <h1 style="font-size:clamp(40px,5vw,64px)">Корзина</h1>
+</div></div>
+
+<div class="wrap cart-grid">
+  <div id="items"></div>
+  <aside class="summary" id="summary">
+    <h3>Ваш&nbsp;заказ</h3>
+    <div class="sum-row"><span id="cnt"></span><span id="sum"></span></div>
+    <div class="sum-row"><span>Доставка</span><span class="muted">на&nbsp;следующем шаге</span></div>
+    <div class="sum-row total"><span>Итого</span><span id="total"></span></div>
+
+    <div class="ways" role="radiogroup" aria-label="Как оформить">
+      <button class="way on" data-way="buy" role="radio" aria-checked="true"><b>Купить сейчас</b><span>Выберете доставку и&nbsp;оплатите картой или&nbsp;через&nbsp;СБП. Отправим на&nbsp;следующий рабочий день.</span></button>
+      <button class="way" data-way="mgr" role="radio" aria-checked="false"><b>Через&nbsp;менеджера</b><span>Менеджер Модного дома напишет вам, уточнит размер, наличие и&nbsp;сроки пошива, предложит примерку и&nbsp;пришлёт ссылку на&nbsp;оплату.</span></button>
+    </div>
+
+    <a href="checkout.html" class="btn wide" id="go-buy" style="margin-top:16px">Оформить и&nbsp;оплатить</a>
+
+    <form class="form-grid" id="mgr-form" onsubmit="sendToManager(event)">
+      <input required placeholder="Имя" autocomplete="name" aria-label="Имя">
+      <input required placeholder="Телефон" inputmode="tel" autocomplete="tel" aria-label="Телефон">
+      <select aria-label="Где удобнее ответить"><option>Написать в&nbsp;WhatsApp</option><option>Написать в&nbsp;Telegram</option><option>Позвонить</option></select>
+      <textarea placeholder="Комментарий: рост, параметры, когда удобно приехать на примерку" aria-label="Комментарий"></textarea>
+      <button class="btn wide" type="submit">Отправить менеджеру</button>
+      <span class="demo-note">Состав корзины уйдёт менеджеру вместе с&nbsp;заявкой. Оплачивать сейчас не&nbsp;нужно.</span>
+    </form>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+function sendToManager(e) {
+  e.preventDefault();
+  try { localStorage.setItem('ai_last_order', JSON.stringify({ way: 'mgr', items: cartRead(), sum: cartSum() })); } catch (x) {}
+  cartWrite([]);
+  location.href = 'success.html?way=mgr';
+}
+function render() {
+  const c = cartRead();
+  const items = document.getElementById('items');
+  if (!c.length) {
+    items.innerHTML = '<div class="empty"><p>В&nbsp;корзине пока ничего нет.</p><a href="catalog.html" class="btn">В&nbsp;магазин</a></div>';
+    document.getElementById('summary').style.display = 'none';
+    return;
+  }
+  items.innerHTML = c.map((i, n) => {
+    const p = byId(i.id); if (!p) return '';
+    const url = p.cat === 'ticket' ? 'events.html' : 'product.html?id=' + p.id;
+    return `<div class="line-item">
+      <a href="${url}">${ph(p, p.cat === 'ticket' ? 'билет' : '')}</a>
+      <div>
+        <h3><a href="${url}" style="text-decoration:none">${p.name}</a></h3>
+        <div class="meta">${p.cat === 'ticket' ? p.date + ' · дресс-код ' + p.dress : (i.size !== '—' ? 'Размер ' + i.size + ' · ' : '') + COLLECTIONS[p.coll].short + (p.status === 'pre' ? ' · предзаказ' : '')}</div>
+        <div class="qty"><button data-n="${n}" data-d="-1" aria-label="Меньше">−</button><span>${i.qty}</span><button data-n="${n}" data-d="1" aria-label="Больше">+</button></div><br>
+        <button class="rm" data-rm="${n}">Удалить</button>
+      </div>
+      <div class="price" style="margin:0">${RUB(p.price * i.qty)}</div>
+    </div>`;
+  }).join('');
+  items.querySelectorAll('[data-d]').forEach(b => b.onclick = () => {
+    const c = cartRead(); const i = c[b.dataset.n]; i.qty = Math.max(1, i.qty + +b.dataset.d); cartWrite(c); render();
+  });
+  items.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { const c = cartRead(); c.splice(b.dataset.rm, 1); cartWrite(c); render(); });
+  document.getElementById('cnt').textContent = plural(cartCount(), 'товар', 'товара', 'товаров');
+  document.getElementById('sum').textContent = RUB(cartSum());
+  document.getElementById('total').textContent = RUB(cartSum());
+}
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+  document.querySelectorAll('.way').forEach(w => w.onclick = () => {
+    document.querySelectorAll('.way').forEach(x => { x.classList.toggle('on', x === w); x.setAttribute('aria-checked', x === w); });
+    const mgr = w.dataset.way === 'mgr';
+    document.getElementById('go-buy').style.display = mgr ? 'none' : '';
+    document.getElementById('mgr-form').classList.toggle('on', mgr);
+  });
+  if (qs.get('way') === 'mgr') document.querySelector('[data-way="mgr"]').click();
+});
+</script>
+</body>
+</html>

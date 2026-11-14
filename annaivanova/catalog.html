@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Каталог — ANNAIVANOVA</title>
+<meta name="description" content="Каталог ANNAIVANOVA: платья, жакеты, блузы, плащи и платки из коллекций «Метель» FW27 и «Саратов. Вдохновение».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="catalog">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ <span id="crumb">Магазин</span></div>
+  <h1 id="title" style="font-size:clamp(40px,5vw,64px)">Магазин</h1>
+  <p id="subtitle">Все&nbsp;коллекции в&nbsp;одном месте: новая «Метель» по&nbsp;предзаказу и&nbsp;вещи в&nbsp;наличии. Каждая модель шьётся небольшим тиражом.</p>
+</div></div>
+
+<div class="wrap shop">
+  <aside class="filters">
+    <div class="grp"><h4>Коллекция</h4><div id="f-coll"></div></div>
+    <div class="grp"><h4>Категория</h4><div id="f-cat"></div></div>
+    <div class="grp"><h4>Размер</h4><div class="sizes" id="f-size"></div><p class="demo-note" style="margin-top:10px">Размеры «Метели»&nbsp;— для&nbsp;примера.</p></div>
+    <div class="grp" style="border:0"><h4>Наличие</h4>
+      <label class="chk"><input type="checkbox" id="f-stock"> Только в&nbsp;наличии</label>
+      <label class="chk"><input type="checkbox" id="f-sale"> Со&nbsp;скидкой</label>
+    </div>
+  </aside>
+  <div>
+    <div class="toolbar">
+      <div class="chips" id="chips"></div>
+      <select id="sort" aria-label="Сортировка">
+        <option value="def">Сначала новинки</option>
+        <option value="asc">Цена по&nbsp;возрастанию</option>
+        <option value="desc">Цена по&nbsp;убыванию</option>
+      </select>
+    </div>
+    <div class="goods c3" id="grid"></div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+const st = { coll: qs.get('coll') ? [qs.get('coll')] : [], cat: qs.get('cat') ? [qs.get('cat')] : [], size: null, stock: false, sale: qs.get('sale') === '1', sort: 'def' };
+
+function boxes(el, list, key) {
+  el.innerHTML = list.map(x => {
+    const n = PRODUCTS.filter(p => p[key === 'coll' ? 'coll' : 'cat'] === x.id).length;
+    return `<label class="chk"><input type="checkbox" value="${x.id}" ${st[key].includes(x.id) ? 'checked' : ''}> ${x.name}<em>${n}</em></label>`;
+  }).join('');
+  el.querySelectorAll('input').forEach(i => i.onchange = () => {
+    st[key] = [...el.querySelectorAll('input:checked')].map(x => x.value); render();
+  });
+}
+function sizesOf(p) { return p.oneSize ? [] : p.stockSizes || SIZES_ALL; }
+
+function render() {
+  let list = PRODUCTS.filter(p =>
+    (!st.coll.length || st.coll.includes(p.coll)) &&
+    (!st.cat.length || st.cat.includes(p.cat)) &&
+    (!st.size || sizesOf(p).includes(st.size)) &&
+    (!st.stock || p.status === 'stock') &&
+    (!st.sale || p.old));
+  if (st.sort === 'asc') list.sort((a, b) => a.price - b.price);
+  if (st.sort === 'desc') list.sort((a, b) => b.price - a.price);
+  document.getElementById('grid').innerHTML = list.length ? list.map(cardHTML).join('')
+    : '<div class="empty">Под&nbsp;такие фильтры моделей нет. Нужный размер можно <a href="info.html#tailoring">сшить по&nbsp;меркам</a>.</div>';
+
+  const chips = [];
+  st.coll.forEach(c => chips.push([COLLECTIONS[c].short, () => st.coll = st.coll.filter(x => x !== c)]));
+  st.cat.forEach(c => chips.push([CATEGORIES.find(x => x.id === c).name, () => st.cat = st.cat.filter(x => x !== c)]));
+  if (st.size) chips.push(['Размер ' + st.size, () => st.size = null]);
+  if (st.stock) chips.push(['В наличии', () => st.stock = false]);
+  if (st.sale) chips.push(['Со скидкой', () => st.sale = false]);
+  const ch = document.getElementById('chips');
+  ch.innerHTML = chips.length ? chips.map((c, i) => `<button class="chip on" data-i="${i}">${c[0]} ×</button>`).join('') + '<button class="chip" data-reset>Сбросить</button>'
+    : `<span class="muted" style="font-size:14px">${plural(list.length, 'модель', 'модели', 'моделей')}</span>`;
+  ch.querySelectorAll('[data-i]').forEach(b => b.onclick = () => { chips[b.dataset.i][1](); sync(); });
+  const r = ch.querySelector('[data-reset]'); if (r) r.onclick = () => { st.coll = []; st.cat = []; st.size = null; st.stock = false; st.sale = false; sync(); };
+
+  const one = st.coll.length === 1 && !st.cat.length ? COLLECTIONS[st.coll[0]] : st.cat.length === 1 && !st.coll.length ? CATEGORIES.find(x => x.id === st.cat[0]) : null;
+  document.getElementById('title').textContent = one ? one.name : 'Магазин';
+  document.getElementById('crumb').textContent = one ? one.name : 'Магазин';
+  if (st.coll.length === 1 && st.coll[0] === 'fw27') document.getElementById('subtitle').textContent = 'Новая коллекция по предзаказу. Графитовые оттенки, чёткие линии плеч, приталенные жакеты, мягкие драпировки и блеск пайеток.';
+  if (st.coll.length === 1 && st.coll[0] === 'pf25') document.getElementById('subtitle').textContent = 'Коллаборация с художником Александром Дегтярёвым: принты по архивным снимкам и картинам старого Саратова. Скидка 20%, вещи в наличии.';
+}
+function sync() {
+  boxes(document.getElementById('f-coll'), Object.values(COLLECTIONS).filter(c => c.id !== 'event'), 'coll');
+  boxes(document.getElementById('f-cat'), CATEGORIES, 'cat');
+  document.getElementById('f-size').innerHTML = SIZES_ALL.map(s => `<button class="size ${st.size === s ? 'on' : ''}" data-s="${s}">${s}</button>`).join('');
+  document.querySelectorAll('#f-size .size').forEach(b => b.onclick = () => { st.size = st.size === b.dataset.s ? null : b.dataset.s; sync(); });
+  document.getElementById('f-stock').checked = st.stock;
+  document.getElementById('f-sale').checked = st.sale;
+  render();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('f-stock').onchange = e => { st.stock = e.target.checked; render(); };
+  document.getElementById('f-sale').onchange = e => { st.sale = e.target.checked; render(); };
+  document.getElementById('sort').onchange = e => { st.sort = e.target.value; render(); };
+  sync();
+});
+</script>
+</body>
+</html>

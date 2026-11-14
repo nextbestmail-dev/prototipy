@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Афиша Модного дома — ANNAIVANOVA</title>
+<meta name="description" content="Fashion-вечера, показы и «Модное кино» с Анной Ивановой в Модном доме ANNAIVANOVA, Саратов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="events">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ Афиша</div>
+  <h1 style="font-size:clamp(40px,5vw,64px)">Афиша Модного дома</h1>
+  <p>Встречи с&nbsp;Анной Ивановой, показы коллекций и&nbsp;«Модное кино»&nbsp;— примерно раз в&nbsp;месяц. Билет покупается здесь&nbsp;же и&nbsp;в&nbsp;той&nbsp;же корзине, что&nbsp;и&nbsp;одежда.</p>
+</div></div>
+
+<section style="padding-top:56px">
+  <div class="wrap">
+    <div class="eyebrow">Скоро</div>
+    <div class="events" style="grid-template-columns:1fr">
+      <div class="event big">
+        <div class="date">14<small>ноября · 18:00</small></div>
+        <div><h3>Fashion-вечер ANNAIVANOVA</h3>
+          <p>Вечер, посвящённый коллекции «Осень–Зима 26/27». «В&nbsp;этот&nbsp;вечер я&nbsp;расскажу, как&nbsp;рождалась коллекция: об&nbsp;истории её&nbsp;создания, вдохновении, поиске образов, неожиданных решениях, неудачах и&nbsp;удачах»,&nbsp;— Анна Иванова.</p>
+          <p>Welcome-напиток от&nbsp;партнёров, десерты, персональный подбор образов и&nbsp;сертификат на&nbsp;5&nbsp;000&nbsp;₽ на&nbsp;новую коллекцию каждому гостю.</p>
+          <p class="muted">Модный дом ANNAIVANOVA, Саратов, ул.&nbsp;Советская,&nbsp;3/5, 2&nbsp;этаж · дресс-код TOTAL BLACK</p></div>
+        <div>
+          <div class="tag pre" style="display:inline-block;margin-bottom:14px">Осталось меньше 10 мест</div>
+          <div class="price" style="font-size:24px;margin:0 0 4px">3&nbsp;000&nbsp;₽</div>
+          <p style="font-size:13.5px;color:var(--muted);margin:0 0 14px">Билет окупается: на&nbsp;вечере каждый гость получает сертификат на&nbsp;5&nbsp;000&nbsp;₽ на&nbsp;новую коллекцию.</p>
+          <label style="font-size:13px;color:var(--muted);display:grid;gap:6px;margin-bottom:10px">Сколько билетов<select id="tk-qty"><option>1</option><option>2</option><option>3</option></select></label>
+          <button class="btn wide" onclick="buyTicket(true)">Купить билет</button>
+          <button class="btn line wide" style="margin-top:8px" onclick="buyTicket(false)">Добавить к&nbsp;заказу</button>
+        </div>
+      </div>
+    </div>
+    <div class="need" style="margin-top:20px"><b>Нужно от&nbsp;вас</b>Даты и&nbsp;цены следующих встреч&nbsp;— раз в&nbsp;месяц они&nbsp;будут появляться здесь сами, вместе с&nbsp;кнопкой покупки.</div>
+
+    <div class="eyebrow" style="margin-top:64px">Прошедшие</div>
+    <div class="events">
+      <div class="event past"><div class="date">22<small>октября</small></div><div><h3>Шоу FW27 на&nbsp;Art Seasons</h3><p>Санкт-Петербург, с&nbsp;симфоническим оркестром «Таврический». Шоурум в&nbsp;особняке Трубецких&nbsp;— Нарышкиных.</p></div></div>
+      <div class="event past"><div class="date">08<small>октября</small></div><div><h3>«Модное кино»: «Секреты Лагерфельда»</h3><p>Документальный фильм Родольфа Маркони и&nbsp;разговор о&nbsp;том, как&nbsp;рождается личный стиль.</p></div></div>
+      <div class="event past"><div class="date">16<small>сентября</small></div><div><h3>«Модное кино»</h3><p>Анна Иванова об&nbsp;«изнанке» модной индустрии: от&nbsp;коллекции до&nbsp;бизнес-модели премиального бренда.</p></div></div>
+      <div class="event past"><div class="date">03<small>августа</small></div><div><h3>Показ «Волга. Волга. Рассвет»</h3><p>Показ коллекции ANNAIVANOVA и&nbsp;его&nbsp;гости.</p></div></div>
+    </div>
+    <p class="demo-note" style="margin-top:16px">События&nbsp;— из&nbsp;постов бренда во&nbsp;ВКонтакте и&nbsp;Telegram.</p>
+  </div>
+</section>
+
+<div class="modal" id="reg" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('reg').classList.remove('on')" aria-label="Закрыть">×</button>
+    <div class="eyebrow">Регистрация</div>
+    <h3 id="reg-t"></h3>
+    <form class="form-grid" onsubmit="event.preventDefault();document.getElementById('reg').classList.remove('on');toast('Вы зарегистрированы (демо). Напоминание придёт за день')">
+      <label>Имя<input required autocomplete="name"></label>
+      <label>Телефон<input required inputmode="tel" autocomplete="tel"></label>
+      <label>Сколько гостей<select><option>1</option><option>2</option></select></label>
+      <button class="btn wide" type="submit">Зарегистрироваться</button>
+      <span class="demo-note">Демо: форма ничего не&nbsp;отправляет.</span>
+    </form>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+function reg(t) { document.getElementById('reg-t').textContent = t; document.getElementById('reg').classList.add('on'); }
+function buyTicket(go) {
+  cartAdd('tk-1411', '—', +document.getElementById('tk-qty').value);
+  if (go) location.href = 'cart.html';
+}
+</script>
+</body>
+</html>
