@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Спасибо — ANNAIVANOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=11">
+</head>
+<body>
+<div id="site-header"></div>
+<section><div class="wrap" style="max-width:760px;text-align:center">
+  <div class="eyebrow" style="justify-content:center">ANNA <i>\</i> IVANOVA</div>
+  <h1 id="h" style="font-size:clamp(40px,5vw,64px)">Спасибо за&nbsp;заказ</h1>
+  <p class="lead" id="t" style="margin:24px auto 36px"></p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="catalog.html" class="btn">Вернуться в&nbsp;магазин</a>
+    <a href="designer.html" class="btn line">Об&nbsp;Анне Ивановой</a>
+  </div>
+  <p class="demo-note" style="margin-top:32px">Это&nbsp;демо: заказ никуда не&nbsp;ушёл. На&nbsp;сайте он&nbsp;придёт в&nbsp;мессенджер менеджеру и&nbsp;письмом на&nbsp;post@annaivanova.com.</p>
+</div></section>
+<div id="site-footer"></div>
+<script src="js/data.js?v=11"></script>
+<script src="js/main.js?v=11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (qs.get('way') === 'mgr') {
+    document.getElementById('h').innerHTML = 'Заявка у&nbsp;менеджера';
+    document.getElementById('t').innerHTML = 'Менеджер Модного дома напишет вам в&nbsp;течение рабочего дня (пн–пт, 9:00–18:00): уточнит размер и&nbsp;наличие, предложит примерку и&nbsp;пришлёт ссылку на&nbsp;оплату.';
+  } else {
+    document.getElementById('t').innerHTML = 'Оплата прошла. Мы&nbsp;отправим заказ на&nbsp;следующий рабочий день и&nbsp;пришлём номер для отслеживания на&nbsp;почту. Для предзаказа менеджер напишет о&nbsp;сроках пошива.';
+  }
+});
+</script>
+</body>
+</html>

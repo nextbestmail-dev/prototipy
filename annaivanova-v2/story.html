@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Коллекция — ANNAIVANOVA</title>
+<meta name="description" content="История коллекции Анны Ивановой и вещи из неё.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=11">
+</head>
+<body data-page="stories" class="story-page">
+<div id="site-header"></div>
+
+<div class="banner" style="height:calc(100vh - 150px);max-height:860px">
+  <div id="s-ph"></div>
+  <div class="banner-in" id="s-banner"></div>
+</div>
+
+<div class="st-head">
+  <div class="crumbs"><a href="index.html">Главная</a> \ <a href="collections.html">Коллекции</a> \ <span id="crumb"></span></div>
+  <div class="eyebrow" style="justify-content:center;margin-top:28px" id="s-season"></div>
+  <h1 id="s-title"></h1>
+  <p class="st-lead" id="s-lead"></p>
+</div>
+
+<div class="wrap" id="s-blocks"></div>
+
+<section style="padding-top:24px">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" id="items-eyebrow"></div><h2 id="items-title"></h2><p id="items-note"></p></div><a class="link" id="items-link"></a></div>
+    <div class="goods c3" id="items"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Другие коллекции</h2></div><a href="collections.html" class="link">Все&nbsp;коллекции</a></div>
+    <div class="st-list" id="more"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/data.js?v=11"></script>
+<script src="js/main.js?v=11"></script>
+<script>
+const S = STORIES.find(x => x.id === qs.get('id')) || STORIES[0];
+const ART = { romeo: 'FW26', swan: 'SS25' };
+function itemsOf(s) {
+  if (s.coll) return PRODUCTS.filter(p => p.coll === s.coll);
+  if (ART[s.id]) return PRODUCTS.filter(p => (p.art || '').startsWith(ART[s.id]));
+  return [];
+}
+function block(b) {
+  if (b.t === 'text') return `<p class="st-block st-text">${b.v}</p>`;
+  if (b.t === 'wide') return `<div class="st-block st-wide">${phTone(b.tone, b.label)}</div>`;
+  if (b.t === 'pair') return `<div class="st-block st-pair">${phTone(b.tones[0], b.labels[0])}${phTone(b.tones[1], b.labels[1])}</div>`;
+  if (b.t === 'quote') return `<blockquote class="st-block st-quote">«${b.v}»<small>${b.by}</small></blockquote>`;
+  if (b.t === 'video') return `<div class="st-block st-video">${phTone(b.tone, b.label).replace('</div>', '<span class="play" role="button" aria-label="Смотреть видео"></span></div>')}</div>`;
+  if (b.t === 'need') return `<div class="st-block need" style="max-width:640px">${'<b>Нужно от вас</b>' + b.v}</div>`;
+  return '';
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.title = S.title.replace(/[«»]/g, '') + ' — коллекция ANNAIVANOVA';
+  document.getElementById('s-ph').innerHTML = phTone(S.tone, '');
+  document.getElementById('s-banner').remove();
+  document.getElementById('crumb').textContent = S.title;
+  document.getElementById('s-season').textContent = S.season;
+  document.getElementById('s-title').textContent = S.title;
+  document.getElementById('s-lead').textContent = S.lead;
+  document.getElementById('s-blocks').innerHTML = S.blocks.map(block).join('');
+
+  const items = itemsOf(S);
+  const sale = items.some(p => p.old);
+  const ey = document.getElementById('items-eyebrow'), ti = document.getElementById('items-title'), no = document.getElementById('items-note'), ln = document.getElementById('items-link');
+  if (!items.length) {
+    ey.textContent = 'Вещи коллекции';
+    ti.textContent = 'Узнать о моделях';
+    no.innerHTML = 'Какие модели коллекции сейчас можно заказать, подскажет менеджер Модного дома.';
+    document.getElementById('items').innerHTML = '<div><button class="btn" onclick="openFitting()">Спросить менеджера</button><div class="need" style="margin-top:20px"><b>Нужно от вас</b>Какие модели этой коллекции в продаже.</div></div>';
+    ln.remove();
+  } else if (sale) {
+    ey.textContent = 'Прошлая коллекция';
+    ti.textContent = 'Вещи коллекции в Outlet';
+    no.textContent = 'Оставшиеся модели — по более доступной цене.';
+    ln.textContent = 'Весь Outlet'; ln.href = 'catalog.html?coll=outlet';
+    document.getElementById('items').innerHTML = items.filter(p => p.old).slice(0, 6).map(cardHTML).join('');
+  } else {
+    ey.textContent = 'Новая коллекция';
+    ti.textContent = 'Вещи из коллекции';
+    no.textContent = 'Каждая модель — авторская работа Анны Ивановой, ограниченным тиражом.';
+    ln.textContent = 'Вся коллекция'; ln.href = 'catalog.html?coll=' + S.coll;
+    document.getElementById('items').innerHTML = items.slice(0, 6).map(cardHTML).join('');
+  }
+  document.getElementById('more').innerHTML = STORIES.filter(x => x.id !== S.id).slice(0, 2).map(s =>
+    `<a class="st-tile" href="story.html?id=${s.id}" style="grid-column:auto">${phTone(s.tone, '')}<div class="st-cap"><small>${s.season}</small><b>${s.title}</b></div></a>`).join('');
+});
+</script>
+</body>
+</html>

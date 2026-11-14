@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Оформление заказа — ANNAIVANOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=11">
+</head>
+<body data-page="cart">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ <a href="cart.html">Корзина</a> \ Оформление</div>
+  <h1 style="font-size:clamp(40px,5vw,64px)">Оформление заказа</h1>
+  <p>Хотите сначала поговорить с&nbsp;менеджером? <a href="cart.html?way=mgr">Отправьте корзину ему</a>&nbsp;— он&nbsp;уточнит размер и&nbsp;пришлёт ссылку на&nbsp;оплату.</p>
+</div></div>
+
+<form class="wrap cart-grid" onsubmit="pay(event)">
+  <div>
+    <div class="co-sec">
+      <h3>Контакты</h3>
+      <div class="form-grid">
+        <div class="two"><input required placeholder="Имя и фамилия" autocomplete="name" aria-label="Имя и фамилия"><input required placeholder="Телефон" inputmode="tel" autocomplete="tel" aria-label="Телефон"></div>
+        <input type="email" required placeholder="Почта — пришлём чек и номер отправления" autocomplete="email" aria-label="Почта">
+      </div>
+    </div>
+    <div class="co-sec">
+      <h3>Доставка</h3>
+      <div id="deliv"></div>
+      <input id="addr" placeholder="Город, улица, дом, квартира" autocomplete="street-address" aria-label="Адрес" style="margin-top:6px">
+    </div>
+    <div class="co-sec">
+      <h3>Оплата</h3>
+      <label class="opt"><input type="radio" name="pay" checked><div><b>Картой онлайн</b><span>Visa, Mastercard, «Мир»</span></div></label>
+      <label class="opt"><input type="radio" name="pay"><div><b>СБП</b><span>Оплата по&nbsp;QR-коду из&nbsp;приложения банка</span></div></label>
+      <label class="opt"><input type="radio" name="pay"><div><b>Подарочный сертификат</b><span>Введите номер сертификата ANNAIVANOVA</span></div></label>
+      <p class="demo-note">Демо-оплата: деньги не&nbsp;списываются. Платёжный сервис подключим после&nbsp;выбора банка.</p>
+    </div>
+  </div>
+  <aside class="summary">
+    <h3>Ваш&nbsp;заказ</h3>
+    <div id="lines" style="font-size:14px"></div>
+    <div class="sum-row"><span>Товары</span><span id="sum"></span></div>
+    <div class="sum-row"><span>Доставка</span><span id="dl"></span></div>
+    <div class="sum-row total"><span>Итого</span><span id="total"></span></div>
+    <button class="btn wide" type="submit" style="margin-top:18px">Оплатить</button>
+    <p class="demo-note" style="margin-top:10px">Нажимая «Оплатить», вы&nbsp;соглашаетесь с&nbsp;офертой и&nbsp;политикой конфиденциальности.</p>
+  </aside>
+</form>
+
+<div id="site-footer"></div>
+<script src="js/data.js?v=11"></script>
+<script src="js/main.js?v=11"></script>
+<script>
+let dl = DELIVERY[0];
+function totals() {
+  document.getElementById('sum').textContent = RUB(cartSum());
+  document.getElementById('dl').textContent = dl.price ? RUB(dl.price) : 'бесплатно';
+  document.getElementById('total').textContent = RUB(cartSum() + dl.price);
+  document.getElementById('addr').style.display = dl.id === 'pickup' ? 'none' : '';
+  document.getElementById('addr').required = dl.id !== 'pickup';
+}
+function pay(e) {
+  e.preventDefault();
+  try { localStorage.setItem('ai_last_order', JSON.stringify({ way: 'buy', sum: cartSum() + dl.price, dl: dl.name })); } catch (x) {}
+  cartWrite([]);
+  location.href = 'success.html?way=buy';
+}
+document.addEventListener('DOMContentLoaded', () => {
+  if (!cartRead().length) { location.href = 'cart.html'; return; }
+  document.getElementById('lines').innerHTML = cartRead().map(i => { const p = byId(i.id); return `<div class="sum-row" style="gap:12px"><span>${p.name}${i.size !== '—' ? ', ' + i.size : ''} × ${i.qty}</span><span style="white-space:nowrap">${RUB(p.price * i.qty)}</span></div>`; }).join('') + '<hr style="border:0;border-top:1px solid var(--line);margin:10px 0">';
+  document.getElementById('deliv').innerHTML = DELIVERY.map((d, n) => `<label class="opt"><input type="radio" name="dl" value="${n}" ${n === 0 ? 'checked' : ''}><div><b>${d.name}</b><span>${d.note}</span></div><em>${d.price ? RUB(d.price) : 'бесплатно'}</em></label>`).join('');
+  document.querySelectorAll('[name=dl]').forEach(r => r.onchange = () => { dl = DELIVERY[r.value]; totals(); });
+  if (cartRead().every(i => byId(i.id).cat === 'ticket')) {
+    document.getElementById('deliv').innerHTML = '<div class="opt" style="cursor:default"><div><b>Электронный билет</b><span>Придёт на почту сразу после оплаты, а за день до вечера — напоминание.</span></div><em>бесплатно</em></div>';
+  }
+  totals();
+});
+</script>
+</body>
+</html>
