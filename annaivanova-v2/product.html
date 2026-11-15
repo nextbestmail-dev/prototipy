@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body data-page="catalog">
 <div id="site-header"></div>
@@ -65,8 +65,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="js/data.js?v=11"></script>
-<script src="js/main.js?v=11"></script>
+<script src="js/data.js?v=13"></script>
+<script src="js/main.js?v=13"></script>
 <script>
 let size = null;
 const p = byId(qs.get('id')) || PRODUCTS[0];
@@ -76,6 +76,11 @@ function openManager() {
   document.getElementById('manager').classList.add('on');
 }
 
+function seasonOf(p) {
+  const a = (p.art || '').split('.')[0];
+  const MAP = { SS25: 'коллекция весна-лето 2025', FW26: 'коллекция осень-зима 2025–26', PF25: '«Саратов. Вдохновение»' };
+  return MAP[a] || (a ? 'коллекция ' + a : 'прошлая коллекция');
+}
 document.addEventListener('DOMContentLoaded', () => {
   document.title = p.name + ' — ANNAIVANOVA';
   const coll = COLLECTIONS[p.coll], cat = CATEGORIES.find(c => c.id === p.cat);
@@ -90,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     : p.stockSizes ? `<div class="pdp-row"><h4>Лимитированная коллекция</h4><p style="margin:0;font-size:15px">Каждая модель выходит ограниченным тиражом. Сейчас в&nbsp;наличии размер ${p.stockSizes.join(', ')}; другой размер можно сшить по&nbsp;меркам.</p></div>` : '';
 
   document.getElementById('info').innerHTML = `
-    <a href="${p.old ? 'catalog.html?coll=outlet' : 'catalog.html?coll=' + p.coll}" class="coll" style="font:400 11px var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none">${p.old ? 'Outlet · ' + coll.name : coll.name}</a>
+    <a href="${p.old ? 'catalog.html?coll=outlet' : 'catalog.html?coll=' + p.coll}" class="coll" style="font:400 11px var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none">${p.old ? 'Outlet · ' + seasonOf(p) : coll.name}</a>
     <h1>${nb(p.name)}</h1>
     ${priceHTML(p)}
     ${p.cat === 'gift' ? '' : '<div class="author-line">Авторская модель Анны Ивановой · ограниченный тираж</div>'}
@@ -121,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const st = storyOf(p);
   const sign = document.querySelector('.sign');
-  if (st) sign.insertAdjacentHTML('afterend', `<div class="story"><small>История вещи</small><b>${st.title}</b><p>${st.text}</p><a href="story.html?id=${p.coll === 'fw27' ? 'metel' : (p.coll === 'pf25' || (p.art || '').startsWith('PF25')) ? 'saratov' : (p.art || '').startsWith('SS25') ? 'swan' : (p.art || '').startsWith('FW26') ? 'romeo' : ''}" style="display:inline-block;margin-top:12px;color:#fff;font:400 11.5px var(--label);letter-spacing:.16em;text-transform:uppercase">Вся история коллекции →</a></div>`);
+  if (st) sign.insertAdjacentHTML('afterend', `<div class="story"><small>История вещи</small><b>${st.title}</b><p>${st.text}</p><a href="${p.coll === 'fw27' ? 'story.html?id=metel' : (p.coll === 'pf25' || (p.art || '').startsWith('PF25')) ? 'project.html?id=saratov-degtyarev' : 'designer.html#archive'}" style="display:inline-block;margin-top:12px;color:#fff;font:400 11.5px var(--label);letter-spacing:.16em;text-transform:uppercase">${p.coll === 'fw27' ? 'Вся история коллекции →' : (p.coll === 'pf25' || (p.art || '').startsWith('PF25')) ? 'О коллаборации →' : 'Коллекции разных лет →'}</a></div>`);
   if (p.cat !== 'gift') (st ? document.querySelector('.story') : sign).insertAdjacentHTML('afterend', `<details open><summary>Что вы&nbsp;получаете вместе с&nbsp;вещью</summary><div><ul class="incl">
     <li>Примерка в&nbsp;Модном доме или подбор образа онлайн с&nbsp;ассистентом</li>
     <li>Пошив по&nbsp;вашим меркам, если нет нужного размера</li>

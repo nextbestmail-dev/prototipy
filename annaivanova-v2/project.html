@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body data-page="projects">
 <div id="site-header"></div>
@@ -18,6 +18,8 @@
   <div id="p-ph"></div>
   <div class="banner-in" id="p-head"></div>
 </div>
+
+<section id="p-story" style="padding-bottom:0"><div class="wrap"><div class="story-prose" style="max-width:62ch;margin:0 auto;text-align:center" id="p-story-in"></div></div></section>
 
 <section>
   <div class="wrap">
@@ -62,8 +64,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="js/data.js?v=11"></script>
-<script src="js/main.js?v=11"></script>
+<script src="js/data.js?v=13"></script>
+<script src="js/main.js?v=13"></script>
 <script>
 const P = PROJECTS.find(x => x.id === qs.get('id')) || PROJECTS[0];
 function want(n) {
@@ -89,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>`;
   }).join('');
+  if (P.story) document.getElementById('p-story-in').innerHTML = P.story.map(x => `<p>${x}</p>`).join(''); else document.getElementById('p-story').remove();
   document.getElementById('credits').innerHTML = P.credits.map(c => `<li>${c}</li>`).join('');
   document.getElementById('more').innerHTML = PROJECTS.filter(x => x.id !== P.id).slice(0, 2).map(p =>
     `<a class="proj" href="project.html?id=${p.id}" style="grid-column:auto">${phTone(p.tone, '')}<div class="proj-cap"><small>${p.type} · ${p.media}</small><b>${nb(p.title)}</b></div></a>`).join('');

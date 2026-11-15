@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -33,7 +33,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="eyebrow">Новая коллекция Анны Ивановой <i>\</i> предзаказ</div><h2>«Метель»</h2></div>
-      <a href="catalog.html?coll=fw27" class="link">Вся&nbsp;коллекция</a>
+      <div style="display:flex;gap:28px;flex-wrap:wrap"><a href="story.html?id=metel" class="link">История коллекции</a><a href="catalog.html" class="link">Вся&nbsp;коллекция</a></div>
     </div>
     <div class="goods" id="fw-goods"></div>
   </div>
@@ -41,8 +41,11 @@
 
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Истории коллекций</div><h2>У&nbsp;каждой коллекции есть сюжет</h2></div><a href="collections.html" class="link">Все&nbsp;коллекции</a></div>
-    <div class="st-list" id="stories-home"></div>
+    <div class="colls">
+      <a class="coll-tile" href="story.html?id=metel"><div data-ph="snow||"></div><span><small>История новой коллекции</small>«Метель»</span></a>
+      <a class="coll-tile" href="info.html#tailoring"><div data-ph="paper||"></div><span><small>Мастерская Модного дома</small>Пошив по&nbsp;меркам</span></a>
+      <a class="coll-tile" href="gifts.html"><div data-ph="red||"></div><span><small>Сертификаты, платки</small>Gift Edit</span></a>
+    </div>
   </div>
 </section>
 
@@ -119,8 +122,8 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="js/data.js?v=11"></script>
-<script src="js/main.js?v=11"></script>
+<script src="js/data.js?v=13"></script>
+<script src="js/main.js?v=13"></script>
 <script>
 /* Баннер: если впереди мероприятие — афиша, иначе новая коллекция.
    На сайте режим выбирается сам по дате; в прототипе его можно переключить. */
@@ -142,8 +145,6 @@ function paintBanner(mode) {
 document.addEventListener('DOMContentLoaded', () => {
   paintBanner(qs.get('banner') || (nextEvent ? 'event' : 'coll'));
   document.querySelectorAll('.banner-demo button').forEach(b => b.onclick = () => paintBanner(b.dataset.mode));
-  document.getElementById('stories-home').innerHTML = STORIES.slice(0, 3).map(s =>
-    `<a class="st-tile" href="story.html?id=${s.id}">${phTone(s.tone, '')}<div class="st-cap"><small>${s.season}${s.isNew ? ' · новая коллекция' : ''}</small><b>${s.title}</b><span>${s.lead}</span></div></a>`).join('');
   document.getElementById('proj-home').innerHTML = PROJECTS.slice(0, 3).map(p =>
     `<a class="proj" href="project.html?id=${p.id}">${phTone(p.tone, '')}<div class="proj-cap"><small>${p.type} · ${p.media}</small><b>${nb(p.title)}</b></div></a>`).join('');
   document.getElementById('fw-goods').innerHTML = ['fw-01', 'fw-04', 'fw-02', 'fw-10'].map(byId).map(cardHTML).join('');

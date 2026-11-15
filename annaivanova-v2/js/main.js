@@ -53,7 +53,6 @@ function paintChrome(active) {
     <nav class="main" id="nav">
       <a href="events.html" ${a('events')}>Афиша</a>
       <a href="catalog.html" ${a('catalog')}>Магазин</a>
-      <a href="collections.html" ${a('stories')}>Коллекции</a>
       <a href="designer.html" ${a('designer')}>Анна Иванова</a>
       <a href="specprojects.html" ${a('projects')}>Спецпроекты</a>
       <a href="gifts.html" ${a('gifts')}>Gift Edit</a>
@@ -74,15 +73,15 @@ function paintChrome(active) {
         <p style="font-size:14.5px;max-width:36ch;margin-top:18px">Модный дом дизайнера Анны Ивановой. Авторские принты, ограниченные тиражи, мастерская в&nbsp;здании 1911 года. Саратов, с&nbsp;1998 года.</p>
       </div>
       <div><h4>Магазин</h4><ul>
-        <li><a href="catalog.html?coll=fw27">Осень-зима 2027 «Метель»</a></li>
-        <li><a href="catalog.html?coll=pf25">«Саратов. Вдохновение»</a></li>
+        <li><a href="catalog.html">Осень-зима 2027 «Метель»</a></li>
+        <li><a href="story.html?id=metel">История коллекции</a></li>
         <li><a href="catalog.html?coll=outlet">Outlet</a></li>
         <li><a href="gifts.html">Gift Edit: сертификаты и&nbsp;подарки</a></li>
       </ul></div>
       <div><h4>Модный дом</h4><ul>
         <li><a href="designer.html">Анна Иванова</a></li>
         <li><a href="house.html">Модный дом</a></li>
-        <li><a href="collections.html">Истории коллекций</a></li>
+        <li><a href="designer.html#archive">Коллекции разных лет</a></li>
         <li><a href="specprojects.html">Спецпроекты</a></li>
         <li><a href="events.html">Афиша</a></li>
       </ul></div>
