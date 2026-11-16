@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Концепция ANNAIVANOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap">
+<style>
+/* Layout: длинная журнальная страница; слева закреплённое оглавление, справа экраны — схема страницы целиком + разбор.
+   Один осознанный вид (светлый, бумага бренда), поэтому без тёмной темы. */
+:root{
+  color-scheme: light;
+  --paper:#ffffff; --paper-2:#f4f2ef; --card:#faf9f7;
+  --ink:#1b1715; --ink-2:#3b332e; --muted:#6f675f; --line:#e4e0da;
+  --ox:#7a2333; --choc:#4a2e23;
+  --graphite:#3a3b3f; --frost:#c7c9cc; --snow:#e8e6e2;
+  --display:"Forum", "Times New Roman", Georgia, serif;
+  --body:"Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+  --label:"Tenor Sans", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:400}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ox);outline-offset:3px}
+.sl{color:var(--ox);font-family:var(--label)}
+.lbl{font:400 12px/1.3 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.gut{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+
+/* ——— обложка */
+.hero{position:relative;background:var(--graphite);color:#f1eee9;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-in{position:relative;max-width:1320px;margin:0 auto;padding-block:56px 64px;display:grid;gap:40px}
+.hero .lbl{color:#b9bbbf}
+.hero-logo{font:400 15px/1 var(--label);letter-spacing:.32em}
+.hero-logo b{color:#d3a0aa;font-weight:400}
+.hero h1{font:400 clamp(48px,8vw,118px)/.95 var(--display);letter-spacing:-.01em;text-wrap:balance}
+.hero h1 em{font-style:normal;color:#e7dccd}
+.hero-lead{max-width:60ch;font-size:17px;color:#d7d6d3}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)}
+.pillar{background:var(--graphite);padding:22px 24px 26px;display:grid;gap:8px;align-content:start}
+.pillar h3{font:400 34px/1 var(--display);color:#fff}
+.pillar p{font-size:15px;color:#cfd0d2}
+.hero-note{font:400 22px/1.35 var(--display);color:#e7dccd;max-width:46ch}
+
+/* ——— каркас */
+.shell{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px}
+.toc{position:sticky;top:env(safe-area-inset-top, 0px);align-self:start;padding-block:40px;display:grid;gap:4px;max-height:100vh;overflow:auto}
+.toc .lbl{margin-bottom:10px}
+.toc a{text-decoration:none;font-size:14px;color:var(--ink-2);padding:3px 0 3px 14px;border-left:1px solid var(--line)}
+.toc a:hover{color:var(--ox);border-color:var(--ox)}
+.toc .grp{margin-top:14px;font:400 11px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-left:14px}
+main{min-width:0}
+.sec{padding-block:72px;border-top:1px solid var(--line)}
+.sec:first-child{border-top:0}
+.sec-h{display:grid;gap:12px;margin-bottom:36px;max-width:70ch}
+.sec-h h2{font:400 clamp(36px,4.4vw,58px)/1.02 var(--display);text-wrap:balance}
+.sec-h h2 em{font-style:normal;color:var(--ox)}
+.sec-h p{font-size:17px;color:var(--ink-2)}
+
+/* ——— принципы */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 40px}
+.rule{display:grid;gap:8px;align-content:start}
+.rule h3{font:400 25px/1.15 var(--display);display:flex;gap:10px;align-items:baseline}
+.rule h3 .sl{font-size:18px}
+.rule p{font-size:15px;color:var(--ink-2)}
+
+/* ——— визуальный язык */
+.lang{display:grid;gap:48px}
+.sw-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.sw{display:grid;gap:8px}
+.sw i{display:block;aspect-ratio:1/1.15;border:1px solid rgba(27,23,21,.1)}
+.sw b{font:500 14px/1.2 var(--body)}
+.sw span{font:400 12px/1.35 var(--body);color:var(--muted)}
+.sw-cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.sw-cap p{font-size:14px;color:var(--ink-2);max-width:62ch}
+.type{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.type > div{background:var(--card);padding:26px 24px;display:grid;gap:10px;align-content:start;min-width:0}
+.spec-d{font:400 76px/.9 var(--display)}
+.spec-b{font:400 22px/1.3 var(--body)}
+.spec-l{font:400 18px/1.4 var(--label);letter-spacing:.2em;text-transform:uppercase}
+.type p{font-size:14px;color:var(--ink-2)}
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.photo{display:grid;gap:10px;align-content:start}
+.photo .ph{aspect-ratio:3/4;container-type:inline-size;position:relative}
+.photo b{font:500 15px/1.3 var(--body)}
+.photo span{font-size:14px;color:var(--ink-2)}
+.motion{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.motion > div{border-top:1px solid var(--ink);padding-top:14px;display:grid;gap:6px}
+.motion b{font:400 22px/1.2 var(--display)}
+.motion span{font-size:14px;color:var(--ink-2)}
+
+/* ——— видео */
+.vmap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.vmap span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);font-size:14px;background:var(--card)}
+.vmap span i{width:10px;height:10px;border-radius:50%;border:1px solid var(--ox)}
+.vmap span.on{border-color:var(--ox)}
+.vmap span.on i{background:var(--ox)}
+.vmap span.half i{background:linear-gradient(90deg,var(--ox) 50%,transparent 50%)}
+.vgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.vcard{display:grid;gap:12px;align-content:start}
+.vcard .ph{container-type:inline-size;position:relative;aspect-ratio:4/5}
+.vcard h3{font:400 22px/1.15 var(--display)}
+.vcard .lbl{color:var(--ox)}
+.vcard p{font-size:14px;color:var(--ink-2)}
+.vrules{margin-top:44px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 40px;padding:28px 30px;background:var(--card);border:1px solid var(--line)}
+.vrules h3{grid-column:1/-1;font:400 24px/1.2 var(--display);margin-bottom:4px}
+.vrules p{font-size:15px;color:var(--ink-2);padding-left:18px;position:relative}
+.vrules p::before{content:"\\";position:absolute;left:0;color:var(--ox);font-family:var(--label)}
+
+/* ——— экран: схема + разбор */
+.scr{display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:56px;align-items:start}
+.scr + .scr{margin-top:64px;padding-top:64px;border-top:1px dashed var(--line)}
+.strip-w{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 24px);padding-left:34px}
+.strip-cap{font:400 11px/1.3 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.strip{container-type:inline-size;background:var(--paper);border:1px solid rgba(27,23,21,.18);box-shadow:0 28px 50px -30px rgba(27,23,21,.45)}
+.copy{display:grid;gap:22px;min-width:0}
+.copy .lbl{display:flex;gap:10px;flex-wrap:wrap}
+.copy .lbl .pl{color:var(--ox)}
+.copy h2{font:400 clamp(36px,4vw,54px)/1.02 var(--display);text-wrap:balance}
+.copy h2 em{font-style:normal;color:var(--ox)}
+.job{font:400 23px/1.35 var(--display);color:var(--ink-2);max-width:52ch}
+ol.blocks{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:b}
+ol.blocks li{counter-increment:b;position:relative;padding-left:36px;font-size:15.5px;color:var(--ink-2);max-width:68ch}
+ol.blocks li::before{content:counter(b);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font:400 11px/22px var(--label);text-align:center}
+ol.blocks li b{color:var(--ink);font-weight:500}
+ol.blocks li .v{color:var(--ox);white-space:nowrap}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.box{padding:18px 20px;display:grid;gap:8px;align-content:start}
+.box h4{font:400 12px/1.3 var(--label);letter-spacing:.16em;text-transform:uppercase}
+.box p{font-size:14.5px;color:var(--ink-2)}
+.box.yes{background:var(--card);border:1px solid var(--line)}
+.box.yes h4{color:var(--ox)}
+.box.no{border:1px dashed #c9c2b8}
+.box.no h4{color:var(--muted)}
+.media-line{display:flex;gap:10px;align-items:baseline;font-size:15px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:14px}
+.media-line b{font:400 12px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--ox);white-space:nowrap}
+.media-line.off b{color:var(--muted)}
+
+/* ——— мини-страница (всё в единицах ширины схемы) */
+.band{position:relative;height:calc(var(--h)*1cqw);padding:3.5cqw 4cqw;border-bottom:1px solid rgba(27,23,21,.07);color:var(--ink)}
+.band.full{padding:0}
+.band.dark{background:var(--ink);color:#e9e1d6}
+.band.gr{background:var(--graphite);color:#eee}
+.band.p2{background:var(--paper-2)}
+.n{position:absolute;left:-31px;top:4px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font:400 11px/22px var(--label);text-align:center;z-index:5}
+.band.full .n{top:4px}
+.fill{position:absolute;inset:0}
+.img{position:relative;min-height:0;min-width:0}
+.g{background:linear-gradient(160deg,#5c5d62 0%,#2a2b2f 100%)}
+.s{background:linear-gradient(160deg,#f0eeea,#d6d3cd)}
+.si{background:linear-gradient(160deg,#d3d5d8,#979aa0)}
+.ox{background:linear-gradient(160deg,#94384a,#561723)}
+.ch{background:linear-gradient(160deg,#6d493c,#36211a)}
+.bk{background:linear-gradient(160deg,#2a2624,#0f0d0c)}
+.sep{background:linear-gradient(160deg,#c3ae8e,#7a654b)}
+.mp{background:#e6ddcf;background-image:linear-gradient(90deg,transparent 48%,rgba(255,255,255,.7) 48% 52%,transparent 52%),linear-gradient(0deg,transparent 30%,rgba(255,255,255,.7) 30% 33%,transparent 33%),linear-gradient(20deg,transparent 60%,rgba(255,255,255,.6) 60% 62%,transparent 62%)}
+.cl{background-color:#d6c8ae;background-image:
+  repeating-linear-gradient(90deg,#846c4f 0 1.4cqw,transparent 1.4cqw 13cqw),
+  repeating-linear-gradient(0deg,#846c4f 0 1.4cqw,transparent 1.4cqw 13cqw),
+  repeating-linear-gradient(90deg,rgba(255,250,235,.55) 0 2.4cqw,transparent 2.4cqw 13cqw),
+  repeating-linear-gradient(0deg,rgba(255,250,235,.55) 0 2.4cqw,transparent 2.4cqw 13cqw),
+  repeating-linear-gradient(90deg,transparent 0 9cqw,rgba(90,65,40,.18) 9cqw 13cqw),
+  repeating-linear-gradient(0deg,transparent 0 9cqw,rgba(90,65,40,.18) 9cqw 13cqw),
+  radial-gradient(120% 90% at 50% 0%,#efe4cf,#b8a281)}
+.pr{background-color:#3d3e43;background-image:
+  radial-gradient(circle at 20% 30%,rgba(255,255,255,.55) 0 .5cqw,transparent .6cqw),
+  radial-gradient(circle at 70% 60%,rgba(255,255,255,.45) 0 .4cqw,transparent .5cqw),
+  radial-gradient(circle at 45% 85%,rgba(255,255,255,.35) 0 .35cqw,transparent .45cqw),
+  repeating-linear-gradient(118deg,transparent 0 3cqw,rgba(255,255,255,.16) 3cqw 3.4cqw,transparent 3.4cqw 7cqw),
+  repeating-linear-gradient(104deg,transparent 0 5cqw,rgba(200,203,207,.22) 5cqw 5.3cqw);
+  background-size:9cqw 9cqw,11cqw 11cqw,7cqw 7cqw,auto,auto}
+.vid::before{content:"";position:absolute;left:50%;top:50%;width:11cqw;height:11cqw;max-width:56px;max-height:56px;transform:translate(-50%,-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='none' stroke='white' stroke-opacity='.85' stroke-width='1.2'/%3E%3Cpath d='M16 13l11 7-11 7z' fill='white' fill-opacity='.9'/%3E%3C/svg%3E") center/contain no-repeat;z-index:1}
+.vid::after{content:attr(data-v);position:absolute;right:3cqw;top:var(--lt,3cqw);background:var(--ox);color:#fff;font:400 2.5cqw/1 var(--label);letter-spacing:.1em;text-transform:uppercase;padding:1cqw 1.6cqw;white-space:nowrap;z-index:2}
+.navm{position:absolute;inset:0 0 auto;height:9cqw;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 4cqw;z-index:3;color:var(--ink)}
+.navm.on-dark{color:#fff}
+.mlines{display:flex;gap:1.5cqw}
+.mlines i{width:5cqw;height:.7cqw;background:currentColor;opacity:.75}
+.logo-m{font:400 2.7cqw/1 var(--label);letter-spacing:.22em;white-space:nowrap}
+.micons{justify-self:end;display:flex;gap:1.6cqw}
+.micons i{width:2.6cqw;height:2.6cqw;border:1px solid currentColor;border-radius:50%}
+.ov{position:absolute;left:0;right:0;bottom:0;padding:6cqw;display:grid;gap:1.6cqw;justify-items:start;color:#fff;z-index:3}
+.ov.c{justify-items:center;text-align:center}
+.tx-s{font:400 2.2cqw/1.2 var(--label);letter-spacing:.16em;text-transform:uppercase}
+.tx-xl{font:400 11cqw/.95 var(--display)}
+.tx-l{font:400 6.4cqw/1.05 var(--display)}
+.tx-m{font:400 4.2cqw/1.15 var(--display)}
+.tx-xl em,.tx-l em,.tx-m em{font-style:normal}
+.ln{display:block;height:.9cqw;background:currentColor;opacity:.22;width:var(--w,100%)}
+.lns{display:grid;gap:1.3cqw}
+.btn-m{display:inline-block;border:1px solid currentColor;font:400 1.9cqw/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:1.3cqw 2.4cqw;white-space:nowrap}
+.btn-m.f{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-m.w{background:#fff;color:var(--ink);border-color:#fff}
+.btn-m.o{background:var(--ox);color:#fff;border-color:var(--ox)}
+.row{display:flex;gap:1.6cqw;flex-wrap:wrap;align-items:center}
+.grid{display:grid;gap:2.4cqw;height:100%}
+.card-m{display:grid;gap:1.1cqw;align-content:start;min-width:0}
+.card-m .img{aspect-ratio:3/4}
+.foot{display:grid;grid-template-columns:auto 1fr;gap:6cqw;align-items:start}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw}
+.chip-m{display:inline-block;font:400 1.9cqw/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:1cqw 1.6cqw;border-bottom:1px solid transparent}
+.chip-m.a{border-color:currentColor}
+.sold{position:absolute;inset:auto 0 0 0;background:rgba(27,23,21,.78);color:#fff;font:400 1.8cqw/1 var(--label);letter-spacing:.1em;text-transform:uppercase;padding:1.4cqw;text-align:center}
+.divider{display:flex;align-items:center;gap:2cqw;font:400 2cqw/1 var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);height:100%}
+.divider::before,.divider::after{content:"";flex:1;border-top:1px dashed currentColor}
+
+/* ——— телефоны */
+.phones{display:flex;gap:40px;flex-wrap:wrap;justify-content:flex-start}
+.ph-w{display:grid;gap:14px;width:230px;max-width:100%}
+.phone{container-type:inline-size;width:100%;aspect-ratio:9/19;border:7px solid var(--ink);border-radius:34px;overflow:hidden;background:var(--paper);position:relative;box-shadow:0 30px 50px -28px rgba(27,23,21,.5)}
+.phone .band{border-bottom:0}
+.ph-w b{font:400 20px/1.2 var(--display)}
+.ph-w span{font-size:14px;color:var(--ink-2)}
+.pmenu{display:grid;gap:5cqw;padding:22cqw 8cqw 0}
+.pmenu span{font:400 11cqw/1 var(--display)}
+.pmenu span:first-child{font-style:normal;color:var(--ox)}
+.pbottom{position:absolute;left:0;right:0;bottom:0;padding:7cqw 8cqw 10cqw;border-top:1px solid var(--line);display:grid;gap:4cqw}
+.msg{display:flex;gap:3cqw}
+.msg i{font:normal 400 3.4cqw/1 var(--label);letter-spacing:.08em;border:1px solid var(--ink);padding:2.6cqw 3.2cqw}
+.sticky-bar{position:absolute;left:0;right:0;bottom:0;padding:5cqw 6cqw 8cqw;background:var(--paper);border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;align-items:center;gap:4cqw}
+.sticky-bar .btn-m{font-size:3.6cqw;padding:3.6cqw 5cqw}
+
+/* ——— что снять */
+.shoot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.shoot div{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.shoot b{font:400 22px/1.2 var(--display);grid-column:2}
+.shoot span{grid-column:2;font-size:14.5px;color:var(--ink-2)}
+.shoot i{grid-row:1/3;width:18px;height:18px;border:1px solid var(--ink);margin-top:5px}
+.next{margin-top:48px;padding:34px 36px;background:var(--ink);color:#e9e1d6;display:grid;gap:12px}
+.next h3{font:400 32px/1.1 var(--display);color:#fff}
+.next p{max-width:70ch;color:#cfc5b8}
+.foot-note{padding-block:40px 64px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+
+/* ——— адаптив */
+@media (max-width:1100px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0}
+  .toc{position:static;max-height:none;padding-block:28px 0;display:flex;flex-wrap:wrap;gap:6px}
+  .toc .lbl,.toc .grp{display:none}
+  .toc a{border:1px solid var(--line);padding:6px 12px;font-size:13px}
+  .vgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sw-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .scr{grid-template-columns:minmax(0,1fr);gap:36px}
+  .strip-w{position:static;max-width:360px}
+  .rules,.photos,.motion,.type{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .type > div:first-child{grid-column:1/-1}
+  .pillars{grid-template-columns:minmax(0,1fr)}
+  .vrules,.shoot{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .rules,.photos,.motion,.type,.two{grid-template-columns:minmax(0,1fr)}
+  .vgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sw-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sec{padding-block:52px}
+  .phones{justify-content:center}
+}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact} .toc{display:none} .shell{grid-template-columns:minmax(0,1fr)} .strip-w{position:static} .sec-h,.rule,.vcard,.photo{break-inside:avoid} @page{margin:10mm 0}}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <canvas id="snow" aria-hidden="true"></canvas>
+  <div class="hero-in gut">
+    <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center">
+      <span class="hero-logo">ANNA<b>\</b>IVANOVA</span>
+      <span class="lbl">Дизайн-концепция сайта <span class="sl">\</span> ноябрь 2026</span>
+    </div>
+    <h1>Дорого&nbsp;—<br><em>и&nbsp;видно, за&nbsp;что</em></h1>
+    <p class="hero-lead">Как будет выглядеть каждый экран, до&nbsp;того как садиться за&nbsp;дизайн. За&nbsp;основу взята вторая версия прототипа: в&nbsp;магазине только «Метель», прошлые коллекции на&nbsp;странице Анны, скидки в&nbsp;Outlet.</p>
+    <div class="pillars">
+      <div class="pillar"><span class="lbl">Опора 1</span><h3>Вещь</h3><p>Ткань, крой и&nbsp;принт крупным планом. Видно руку мастера и&nbsp;то, за&nbsp;что платят.</p></div>
+      <div class="pillar"><span class="lbl">Опора 2</span><h3>Автор</h3><p>Анна в&nbsp;каждом разделе: её&nbsp;слова о&nbsp;вещах, её&nbsp;история, её&nbsp;подпись.</p></div>
+      <div class="pillar"><span class="lbl">Опора 3</span><h3>Дом</h3><p>Модный дом 1911&nbsp;года под кессонным потолком. Место, где вещь придумали и&nbsp;сшили.</p></div>
+    </div>
+    <p class="hero-note">Платье за&nbsp;60&nbsp;000&nbsp;₽ держится на&nbsp;этих трёх опорах. Каждый экран сайта показывает хотя&nbsp;бы одну.</p>
+  </div>
+</header>
+
+<div class="shell gut">
+  <nav class="toc" aria-label="Оглавление">
+    <span class="lbl">Содержание</span>
+    <a href="#rules">Правила</a>
+    <a href="#lang">Цвет, шрифт, фото</a>
+    <a href="#video">Видео</a>
+    <span class="grp">Экраны</span>
+    <a href="#chrome">Шапка и подвал</a>
+    <a href="#home">Главная</a>
+    <a href="#shop">Магазин «Метель»</a>
+    <a href="#product">Карточка вещи</a>
+    <a href="#cart">Корзина и заказ</a>
+    <a href="#story">История коллекции</a>
+    <a href="#anna">Анна Иванова</a>
+    <a href="#house">Модный дом</a>
+    <a href="#events">Афиша</a>
+    <a href="#projects">Спецпроекты</a>
+    <a href="#gifts">Gift Edit</a>
+    <a href="#outlet">Outlet</a>
+    <a href="#phone">На телефоне</a>
+    <span class="grp">Дальше</span>
+    <a href="#shoot">Что снять</a>
+  </nav>
+
+  <main>
+    <!-- ПРАВИЛА -->
+    <section class="sec" id="rules">
+      <div class="sec-h">
+        <span class="lbl">Общие правила</span>
+        <h2>Шесть правил, <em>по&nbsp;которым собран каждый экран</em></h2>
+      </div>
+      <div class="rules">
+        <div class="rule"><h3><span class="sl">\</span>Один экран, одна мысль</h3><p>Крупный кадр и&nbsp;строка текста. Подробности открываются по&nbsp;клику. Одежда в&nbsp;первую очередь про визуал.</p></div>
+        <div class="rule"><h3><span class="sl">\</span>Много воздуха</h3><p>Широкие поля, три вещи в&nbsp;ряд, никакой тесноты. Свободное место на&nbsp;экране само по&nbsp;себе говорит о&nbsp;цене.</p></div>
+        <div class="rule"><h3><span class="sl">\</span>Цена спокойно</h3><p>Тем&nbsp;же шрифтом, что и&nbsp;название. Без зачёркиваний, «хитов», таймеров и&nbsp;«осталось&nbsp;2». Скидки живут только в&nbsp;Outlet.</p></div>
+        <div class="rule"><h3><span class="sl">\</span>Голос Анны</h3><p>Описания вещей и&nbsp;коллекций написаны её&nbsp;словами, от&nbsp;первого лица. В&nbsp;конце историй и&nbsp;писем стоит её&nbsp;подпись.</p></div>
+        <div class="rule"><h3><span class="sl">\</span>Медленное движение</h3><p>Кадры проявляются плавно, видео идёт без звука. Ничего не&nbsp;мигает и&nbsp;не&nbsp;выскакивает, окна с&nbsp;промокодом нет.</p></div>
+        <div class="rule"><h3><span class="sl">\</span>Знак «\»</h3><p>Обратная косая из&nbsp;логотипа служит разделителем в&nbsp;меню, подписях и&nbsp;датах. Деталь, которая есть только у&nbsp;этого бренда.</p></div>
+      </div>
+    </section>
+
+    <!-- ЯЗЫК -->
+    <section class="sec" id="lang">
+      <div class="sec-h">
+        <span class="lbl">Визуальный язык</span>
+        <h2>Цвет, шрифт <em>и&nbsp;фото</em></h2>
+      </div>
+      <div class="lang">
+        <div>
+          <div class="sw-cap"><span class="lbl">Цвет</span><p>Три цвета бренда не&nbsp;меняются. Ещё два-три цвета приходят с&nbsp;каждой новой коллекцией: сайт каждый сезон выглядит свежо без переделки.</p></div>
+          <div class="sw-row">
+            <div class="sw"><i style="background:var(--paper)"></i><b>Белый</b><span>Фон всего сайта, как у&nbsp;Dior и&nbsp;AKHMADULLINA</span></div>
+            <div class="sw"><i style="background:var(--ink)"></i><b>Чернила</b><span>Текст, подвал, кнопки</span></div>
+            <div class="sw"><i style="background:var(--ox)"></i><b>Бордо</b><span>Одна деталь на&nbsp;экран: метка, знак «\», кнопка вечера</span></div>
+            <div class="sw"><i style="background:var(--graphite)"></i><b>Графит</b><span>Сезон «Метель»: фон историй, видео</span></div>
+            <div class="sw"><i style="background:var(--frost)"></i><b>Иней</b><span>Сезон «Метель»: линии, подложки</span></div>
+            <div class="sw"><i style="background:var(--snow)"></i><b>Снег</b><span>Сезон «Метель»: светлые блоки</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="sw-cap"><span class="lbl">Шрифт</span></div>
+          <div class="type">
+            <div><span class="lbl">Заголовки и&nbsp;названия коллекций</span><span class="spec-d">Метель</span><p>Forum. Классические римские буквы, как надписи на&nbsp;фасадах. Не&nbsp;спорит с&nbsp;логотипом. Только для заголовков и&nbsp;цитат.</p></div>
+            <div><span class="lbl">Текст и&nbsp;цены</span><span class="spec-b">Платье из&nbsp;шифона с&nbsp;принтом «Метель»<br>60&nbsp;000&nbsp;₽</span><p>Golos Text. Спокойный и&nbsp;хорошо читается на&nbsp;телефоне.</p></div>
+            <div><span class="lbl">Меню, метки, даты</span><span class="spec-l">Афиша <span class="sl">\</span> 14&nbsp;ноября</span><p>Tenor Sans, заглавными, с&nbsp;разрядкой. Как подписи на&nbsp;бирке.</p></div>
+          </div>
+        </div>
+        <div>
+          <div class="sw-cap"><span class="lbl">Фото</span><p>Вещи на&nbsp;моделях и&nbsp;в&nbsp;интерьере, без белого фона. Так снимает бренд сейчас, и&nbsp;так выглядит дороже.</p></div>
+          <div class="photos">
+            <div class="photo"><div class="ph g"></div><b>Образ целиком</b><span>На&nbsp;всю высоту экрана, модель в&nbsp;движении.</span></div>
+            <div class="photo"><div class="ph pr"></div><b>Ткань крупно</b><span>Принт, шов, блеск пайеток. То, за&nbsp;что платят.</span></div>
+            <div class="photo"><div class="ph cl"></div><b>В&nbsp;Модном доме</b><span>Кампанию коллекции снимать под кессонным потолком: место становится частью вещи.</span></div>
+            <div class="photo"><div class="ph ch"></div><b>Анна за&nbsp;работой</b><span>Эскизы, ткани на&nbsp;столе, примерка.</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="sw-cap"><span class="lbl">Движение</span></div>
+          <div class="motion">
+            <div><b>Проявление</b><span>Кадры появляются за&nbsp;0,8&nbsp;секунды, без прыжков и&nbsp;вылетов сбоку.</span></div>
+            <div><b>Второй кадр</b><span>В&nbsp;магазине при наведении фото меняется: вещь сзади или в&nbsp;движении.</span></div>
+            <div><b>Без каруселей</b><span>Ничего не&nbsp;листается само. Покупательница смотрит в&nbsp;своём темпе.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВИДЕО -->
+    <section class="sec" id="video">
+      <div class="sec-h">
+        <span class="lbl">Видео</span>
+        <h2>Пять видео <em>на&nbsp;весь сайт</em></h2>
+        <p>Как у&nbsp;Dior: роликов немного, и&nbsp;каждый стоит там, где движение сильнее фото. Шифон в&nbsp;шаге, показ, свет под кессонным потолком. Всё остальное показываем фото.</p>
+      </div>
+      <div class="vmap" aria-label="Где на сайте видео">
+        <span class="on"><i></i>Главная</span>
+        <span><i></i>Магазин</span>
+        <span class="on"><i></i>Карточка вещи</span>
+        <span><i></i>Корзина</span>
+        <span class="on"><i></i>История коллекции</span>
+        <span class="half"><i></i>Анна Иванова</span>
+        <span class="on"><i></i>Модный дом</span>
+        <span class="on"><i></i>Афиша</span>
+        <span class="half"><i></i>Спецпроекты</span>
+        <span><i></i>Gift Edit</span>
+        <span><i></i>Outlet</span>
+      </div>
+      <div class="vgrid">
+        <div class="vcard"><div class="ph g vid" data-v="8–10 с"></div><span class="lbl">Главная</span><h3>Фильм коллекции</h3><p>Первый экран: проход, движение шифона, блеск пайеток. По&nbsp;кругу, без звука. Когда до&nbsp;вечера меньше двух недель, на&nbsp;его месте афиша.</p></div>
+        <div class="vcard"><div class="ph pr vid" data-v="30–60 с"></div><span class="lbl">История коллекции</span><h3>Полный фильм и&nbsp;показ</h3><p>Фильм на&nbsp;весь экран в&nbsp;начале истории, звук по&nbsp;кнопке. В&nbsp;середине кусок показа: Art Seasons, Петербург, с&nbsp;оркестром.</p></div>
+        <div class="vcard"><div class="ph si vid" data-v="5–8 с"></div><span class="lbl">Карточка вещи</span><h3>Вещь на&nbsp;подиуме</h3><p>Вторым кадром в&nbsp;галерее, только у&nbsp;вещей, для которых есть запись показа.</p></div>
+        <div class="vcard"><div class="ph cl vid" data-v="6–8 с"></div><span class="lbl">Модный дом</span><h3>Кессонный потолок</h3><p>Камера медленно плывёт вдоль потолка. Атмосферу этого места словами не&nbsp;передать, её&nbsp;надо показать.</p></div>
+        <div class="vcard"><div class="ph bk vid" data-v="20–30 с"></div><span class="lbl">Афиша</span><h3>Как это было</h3><p>Короткий ролик после каждого вечера. Лучшее приглашение на&nbsp;следующий.</p></div>
+      </div>
+      <p style="margin-top:22px;font-size:15px;color:var(--ink-2)"><b style="font-weight:500;color:var(--ink)">Если будут материалы:</b> Анна в&nbsp;мастерской на&nbsp;её&nbsp;странице и&nbsp;съёмка со&nbsp;стороны в&nbsp;спецпроекте.</p>
+      <div class="vrules">
+        <h3>Как показываем видео</h3>
+        <p>Видео идёт без звука, звук включается кнопкой.</p>
+        <p>У&nbsp;каждого ролика красивый первый кадр. Его видно, пока видео загружается.</p>
+        <p>Поверх видео только название и&nbsp;одна кнопка.</p>
+        <p>На&nbsp;телефоне облегчённый ролик. Если включена экономия трафика, показываем кадр.</p>
+        <p>В&nbsp;магазине, корзине, оформлении, Gift Edit и&nbsp;Outlet видео нет: там человек выбирает и&nbsp;платит.</p>
+        <p>Ролик первого экрана весит до&nbsp;3–4&nbsp;МБ, чтобы сайт открывался сразу.</p>
+      </div>
+    </section>
+
+    <!-- ЭКРАНЫ -->
+    <section class="sec" id="screens">
+      <div class="sec-h">
+        <span class="lbl">Экраны</span>
+        <h2>Каждый экран <em>сверху вниз</em></h2>
+        <p>Слева схема страницы целиком, цифры совпадают с&nbsp;пунктами справа. Бордовая метка на&nbsp;схеме означает видео.</p>
+      </div>
+
+      <!-- ШАПКА И ПОДВАЛ -->
+      <article class="scr" id="chrome">
+        <div class="strip-w">
+          <div class="strip-cap">На&nbsp;всех страницах</div>
+          <div class="strip">
+            <div class="band full" style="--h:40"><span class="n">1</span><div class="img g fill"></div><div class="navm on-dark"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div><div class="ov"><span class="tx-s">поверх первого экрана</span></div></div>
+            <div class="band" style="--h:12;padding:0"><span class="n">2</span><div class="navm" style="height:100%;border-bottom:1px solid var(--line)"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:24"><div class="divider">страница</div></div>
+            <div class="band dark" style="--h:44"><span class="n">3</span>
+              <div class="grid" style="grid-template-rows:auto auto 1fr">
+                <span class="tx-m" style="color:#fff"><em>Новые коллекции&nbsp;— раньше всех</em></span>
+                <span class="ln" style="--w:60%;height:4cqw;opacity:.15"></span>
+                <div class="foot"><b class="logo-m" style="font-size:3.4cqw">ANNA\IVANOVA</b><div class="fcols"><div class="lns"><span class="ln"></span><span class="ln" style="--w:70%"></span><span class="ln" style="--w:80%"></span></div><div class="lns"><span class="ln"></span><span class="ln" style="--w:60%"></span></div><div class="lns"><span class="ln" style="--w:50%"></span><span class="ln" style="--w:90%"></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Общее</span></div>
+          <h2>Шапка, меню <em>и&nbsp;подвал</em></h2>
+          <p class="job">Не&nbsp;мешать картинке и&nbsp;быть под рукой, когда понадобится.</p>
+          <ol class="blocks">
+            <li><b>Поверх первого экрана</b> шапка прозрачная, буквы белые. Меню слева: Афиша <span class="sl">\</span> Магазин <span class="sl">\</span> Анна Иванова <span class="sl">\</span> Спецпроекты <span class="sl">\</span> Gift Edit. Логотип по&nbsp;центру, справа «Связаться» и&nbsp;корзина.</li>
+            <li><b>При прокрутке</b> шапка становится ниже, появляется фон бумаги и&nbsp;тонкая линия снизу.</li>
+            <li><b>Подвал тёмный.</b> Подписка «Новые коллекции&nbsp;— раньше всех», ссылки: Покупателям, Модный дом, Коллекции разных лет, Outlet, оферта, политика конфиденциальности. Outlet есть только здесь.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Шапка исчезает в&nbsp;картинке и&nbsp;не&nbsp;спорит с&nbsp;коллекцией. Пять пунктов меню, без выпадающих списков на&nbsp;пол-экрана.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Бегущую строку со&nbsp;скидкой, плашку «Бесплатная доставка!», значки соцсетей в&nbsp;шапке.</p></div>
+          </div>
+          <div class="media-line off"><b>Без видео</b><span>Страница «Покупателям» (доставка, размеры, пошив по&nbsp;меркам, привилегии) решается текстом и&nbsp;спокойной вёрсткой, без таблиц тарифов.</span></div>
+        </div>
+      </article>
+
+      <!-- ГЛАВНАЯ -->
+      <article class="scr" id="home">
+        <div class="strip-w">
+          <div class="strip-cap">Главная, страница целиком</div>
+          <div class="strip">
+            <div class="band full" style="--h:68"><span class="n">1</span><div class="img g vid fill" data-v="видео 8–10 с" style="--lt:11cqw"></div><div class="navm on-dark"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div><div class="ov"><span class="tx-s">Осень-зима 2027</span><span class="tx-xl"><em>Метель</em></span><span class="row"><span class="btn-m w">Смотреть коллекцию</span><span class="btn-m">История</span></span></div></div>
+            <div class="band" style="--h:60"><span class="n">2</span>
+              <div class="grid" style="grid-template-columns:1.25fr 1fr">
+                <div class="img pr"></div>
+                <div class="grid" style="grid-template-rows:auto 1fr;gap:3cqw"><div class="lns"><span class="tx-s" style="color:var(--muted)">Новая коллекция</span><span class="tx-l"><em>«Метель»</em></span><span class="ln" style="--w:90%"></span><span class="ln" style="--w:70%"></span></div><div class="img si" style="margin-top:2cqw"></div></div>
+              </div>
+            </div>
+            <div class="band" style="--h:40"><span class="n">3</span>
+              <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:2cqw">
+                <div class="card-m"><div class="img g"></div><span class="ln" style="--w:80%"></span><span class="ln" style="--w:40%"></span></div>
+                <div class="card-m"><div class="img s"></div><span class="ln" style="--w:70%"></span><span class="ln" style="--w:40%"></span></div>
+                <div class="card-m"><div class="img bk"></div><span class="ln" style="--w:85%"></span><span class="ln" style="--w:40%"></span></div>
+                <div class="card-m"><div class="img si"></div><span class="ln" style="--w:60%"></span><span class="ln" style="--w:40%"></span></div>
+              </div>
+            </div>
+            <div class="band dark" style="--h:54"><span class="n">4</span>
+              <div class="grid" style="grid-template-columns:44% 1fr;gap:5cqw;align-items:center">
+                <div class="img ch" style="height:100%"></div>
+                <div class="lns"><span class="tx-s" style="color:#b6aca0">Анна Иванова</span><span class="tx-m" style="color:#fff"><em>«Не&nbsp;скрывать недостатки, а&nbsp;подчёркивать достоинства»</em></span><span class="btn-m" style="justify-self:start;margin-top:2cqw">Её&nbsp;история</span></div>
+              </div>
+            </div>
+            <div class="band full" style="--h:44"><span class="n">5</span><div class="img cl vid fill" data-v="видео или фото"></div><div class="ov" style="color:var(--ink)"><span class="tx-s">Модный дом</span><span class="tx-m"><em>Советская,&nbsp;3/5. Дом 1911&nbsp;года</em></span></div></div>
+            <div class="band" style="--h:42"><span class="n">6</span>
+              <div class="grid" style="grid-template-rows:auto 1fr;gap:2.4cqw"><span class="tx-s">В&nbsp;образах ANNAIVANOVA</span>
+              <div class="grid" style="grid-template-columns:1fr 1.3fr 1fr;gap:2cqw"><div class="img ox"></div><div class="img si"></div><div class="img ch"></div></div></div>
+            </div>
+            <div class="band p2" style="--h:20"><span class="n">7</span><div class="grid" style="place-items:center;gap:2cqw;align-content:center"><span class="tx-m"><em>Новые коллекции&nbsp;— раньше всех</em></span><span class="ln" style="--w:50%;height:3.4cqw;opacity:.12"></span></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь <span class="sl">\</span> Автор <span class="sl">\</span> Дом</span></div>
+          <h2>Главная</h2>
+          <p class="job">За&nbsp;пять секунд показать новую коллекцию и&nbsp;пригласить в&nbsp;магазин.</p>
+          <ol class="blocks">
+            <li><b>Первый экран на&nbsp;всю высоту.</b> Фильм «Метели» <span class="v">\ видео 8–10&nbsp;с</span>. Поверх только сезон, название и&nbsp;две ссылки. Когда до&nbsp;вечера меньше двух недель, вместо фильма стоит афиша: дата крупно, дресс-код, «Купить билет».</li>
+            <li><b>Коллекция.</b> Два крупных кадра разной высоты, рядом одна строка о&nbsp;коллекции. Как разворот журнала.</li>
+            <li><b>Четыре вещи</b> из&nbsp;коллекции и&nbsp;ссылка «Вся коллекция».</li>
+            <li><b>Анна.</b> Портрет на&nbsp;тёмном фоне и&nbsp;одна её&nbsp;фраза. Ссылка «Её&nbsp;история».</li>
+            <li><b>Модный дом.</b> Кессонный потолок на&nbsp;всю ширину <span class="v">\ видео или фото</span> и&nbsp;одна строка про дом 1911&nbsp;года.</li>
+            <li><b>В&nbsp;образах ANNAIVANOVA.</b> Три кадра: обложки, съёмки, известные клиентки. Ведут в&nbsp;спецпроекты.</li>
+            <li><b>Подписка</b> одной строкой.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>На&nbsp;первом экране только коллекция, ни&nbsp;одного слова о&nbsp;скидках. Все три опоры видны за&nbsp;одну прокрутку.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Карусель из&nbsp;пяти баннеров, «хиты продаж», окно «−10% за&nbsp;подписку» при входе.</p></div>
+          </div>
+          <div class="media-line"><b>Видео 1–2</b><span>Фильм коллекции на&nbsp;первом экране; потолок Модного дома, если снимем.</span></div>
+        </div>
+      </article>
+
+      <!-- МАГАЗИН -->
+      <article class="scr" id="shop">
+        <div class="strip-w">
+          <div class="strip-cap">Магазин, страница целиком</div>
+          <div class="strip">
+            <div class="band" style="--h:9;padding:0"><div class="navm" style="height:100%"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:30"><span class="n">1</span><div class="lns" style="justify-items:start;gap:1.8cqw"><span class="tx-s" style="color:var(--muted)">Магазин <span class="sl">\</span> новая коллекция <span class="sl">\</span> осень-зима 2027</span><span class="tx-xl"><em>Метель</em></span><span class="ln" style="--w:60%"></span><span class="tx-s" style="border-bottom:1px solid;padding-bottom:.6cqw">История коллекции</span></div></div>
+            <div class="band" style="--h:9;padding-block:2cqw"><span class="n">2</span><div class="row" style="justify-content:space-between;height:100%"><span class="row" style="gap:.5cqw"><span class="chip-m a">Все</span><span class="chip-m">Платья</span><span class="chip-m">Жакеты</span><span class="chip-m">Плащи</span><span class="chip-m">Блузы</span></span><span class="chip-m">Фильтры</span></div></div>
+            <div class="band" style="--h:46"><span class="n">3</span>
+              <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw">
+                <div class="card-m"><div class="img g"></div><span class="ln" style="--w:85%"></span><span class="ln" style="--w:35%"></span></div>
+                <div class="card-m"><div class="img s"></div><span class="ln" style="--w:70%"></span><span class="ln" style="--w:35%"></span></div>
+                <div class="card-m"><div class="img bk"></div><span class="ln" style="--w:80%"></span><span class="ln" style="--w:35%"></span></div>
+              </div>
+            </div>
+            <div class="band" style="--h:46"><span class="n">4</span>
+              <div class="grid" style="grid-template-columns:2fr 1fr;gap:3cqw">
+                <div class="img pr" style="height:38cqw"><div class="ov"><span class="tx-s">История коллекции</span><span class="tx-m"><em>Снег в&nbsp;вечернем свете</em></span></div></div>
+                <div class="card-m"><div class="img si"></div><span class="ln" style="--w:80%"></span><span class="ln" style="--w:35%"></span></div>
+              </div>
+            </div>
+            <div class="band" style="--h:46">
+              <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw">
+                <div class="card-m"><div class="img ox"></div><span class="ln" style="--w:70%"></span><span class="ln" style="--w:35%"></span></div>
+                <div class="card-m"><div class="img g"></div><span class="ln" style="--w:85%"></span><span class="ln" style="--w:35%"></span></div>
+                <div class="card-m"><div class="img s"></div><span class="ln" style="--w:60%"></span><span class="ln" style="--w:35%"></span></div>
+              </div>
+            </div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь</span></div>
+          <h2>Магазин <em>«Метель»</em></h2>
+          <p class="job">Показать всю новую коллекцию так, чтобы хотелось открыть каждую вещь.</p>
+          <ol class="blocks">
+            <li><b>Шапка коллекции.</b> «Магазин <span class="sl">\</span> новая коллекция <span class="sl">\</span> осень-зима 2027», название крупно курсивом, одна строка о&nbsp;коллекции, ссылка на&nbsp;историю. Человек сразу понимает: это актуальная коллекция.</li>
+            <li><b>Категории</b> тонкой строкой: Все, Платья, Жакеты, Плащи, Блузы, Аксессуары. Размер и&nbsp;цвет спрятаны в&nbsp;боковую панель «Фильтры».</li>
+            <li><b>Три вещи в&nbsp;ряд</b> на&nbsp;компьютере, две на&nbsp;телефоне. Высокие фото, под ними название и&nbsp;цена одним шрифтом. При наведении второй кадр.</li>
+            <li><b>Кадр кампании</b> после первого ряда, шириной в&nbsp;две вещи. Ведёт в&nbsp;историю коллекции и&nbsp;даёт глазу отдохнуть.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Мало вещей на&nbsp;экране, ровные поля. Видна одна коллекция, а&nbsp;не&nbsp;склад. Прошлых коллекций и&nbsp;скидок здесь нет совсем.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Наклейки «хит», «−20%», «осталось 2», сортировку «сначала дешёвые», ссылку на&nbsp;Outlet.</p></div>
+          </div>
+          <div class="media-line off"><b>Без видео</b><span>Только фото: страница грузится быстро, ничего не&nbsp;отвлекает от&nbsp;выбора.</span></div>
+        </div>
+      </article>
+
+      <!-- КАРТОЧКА -->
+      <article class="scr" id="product">
+        <div class="strip-w">
+          <div class="strip-cap">Карточка вещи, страница целиком</div>
+          <div class="strip">
+            <div class="band" style="--h:9;padding:0"><div class="navm" style="height:100%"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:128;padding:0"><span class="n">1</span>
+              <div class="grid" style="grid-template-columns:58% 1fr;gap:0">
+                <div class="grid" style="grid-template-rows:repeat(4,1fr);gap:1cqw">
+                  <div class="img g"></div>
+                  <div class="img si vid" data-v="показ 5–8 с"></div>
+                  <div class="img pr"></div>
+                  <div class="img s"></div>
+                </div>
+                <div style="padding:5cqw 4cqw;position:relative"><span class="n" style="left:auto;right:-31px">2</span>
+                  <div class="lns" style="gap:2cqw">
+                    <span class="tx-s" style="color:var(--muted)">Метель <span class="sl">\</span> платья</span>
+                    <span class="tx-m">Платье из&nbsp;шифона с&nbsp;принтом «Метель»</span>
+                    <span style="font:400 3cqw/1 var(--body)">60&nbsp;000&nbsp;₽</span>
+                    <span class="row" style="gap:1cqw;margin-top:1.4cqw"><span class="chip-m" style="border:1px solid">42</span><span class="chip-m" style="border:1px solid">44</span><span class="chip-m" style="border:1px solid;background:var(--ink);color:var(--paper)">46</span><span class="chip-m" style="border:1px solid">48</span></span>
+                    <span class="btn-m f" style="text-align:center;margin-top:1.4cqw">В&nbsp;корзину</span>
+                    <span class="btn-m" style="text-align:center">Уточнить у&nbsp;менеджера</span>
+                    <span class="tx-s" style="color:var(--ox);font-size:1.9cqw;margin-top:1.4cqw">Ограниченный тираж <span class="sl">\</span> сшито в&nbsp;Саратове</span>
+                    <span class="ln" style="margin-top:2cqw;height:1px;opacity:.3"></span><span class="ln" style="--w:50%"></span>
+                    <span class="ln" style="height:1px;opacity:.3"></span><span class="ln" style="--w:60%"></span>
+                    <span class="ln" style="height:1px;opacity:.3"></span><span class="ln" style="--w:45%"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="band" style="--h:42"><span class="n">3</span>
+              <div class="grid" style="grid-template-rows:auto 1fr;gap:2.4cqw"><span class="tx-m"><em>С&nbsp;этим носят</em></span>
+              <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw"><div class="img bk"></div><div class="img si"></div><div class="img ox"></div></div></div>
+            </div>
+            <div class="band p2" style="--h:16"><span class="n">4</span><div class="row" style="height:100%;justify-content:space-between"><span class="tx-m"><em>Как родилась «Метель»</em></span><span class="btn-m">История</span></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь <span class="sl">\</span> Автор <span class="sl">\</span> Дом</span></div>
+          <h2>Карточка вещи</h2>
+          <p class="job">Здесь решают, стоит&nbsp;ли вещь своих денег. Ответ даём фото и&nbsp;тремя строчками, без длинных описаний.</p>
+          <ol class="blocks">
+            <li><b>Галерея на&nbsp;всю высоту</b>, листается вниз: образ целиком, вещь на&nbsp;подиуме <span class="v">\ видео 5–8&nbsp;с</span>, ткань и&nbsp;принт крупно, спина. Видео только там, где есть запись показа.</li>
+            <li><b>Колонка справа стоит на&nbsp;месте</b>, пока листаются фото. Название, цена, размеры, две кнопки: «В&nbsp;корзину» и&nbsp;«Уточнить у&nbsp;менеджера». Под ними строка «Ограниченный тираж <span class="sl">\</span> сшито в&nbsp;Модном доме в&nbsp;Саратове». Ниже свёрнутые блоки: о&nbsp;вещи словами Анны, ткань и&nbsp;уход, размеры и&nbsp;рост модели, доставка и&nbsp;примерка.</li>
+            <li><b>С&nbsp;этим носят.</b> Две-три вещи из&nbsp;того&nbsp;же образа. Блока нет, если пары не&nbsp;подобраны.</li>
+            <li><b>История коллекции</b> одной строкой со&nbsp;ссылкой.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Крупная ткань показывает качество лучше слов. Короткий рассказ Анны о&nbsp;вещи вместо таблицы характеристик. Цена спокойная, без старой цены рядом.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>«Вы&nbsp;недавно смотрели» на&nbsp;пол-экрана, отзывы со&nbsp;звёздочками, счётчик «смотрят сейчас 5&nbsp;человек».</p></div>
+          </div>
+          <div class="media-line"><b>Видео</b><span>Вещь на&nbsp;подиуме, вторым кадром, где есть запись.</span></div>
+        </div>
+      </article>
+
+      <!-- КОРЗИНА -->
+      <article class="scr" id="cart">
+        <div class="strip-w">
+          <div class="strip-cap">Корзина, оформление, «спасибо»</div>
+          <div class="strip">
+            <div class="band" style="--h:9;padding:0"><div class="navm" style="height:100%;grid-template-columns:1fr"><b class="logo-m" style="justify-self:center">ANNA\IVANOVA</b></div></div>
+            <div class="band" style="--h:58"><span class="n">1</span>
+              <div class="grid" style="grid-template-columns:1.4fr 1fr;gap:4cqw">
+                <div class="grid" style="grid-template-rows:auto 1fr 1fr;gap:3cqw"><span class="tx-l">Корзина</span>
+                  <div class="grid" style="grid-template-columns:28% 1fr;gap:3cqw"><div class="img g"></div><div class="lns" style="align-content:start"><span class="ln" style="--w:90%"></span><span class="ln" style="--w:40%"></span><span class="ln" style="--w:30%"></span></div></div>
+                  <div class="grid" style="grid-template-columns:28% 1fr;gap:3cqw"><div class="img si"></div><div class="lns" style="align-content:start"><span class="ln" style="--w:80%"></span><span class="ln" style="--w:40%"></span><span class="ln" style="--w:30%"></span></div></div>
+                </div>
+                <div style="background:var(--card);border:1px solid var(--line);padding:3cqw;display:grid;gap:2cqw;align-content:start">
+                  <span class="ln" style="--w:60%"></span><span class="tx-m">120&nbsp;000&nbsp;₽</span>
+                  <span class="btn-m f" style="text-align:center;margin-top:2cqw">Оформить и&nbsp;оплатить</span>
+                  <span class="btn-m" style="text-align:center">Через менеджера</span>
+                  <span class="row" style="justify-content:center;gap:1.4cqw"><span class="tx-s">WhatsApp</span><span class="sl" style="font-size:2cqw">\</span><span class="tx-s">Telegram</span><span class="sl" style="font-size:2cqw">\</span><span class="tx-s">Max</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="band p2" style="--h:46"><span class="n">2</span>
+              <div class="grid" style="grid-template-columns:1.4fr 1fr;gap:4cqw">
+                <div class="lns" style="align-content:start;gap:2.6cqw"><span class="tx-m">Оформление</span><span class="ln" style="height:4cqw;opacity:.1"></span><span class="ln" style="height:4cqw;opacity:.1"></span><span class="ln" style="height:4cqw;opacity:.1"></span><span class="ln" style="height:4cqw;opacity:.1;--w:60%"></span><span class="btn-m f" style="justify-self:start">Оплатить</span></div>
+                <div class="lns" style="align-content:start"><span class="ln"></span><span class="ln" style="--w:70%"></span><span class="ln" style="--w:50%"></span></div>
+              </div>
+            </div>
+            <div class="band" style="--h:34"><span class="n">3</span><div class="grid" style="place-items:center;align-content:center;gap:2cqw;text-align:center"><span class="tx-l"><em>Спасибо</em></span><span class="ln" style="--w:60%"></span><span class="ln" style="--w:45%"></span><span style="font:400 4.6cqw/1 var(--display);color:var(--ox)">Анна Иванова</span></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Автор</span></div>
+          <h2>Корзина <em>и&nbsp;заказ</em></h2>
+          <p class="job">Дать заплатить сразу или поговорить с&nbsp;человеком. Выбирает покупательница.</p>
+          <ol class="blocks">
+            <li><b>Корзина</b> с&nbsp;крупными фото вещей. Справа итог и&nbsp;два пути. «Оформить и&nbsp;оплатить»: оплата на&nbsp;сайте. «Через менеджера»: заказ уходит менеджеру Модного дома, она пишет в&nbsp;WhatsApp, Telegram или Max, помогает с&nbsp;размером, записывает на&nbsp;примерку или пошив по&nbsp;меркам.</li>
+            <li><b>Оформление</b> на&nbsp;одной странице, минимум полей. Шапка без меню, чтобы ничего не&nbsp;уводило со&nbsp;страницы. Билет на&nbsp;вечер покупается в&nbsp;этой&nbsp;же корзине.</li>
+            <li><b>«Спасибо»</b> с&nbsp;короткими словами от&nbsp;Анны и&nbsp;её&nbsp;подписью. Что будет дальше и&nbsp;когда придёт вещь.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Живой человек в&nbsp;одном клике. Доставку описываем как сервис: как упакуем, когда привезём. Таблицы тарифов нет.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>«Добавьте ещё на&nbsp;5&nbsp;000&nbsp;₽ до&nbsp;бесплатной доставки», товары «по&nbsp;акции» в&nbsp;корзине, регистрацию до&nbsp;заказа.</p></div>
+          </div>
+          <div class="media-line off"><b>Без видео</b><span>Человек платит: здесь только спокойствие и&nbsp;понятные шаги.</span></div>
+        </div>
+      </article>
+
+      <!-- ИСТОРИЯ -->
+      <article class="scr" id="story">
+        <div class="strip-w">
+          <div class="strip-cap">История коллекции, страница целиком</div>
+          <div class="strip">
+            <div class="band full" style="--h:66"><span class="n">1</span><div class="img g vid fill" data-v="фильм 30–60 с" style="--lt:11cqw"></div><div class="navm on-dark"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:28"><span class="n">2</span><div class="grid" style="place-items:center;align-content:center;gap:1.8cqw;text-align:center"><span class="tx-s" style="color:var(--muted)">Осень-зима 2027</span><span class="tx-xl"><em>Метель</em></span><span class="ln" style="--w:55%"></span></div></div>
+            <div class="band" style="--h:16"><span class="n">3</span><div class="lns" style="width:62%;margin:0 auto"><span class="ln"></span><span class="ln"></span><span class="ln" style="--w:70%"></span><span style="font:400 3cqw/1 var(--display);color:var(--ox);margin-top:1cqw">Анна</span></div></div>
+            <div class="band full" style="--h:44"><div class="img si fill"></div></div>
+            <div class="band" style="--h:42"><div class="grid" style="grid-template-columns:1fr 1fr;gap:3cqw"><div class="img pr"></div><div class="img s"></div></div></div>
+            <div class="band" style="--h:22"><div class="grid" style="place-items:center;text-align:center"><span class="tx-m" style="width:80%"><em>«Словно снег в&nbsp;вечернем свете»</em></span></div></div>
+            <div class="band full" style="--h:44"><span class="n">4</span><div class="img bk vid fill" data-v="показ"></div><div class="ov"><span class="tx-s">Art Seasons <span class="sl">\</span> Петербург</span></div></div>
+            <div class="band" style="--h:44"><span class="n">5</span>
+              <div class="grid" style="grid-template-rows:1fr auto;gap:3cqw"><div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw"><div class="img g"></div><div class="img s"></div><div class="img bk"></div></div><span class="btn-m f" style="justify-self:center">В&nbsp;магазин</span></div>
+            </div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь <span class="sl">\</span> Автор</span></div>
+          <h2>История коллекции <em>«Метель»</em></h2>
+          <p class="job">Самая красивая страница сайта. После неё вещь хочется купить, потому что знаешь, откуда она.</p>
+          <ol class="blocks">
+            <li><b>Фильм коллекции на&nbsp;весь экран</b> <span class="v">\ видео 30–60&nbsp;с</span>. Без звука, звук по&nbsp;кнопке.</li>
+            <li><b>Название</b> по&nbsp;центру крупно и&nbsp;одна строка о&nbsp;коллекции.</li>
+            <li><b>Рассказ Анны</b> короткими абзацами, как&nbsp;родилась коллекция. Дальше чередуем: широкий кадр, пара кадров, цитата, деталь принта.</li>
+            <li><b>Показ</b> <span class="v">\ видео</span>. Фрагмент с&nbsp;Art Seasons в&nbsp;Петербурге, с&nbsp;оркестром «Таврический».</li>
+            <li><b>Вещи коллекции</b> и&nbsp;одна кнопка «В&nbsp;магазин».</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Вещь получает историю, автора и&nbsp;сцену. Так подают коллекции модные дома. По&nbsp;подаче близко к&nbsp;разделу «Вдохновение» у&nbsp;Lichi, но&nbsp;здесь речь об&nbsp;одной коллекции.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Ленту других коллекций в&nbsp;конце: прошлые сезоны живут на&nbsp;странице Анны и&nbsp;не&nbsp;спорят с&nbsp;«Метелью».</p></div>
+          </div>
+          <div class="media-line"><b>Видео 2</b><span>Полный фильм коллекции и&nbsp;фрагмент показа.</span></div>
+        </div>
+      </article>
+
+      <!-- АННА -->
+      <article class="scr" id="anna">
+        <div class="strip-w">
+          <div class="strip-cap">Анна Иванова, страница целиком</div>
+          <div class="strip">
+            <div class="band dark" style="--h:72;padding:0"><span class="n">1</span><div class="navm on-dark"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div>
+              <div class="grid" style="grid-template-columns:1fr 1fr;gap:0"><div class="img ch"></div><div style="display:grid;align-content:end;gap:2cqw;padding:5cqw"><span class="tx-s" style="color:#b6aca0">Дизайнер <span class="sl">\</span> основательница</span><span class="tx-l" style="color:#fff">Анна<br><em>Иванова</em></span><span class="ln" style="--w:80%"></span><span class="ln" style="--w:60%"></span></div></div>
+            </div>
+            <div class="band" style="--h:40"><span class="n">2</span><div class="grid" style="grid-template-columns:1.2fr 1fr 1fr;gap:3cqw"><div class="lns" style="align-content:start"><span class="tx-m">Её&nbsp;история</span><span class="ln"></span><span class="ln"></span><span class="ln" style="--w:70%"></span><span class="ln"></span><span class="ln" style="--w:50%"></span></div><div class="img sep"></div><div class="img sep" style="margin-top:6cqw"></div></div></div>
+            <div class="band p2" style="--h:22"><span class="n">3</span>
+              <div style="position:relative;height:100%;display:grid;grid-template-columns:repeat(5,1fr);align-items:center">
+                <span style="position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--ink);opacity:.4"></span>
+                <span class="tx-s" style="position:relative;background:var(--paper-2);justify-self:center;padding:0 1cqw">1998</span><span class="tx-s" style="position:relative;background:var(--paper-2);justify-self:center;padding:0 1cqw">2002</span><span class="tx-s" style="position:relative;background:var(--paper-2);justify-self:center;padding:0 1cqw">2006</span><span class="tx-s" style="position:relative;background:var(--paper-2);justify-self:center;padding:0 1cqw">2016</span><span class="tx-s" style="position:relative;background:var(--paper-2);justify-self:center;padding:0 1cqw;color:var(--ox)">2026</span>
+              </div>
+            </div>
+            <div class="band" style="--h:36"><span class="n">4</span><div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:2cqw"><div class="img pr"></div><div class="img sep" style="background-image:repeating-linear-gradient(0deg,rgba(40,30,20,.25) 0 .5cqw,transparent .5cqw 2cqw)"></div><div class="img" style="background:linear-gradient(160deg,#7f9bb3,#3e5a75)"></div></div></div>
+            <div class="band" style="--h:40"><span class="n">5</span><div class="grid" style="grid-template-rows:auto 1fr;gap:2.4cqw"><span class="tx-m">Коллекции разных лет</span><div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw"><div class="card-m"><div class="img sep" style="aspect-ratio:4/5"></div><span class="tx-s">Про Любовь</span></div><div class="card-m"><div class="img ox" style="aspect-ratio:4/5"></div><span class="tx-s">Ромео</span></div><div class="card-m"><div class="img s" style="aspect-ratio:4/5"></div><span class="tx-s">Лебедь</span></div></div></div></div>
+            <div class="band p2" style="--h:22"><span class="n">6</span><div class="grid" style="place-items:center;text-align:center;align-content:center;gap:1.6cqw"><span class="tx-m" style="width:85%"><em>«Анна&nbsp;— человек искусства, глубоких смыслов…»</em></span><span class="tx-s" style="color:var(--muted)">Анастасия Князькова</span></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Автор</span></div>
+          <h2>Анна Иванова</h2>
+          <p class="job">Показать человека, без которого этих вещей не&nbsp;было&nbsp;бы. Вещь и&nbsp;автор неотделимы.</p>
+          <ol class="blocks">
+            <li><b>Портрет крупно</b> на&nbsp;тёмном фоне, имя и&nbsp;её&nbsp;главный принцип: «не&nbsp;скрывать недостатки, а&nbsp;подчёркивать достоинства».</li>
+            <li><b>Её&nbsp;история.</b> Короткий текст: Саратов, историческое образование, свой бренд с&nbsp;1998&nbsp;года. Рядом архивные фото.</li>
+            <li><b>Путь</b> лентой лет: 1998 свой бренд, 2002 бутик «Направление», 2006 линия аксессуаров, 2016 товарный знак ANNAIVANOVA, 2026 показ на&nbsp;Art Seasons.</li>
+            <li><b>Принт как высказывание.</b> Крупные фрагменты принтов: «Метель», газетные афиши «Про Любовь», Саратов с&nbsp;Дегтярёвым.</li>
+            <li><b>Коллекции разных лет.</b> Обложки и&nbsp;названия, без цен и&nbsp;кнопок «купить». Рассказываем, а&nbsp;не&nbsp;продаём.</li>
+            <li><b>О&nbsp;ней говорят.</b> Слова клиенток: Ольга Кабо, Анастасия Князькова. Затем пресса и&nbsp;Telegram-канал Анны.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Покупают вещь человека с&nbsp;историей длиной почти в&nbsp;тридцать лет и&nbsp;собственным почерком. Архив без цен работает как музей бренда.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Сухую справку «о&nbsp;компании», цифры про рабочие места и&nbsp;производство, текст картинками.</p></div>
+          </div>
+          <div class="media-line"><b>Видео, если есть</b><span>Анна в&nbsp;мастерской, 10–15&nbsp;секунд, на&nbsp;месте портрета или рядом с&nbsp;историей.</span></div>
+        </div>
+      </article>
+
+      <!-- МОДНЫЙ ДОМ -->
+      <article class="scr" id="house">
+        <div class="strip-w">
+          <div class="strip-cap">Модный дом, страница целиком</div>
+          <div class="strip">
+            <div class="band full" style="--h:72"><span class="n">1</span><div class="img cl vid fill" data-v="видео 6–8 с" style="--lt:11cqw"></div><div class="navm"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div><div class="ov" style="color:var(--ink)"><span class="tx-s">Советская, 3/5 <span class="sl">\</span> Саратов</span><span class="tx-xl" style="font-size:9cqw"><em>Модный дом</em></span></div></div>
+            <div class="band" style="--h:44"><span class="n">2</span><div class="grid" style="grid-template-columns:1fr 1fr 1.1fr;gap:3cqw"><div class="img sep"></div><div class="img cl"></div><div class="lns" style="align-content:center"><span class="tx-s" style="color:var(--muted)">1911–1913</span><span class="tx-m">История места</span><span class="ln"></span><span class="ln" style="--w:80%"></span><span class="ln" style="--w:60%"></span></div></div></div>
+            <div class="band p2" style="--h:34"><span class="n">3</span><div class="grid" style="grid-template-columns:repeat(4,1fr);gap:2cqw"><div class="card-m"><div class="img ch" style="aspect-ratio:1"></div><span class="tx-s">Примерки</span></div><div class="card-m"><div class="img g" style="aspect-ratio:1"></div><span class="tx-s">По&nbsp;меркам</span></div><div class="card-m"><div class="img bk" style="aspect-ratio:1"></div><span class="tx-s">Вечера</span></div><div class="card-m"><div class="img s" style="aspect-ratio:1"></div><span class="tx-s">Завтраки</span></div></div></div>
+            <div class="band" style="--h:36"><span class="n">4</span><div class="grid" style="grid-template-columns:1.2fr 1fr;gap:4cqw"><div class="img mp"></div><div class="lns" style="align-content:center;gap:2cqw"><span class="tx-m"><em>Ждём в&nbsp;гости</em></span><span class="ln" style="--w:80%"></span><span class="ln" style="--w:60%"></span><span class="btn-m f" style="justify-self:start;margin-top:1cqw">Записаться</span></div></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Дом</span></div>
+          <h2>Модный дом</h2>
+          <p class="job">Передать атмосферу места, которое Анна долго искала. Дом с&nbsp;историей, где хочется побывать.</p>
+          <ol class="blocks">
+            <li><b>Кессонный потолок на&nbsp;весь экран</b> <span class="v">\ видео 6–8&nbsp;с</span>. Камера медленно плывёт вдоль потолка. Поверх только «Модный дом» и&nbsp;адрес.</li>
+            <li><b>История места.</b> Доходные дома Пташкина, модерн, 1911–1913. Старое фото улицы (тогда Константиновской) рядом с&nbsp;сегодняшним интерьером. Даты сверим с&nbsp;Анной.</li>
+            <li><b>Что здесь происходит:</b> примерки, пошив по&nbsp;меркам, вечера, завтраки с&nbsp;Анной.</li>
+            <li><b>Ждём в&nbsp;гости.</b> Карта, часы работы, парковка во&nbsp;дворе, кнопка «Записаться на&nbsp;примерку».</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Вещь придумана и&nbsp;сшита в&nbsp;доме 1911&nbsp;года, а&nbsp;не&nbsp;на&nbsp;безымянной фабрике. Место прибавляет вещи ценности.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Фото «магазин изнутри» с&nbsp;вешалками и&nbsp;кассой, рассказ про площадь и&nbsp;оборудование.</p></div>
+          </div>
+          <div class="media-line"><b>Видео 1</b><span>Потолок; тот&nbsp;же ролик может стоять на&nbsp;главной.</span></div>
+        </div>
+      </article>
+
+      <!-- АФИША -->
+      <article class="scr" id="events">
+        <div class="strip-w">
+          <div class="strip-cap">Афиша, страница целиком</div>
+          <div class="strip">
+            <div class="band full" style="--h:70"><span class="n">1</span><div class="img bk fill"></div><div class="navm on-dark"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div><div class="ov"><span class="tx-s">Fashion-вечер <span class="sl">\</span> дресс-код total black</span><span class="tx-xl" style="font-size:10cqw">14&nbsp;<em>ноября</em></span><span class="row"><span class="btn-m o">Купить билет</span><span class="tx-s">3&nbsp;000&nbsp;₽</span></span></div></div>
+            <div class="band" style="--h:48"><span class="n">2</span>
+              <div class="grid" style="grid-template-rows:repeat(3,1fr);gap:0">
+                <div class="grid" style="grid-template-columns:20% 1fr auto;align-items:center;border-bottom:1px solid var(--line);gap:3cqw"><span class="tx-l">06<span class="tx-s"> дек</span></span><div class="lns"><span class="ln" style="--w:70%"></span><span class="ln" style="--w:40%"></span></div><span class="btn-m">Билет</span></div>
+                <div class="grid" style="grid-template-columns:20% 1fr auto;align-items:center;border-bottom:1px solid var(--line);gap:3cqw"><span class="tx-l">18<span class="tx-s"> дек</span></span><div class="lns"><span class="ln" style="--w:60%"></span><span class="ln" style="--w:45%"></span></div><span class="btn-m">Билет</span></div>
+                <div class="grid" style="grid-template-columns:20% 1fr auto;align-items:center;gap:3cqw"><span class="tx-l">24<span class="tx-s"> янв</span></span><div class="lns"><span class="ln" style="--w:75%"></span><span class="ln" style="--w:35%"></span></div><span class="btn-m">Билет</span></div>
+              </div>
+            </div>
+            <div class="band gr" style="--h:42"><span class="n">3</span><div class="grid" style="grid-template-columns:2fr 1fr;gap:3cqw"><div class="img bk vid" data-v="20–30 с"></div><div class="grid" style="grid-template-rows:1fr 1fr;gap:3cqw"><div class="img ch"></div><div class="img ox"></div></div></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Автор <span class="sl">\</span> Дом</span></div>
+          <h2>Афиша</h2>
+          <p class="job">Продать билет на&nbsp;ближайший вечер. Вечера проходят примерно раз в&nbsp;месяц, а&nbsp;гость вечера часто становится покупательницей.</p>
+          <ol class="blocks">
+            <li><b>Ближайший вечер на&nbsp;весь экран.</b> Дата крупно, название, дресс-код, цена и&nbsp;кнопка «Купить билет». Ниже строкой: каждому гостю сертификат 5&nbsp;000&nbsp;₽ на&nbsp;новую коллекцию.</li>
+            <li><b>Следующие события</b> списком: дата крупно слева, название и&nbsp;город, кнопка справа. Сюда&nbsp;же мастер-классы и&nbsp;выездные шоурумы.</li>
+            <li><b>Как это было</b> <span class="v">\ видео 20–30&nbsp;с</span> и&nbsp;пара кадров с&nbsp;прошлого вечера.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Вечер выглядит как закрытое событие модного дома: дресс-код, дата, приглашение. Город и&nbsp;адрес написаны сразу, без вопросов в&nbsp;комментариях.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Календарь-таблицу, длинные анонсы, отдельный раздел для мастер-классов.</p></div>
+          </div>
+          <div class="media-line"><b>Видео 1</b><span>Ролик с&nbsp;прошлого вечера, обновляем после каждого события.</span></div>
+        </div>
+      </article>
+
+      <!-- СПЕЦПРОЕКТЫ -->
+      <article class="scr" id="projects">
+        <div class="strip-w">
+          <div class="strip-cap">Спецпроекты и&nbsp;страница проекта</div>
+          <div class="strip">
+            <div class="band" style="--h:9;padding:0"><div class="navm" style="height:100%"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:76"><span class="n">1</span>
+              <div class="grid" style="grid-template-rows:auto 1fr;gap:3cqw"><span class="tx-l">Спецпроекты</span>
+                <div class="grid" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1.3fr 1fr;gap:2.4cqw"><div class="img ox" style="grid-row:1/3"><div class="ov"><span class="tx-s">HUMAN <span class="sl">\</span> обложка</span></div></div><div class="img si"><div class="ov" style="padding:3cqw"><span class="tx-s">Караван историй</span></div></div><div class="img" style="background:linear-gradient(160deg,#7f9bb3,#3e5a75)"><div class="ov" style="padding:3cqw"><span class="tx-s">× Дегтярёв</span></div></div></div>
+              </div>
+            </div>
+            <div class="band" style="--h:12"><div class="divider">страница проекта</div></div>
+            <div class="band full" style="--h:56"><span class="n">2</span><div class="img ox fill"></div><div class="ov"><span class="tx-s">Журнал HUMAN <span class="sl">\</span> 2026</span><span class="tx-l"><em>Стиль, образы</em></span></div></div>
+            <div class="band p2" style="--h:44"><span class="n">3</span><div class="grid" style="grid-template-rows:auto 1fr;gap:2.4cqw"><span class="tx-m"><em>Хочу такое&nbsp;же</em></span><div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw"><div class="card-m"><div class="img g" style="aspect-ratio:3/3.4"></div><span class="btn-m f" style="text-align:center">Купить</span></div><div class="card-m"><div class="img s" style="aspect-ratio:3/3.4"></div><span class="btn-m" style="text-align:center">По&nbsp;меркам</span></div><div class="card-m"><div class="img bk" style="aspect-ratio:3/3.4"></div><span class="btn-m f" style="text-align:center">Купить</span></div></div></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь <span class="sl">\</span> Автор</span></div>
+          <h2>Спецпроекты</h2>
+          <p class="job">Превратить обложку в&nbsp;продажу: увидела платье в&nbsp;журнале и&nbsp;может заказать такое&nbsp;же.</p>
+          <ol class="blocks">
+            <li><b>Обложки и&nbsp;съёмки разного размера</b>, как журнальный разворот: HUMAN, «Караван историй», коллаборация «Саратов. Вдохновение» с&nbsp;Александром Дегтярёвым.</li>
+            <li><b>Страница проекта.</b> Обложка на&nbsp;весь экран, кто снимал и&nbsp;для кого, три-четыре кадра съёмки.</li>
+            <li><b>«Хочу такое&nbsp;же».</b> Вещи из&nbsp;съёмки: «Купить», если вещь в&nbsp;продаже, или «Сшить по&nbsp;меркам», если нет.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Вещи бренда носят на&nbsp;обложках и&nbsp;известные женщины. Это подтверждает цену лучше любых слов о&nbsp;качестве.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Пост в&nbsp;соцсети без названий вещей и&nbsp;ссылок. Сейчас так теряются миллионы просмотров.</p></div>
+          </div>
+          <div class="media-line"><b>Видео, если есть</b><span>Съёмка со&nbsp;стороны, 10–20&nbsp;секунд, на&nbsp;странице проекта.</span></div>
+        </div>
+      </article>
+
+      <!-- GIFT EDIT -->
+      <article class="scr" id="gifts">
+        <div class="strip-w">
+          <div class="strip-cap">Gift Edit, страница целиком</div>
+          <div class="strip">
+            <div class="band" style="--h:9;padding:0"><div class="navm" style="height:100%"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:24"><div class="grid" style="place-items:center;align-content:center;gap:1.6cqw;text-align:center"><span class="tx-xl" style="font-size:9cqw"><em>Gift Edit</em></span><span class="ln" style="--w:50%"></span></div></div>
+            <div class="band p2" style="--h:36"><span class="n">1</span><div class="grid" style="grid-template-columns:repeat(3,1fr);gap:3cqw;align-items:center">
+              <div style="aspect-ratio:1.5;background:var(--ink);color:#e9e1d6;display:grid;place-items:center;text-align:center;gap:1cqw;padding:2cqw;align-content:center"><span class="logo-m" style="font-size:1.8cqw">ANNA\IVANOVA</span><span class="tx-m" style="font-size:3.6cqw">10&nbsp;000&nbsp;₽</span></div>
+              <div style="aspect-ratio:1.5;background:var(--ox);color:#fff;display:grid;place-items:center;text-align:center;gap:1cqw;padding:2cqw;align-content:center"><span class="logo-m" style="font-size:1.8cqw">ANNA\IVANOVA</span><span class="tx-m" style="font-size:3.6cqw">50&nbsp;000&nbsp;₽</span></div>
+              <div style="aspect-ratio:1.5;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;text-align:center;gap:1cqw;padding:2cqw;align-content:center"><span class="logo-m" style="font-size:1.8cqw">ANNA\IVANOVA</span><span class="tx-m" style="font-size:3.6cqw">100&nbsp;000&nbsp;₽</span></div>
+            </div></div>
+            <div class="band" style="--h:40"><span class="n">2</span><div class="grid" style="grid-template-columns:repeat(4,1fr);gap:2cqw">
+              <div class="card-m"><div class="img" style="background:linear-gradient(160deg,#7f9bb3,#3e5a75)"></div><span class="ln" style="--w:70%"></span></div>
+              <div class="card-m"><div class="img pr"></div><span class="ln" style="--w:60%"></span></div>
+              <div class="card-m"><div class="img ch"></div><span class="ln" style="--w:80%"></span></div>
+              <div class="card-m"><div class="img si"><span class="sold">Тираж разобран</span></div><span class="ln" style="--w:50%"></span></div>
+            </div></div>
+            <div class="band p2" style="--h:18"><span class="n">3</span><div class="row" style="height:100%;justify-content:space-between"><span class="tx-m"><em>Подарки партнёрам и&nbsp;гостям</em></span><span class="btn-m">Заявка</span></div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь</span></div>
+          <h2>Gift Edit</h2>
+          <p class="job">Помочь выбрать подарок, который выглядит как подарок от&nbsp;модного дома.</p>
+          <ol class="blocks">
+            <li><b>Сертификаты как предмет.</b> Карточки в&nbsp;цветах бренда на&nbsp;10&nbsp;000, 50&nbsp;000 и&nbsp;100&nbsp;000&nbsp;₽, фото конверта и&nbsp;упаковки.</li>
+            <li><b>Подарки:</b> платки, шарф-бант, чокер, ограниченный тираж «Саратов. Вдохновение». Разобранные вещи остаются с&nbsp;плашкой «Тираж разобран»: это тоже говорит о&nbsp;ценности.</li>
+            <li><b>Подарки партнёрам и&nbsp;гостям</b> одной строкой и&nbsp;заявка.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему дорого</h4><p>Сертификат показан как вещь, которую приятно вручить. Короткий тираж виден честно.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>«Подарки до&nbsp;5&nbsp;000&nbsp;₽», бантики и&nbsp;сердечки, слово «сувениры».</p></div>
+          </div>
+          <div class="media-line off"><b>Без видео</b><span>Хватит красивых фото упаковки.</span></div>
+        </div>
+      </article>
+
+      <!-- OUTLET -->
+      <article class="scr" id="outlet">
+        <div class="strip-w">
+          <div class="strip-cap">Outlet, страница целиком</div>
+          <div class="strip">
+            <div class="band" style="--h:9;padding:0"><div class="navm" style="height:100%"><span class="mlines"><i></i><i></i><i></i><i></i><i></i></span><b class="logo-m">ANNA\IVANOVA</b><span class="micons"><i></i><i></i></span></div></div>
+            <div class="band" style="--h:18"><span class="n">1</span><div class="lns" style="justify-items:start"><span class="tx-l">Outlet</span><span class="ln" style="--w:55%"></span></div></div>
+            <div class="band" style="--h:92"><span class="n">2</span><div class="grid" style="grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,auto);gap:2.4cqw 2cqw;align-content:start">
+              <div class="card-m"><div class="img s"></div><span class="ln" style="--w:80%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">весна-лето 2025</span></div>
+              <div class="card-m"><div class="img g"></div><span class="ln" style="--w:70%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">pre-fall 2025</span></div>
+              <div class="card-m"><div class="img sep"></div><span class="ln" style="--w:60%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">осень-зима 2026</span></div>
+              <div class="card-m"><div class="img si"></div><span class="ln" style="--w:85%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">весна-лето 2025</span></div>
+              <div class="card-m"><div class="img ch"></div><span class="ln" style="--w:70%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">осень-зима 2025</span></div>
+              <div class="card-m"><div class="img s"></div><span class="ln" style="--w:60%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">pre-fall 2025</span></div>
+              <div class="card-m"><div class="img bk"></div><span class="ln" style="--w:80%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">осень-зима 2026</span></div>
+              <div class="card-m"><div class="img g"></div><span class="ln" style="--w:65%"></span><span class="tx-s" style="font-size:1.6cqw;color:var(--muted)">весна-лето 2025</span></div>
+            </div></div>
+            <div class="band dark" style="--h:16"><div class="foot"><b class="logo-m">ANNA\IVANOVA</b><div class="fcols"><span class="ln"></span><span class="ln"></span><span class="ln"></span></div></div></div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="lbl"><span>Экран</span><span class="pl">Вещь</span></div>
+          <h2>Outlet</h2>
+          <p class="job">Дать шанс купить вещь бренда тем, для кого полная цена пока высока, и&nbsp;не&nbsp;отвлекать от&nbsp;новой коллекции.</p>
+          <ol class="blocks">
+            <li><b>Скромный заголовок</b> и&nbsp;одна строка: прошлые коллекции, количество ограничено. Вход только из&nbsp;подвала.</li>
+            <li><b>Плотная сетка</b>, четыре вещи в&nbsp;ряд. У&nbsp;каждой подпись сезона, например «весна-лето 2025», старая и&nbsp;новая цена.</li>
+          </ol>
+          <div class="two">
+            <div class="box yes"><h4>Почему так</h4><p>Скидка живёт отдельно и&nbsp;выглядит строже магазина: без кампании и&nbsp;историй. Так она не&nbsp;удешевляет новую коллекцию.</p></div>
+            <div class="box no"><h4>Не&nbsp;делаем</h4><p>Ссылки на&nbsp;Outlet из&nbsp;магазина, меню или карточек новой коллекции. Красные плашки «SALE».</p></div>
+          </div>
+          <div class="media-line off"><b>Без видео</b><span>Только фото.</span></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ТЕЛЕФОН -->
+    <section class="sec" id="phone">
+      <div class="sec-h">
+        <span class="lbl">На&nbsp;телефоне</span>
+        <h2>Сначала <em>телефон</em></h2>
+        <p>Многие придут из&nbsp;Instagram и&nbsp;ВКонтакте, то&nbsp;есть с&nbsp;телефона. Поэтому каждый экран рисуем сначала для телефона, потом для компьютера.</p>
+      </div>
+      <div class="phones">
+        <div class="ph-w">
+          <div class="phone"><div class="band full" style="--h:197"><div class="img g vid fill" data-v="видео" style="--lt:16cqw"></div><div class="navm on-dark" style="height:14cqw;grid-template-columns:auto 1fr auto"><span class="tx-s" style="font-size:3cqw">Меню</span><b class="logo-m" style="font-size:3.6cqw;justify-self:center">ANNA\IVANOVA</b><span class="micons"><i style="width:4cqw;height:4cqw"></i></span></div><div class="ov" style="padding:8cqw 8cqw 12cqw;gap:3cqw"><span class="tx-s" style="font-size:3.2cqw">Осень-зима 2027</span><span class="tx-xl" style="font-size:18cqw"><em>Метель</em></span><span class="btn-m w" style="font-size:3.2cqw;padding:3cqw 5cqw">Смотреть коллекцию</span></div></div></div>
+          <b>Главная</b><span>Фильм коллекции на&nbsp;весь экран, одна кнопка.</span>
+        </div>
+        <div class="ph-w">
+          <div class="phone"><div class="navm" style="height:14cqw;grid-template-columns:auto 1fr auto"><span class="tx-s" style="font-size:3cqw">Закрыть</span><b class="logo-m" style="font-size:3.6cqw;justify-self:center">ANNA\IVANOVA</b><span></span></div>
+            <div class="pmenu"><span>Афиша</span><span>Магазин</span><span>Анна Иванова</span><span>Спецпроекты</span><span>Gift Edit</span></div>
+            <div class="pbottom"><span class="tx-s" style="font-size:2.8cqw;color:var(--muted)">Написать в&nbsp;Модный дом</span><div class="msg"><i>WhatsApp</i><i>Telegram</i><i>Max</i></div><span style="font-size:3.2cqw;color:var(--ink-2)">Саратов, Советская, 3/5</span></div>
+          </div>
+          <b>Меню</b><span>На&nbsp;весь экран, крупным шрифтом. Внизу мессенджеры и&nbsp;адрес.</span>
+        </div>
+        <div class="ph-w">
+          <div class="phone"><div class="navm" style="height:14cqw;grid-template-columns:auto 1fr auto"><span class="tx-s" style="font-size:3cqw">Меню</span><b class="logo-m" style="font-size:3.6cqw;justify-self:center">ANNA\IVANOVA</b><span class="micons"><i style="width:4cqw;height:4cqw"></i></span></div>
+            <div class="img pr" style="position:absolute;top:14cqw;left:0;right:0;height:120cqw"><div style="position:absolute;bottom:4cqw;left:0;right:0;display:flex;justify-content:center;gap:2cqw"><i style="width:2cqw;height:2cqw;border-radius:50%;background:#fff"></i><i style="width:2cqw;height:2cqw;border-radius:50%;background:rgba(255,255,255,.4)"></i><i style="width:2cqw;height:2cqw;border-radius:50%;background:rgba(255,255,255,.4)"></i><i style="width:2cqw;height:2cqw;border-radius:50%;background:rgba(255,255,255,.4)"></i></div></div>
+            <div style="position:absolute;top:140cqw;left:0;right:0;padding:0 6cqw;display:grid;gap:2.4cqw"><span class="tx-s" style="font-size:2.8cqw;color:var(--muted)">Метель <span class="sl">\</span> платья</span><span class="tx-m" style="font-size:6.4cqw">Платье из&nbsp;шифона с&nbsp;принтом «Метель»</span></div>
+            <div class="sticky-bar"><span style="font:400 4.4cqw/1 var(--body)">60&nbsp;000&nbsp;₽</span><span class="btn-m f">В&nbsp;корзину</span></div>
+          </div>
+          <b>Карточка вещи</b><span>Фото листаются пальцем, цена и&nbsp;кнопка всегда внизу экрана.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЧТО СНЯТЬ -->
+    <section class="sec" id="shoot">
+      <div class="sec-h">
+        <span class="lbl">Что нужно для дизайна</span>
+        <h2>Что снять <em>и&nbsp;собрать</em></h2>
+        <p>Сайт будет выглядеть дорого, только если дорого выглядят фото и&nbsp;видео. Часть вопросов уже есть в&nbsp;брифе, съёмку стоит обсудить с&nbsp;Анной отдельно.</p>
+      </div>
+      <div class="shoot">
+        <div><i></i><b>Кампания «Метели» в&nbsp;Модном доме</b><span>15–20 кадров под кессонным потолком: образы целиком и&nbsp;детали.</span></div>
+        <div><i></i><b>Фильм коллекции</b><span>30–60 секунд. Из&nbsp;него&nbsp;же нарезка 8–10 секунд для главной.</span></div>
+        <div><i></i><b>Потолок и&nbsp;интерьер дома</b><span>Один медленный проход камерой на&nbsp;10–15 секунд и&nbsp;6–8 фото.</span></div>
+        <div><i></i><b>Портрет Анны</b><span>В&nbsp;полный рост, крупно и&nbsp;за&nbsp;работой: эскизы, ткани, примерка.</span></div>
+        <div><i></i><b>Каждая вещь</b><span>4–6 кадров: целиком, спина, ткань крупно, в&nbsp;движении.</span></div>
+        <div><i></i><b>Записи показов</b><span>Что уже снято на&nbsp;Art Seasons и&nbsp;других показах, и&nbsp;какие вещи там видны.</span></div>
+        <div><i></i><b>Вечера</b><span>Оператор на&nbsp;каждом событии, ролик на&nbsp;20–30 секунд для афиши.</span></div>
+        <div><i></i><b>Архив и&nbsp;история</b><span>Старые фото Анны, обложки прошлых коллекций, старая Константиновская улица.</span></div>
+      </div>
+      <div class="next">
+        <span class="lbl" style="color:#b6aca0">Следующий шаг</span>
+        <h3>Сначала главная, магазин и&nbsp;карточка</h3>
+        <p>На&nbsp;этих трёх экранах держится продажа. Когда концепция согласована, рисуем их&nbsp;в&nbsp;цвете для телефона и&nbsp;компьютера. Остальные экраны собираем по&nbsp;их&nbsp;образцу.</p>
+      </div>
+    </section>
+
+    <p class="foot-note">ANNAIVANOVA, дизайн-концепция сайта. Схемы показывают расположение блоков; цвета на&nbsp;схемах заменяют будущие фото. Прототип: <a href="../">nextbestmail-dev.github.io/prototipy/annaivanova-v2</a> · <a href="ANNAIVANOVA-koncepciya.pdf">PDF-версия</a></p>
+  </main>
+</div>
+
+<script>
+(function(){
+  var c = document.getElementById('snow'); if (!c) return;
+  var ctx = c.getContext('2d'), flakes = [], w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){
+    var r = c.getBoundingClientRect(); w = r.width; h = r.height;
+    c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function seed(){
+    flakes = [];
+    var n = Math.round(Math.min(110, w * h / 9000));
+    for (var i = 0; i < n; i++) flakes.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.6+.4, s:Math.random()*.35+.15, d:Math.random()*.5+.2, o:Math.random()*.5+.2});
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for (var i = 0; i < flakes.length; i++){
+      var f = flakes[i];
+      ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fillStyle = 'rgba(240,240,242,' + f.o + ')'; ctx.fill();
+    }
+  }
+  function step(){
+    for (var i = 0; i < flakes.length; i++){
+      var f = flakes[i]; f.y += f.s; f.x += f.d * .6;
+      if (f.y > h + 4) { f.y = -4; f.x = Math.random()*w; }
+      if (f.x > w + 4) f.x = -4;
+    }
+    draw(); raf = requestAnimationFrame(step);
+  }
+  var raf = 0;
+  size(); seed(); draw();
+  if (!still) raf = requestAnimationFrame(step);
+  window.addEventListener('resize', function(){ size(); seed(); draw(); });
+})();
+</script>
+
+</body>
+</html>
