@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Спецпроекты — ANNAIVANOVA</title>
+<meta name="description" content="Обложки, съёмки в журналах и показы ANNAIVANOVA. Понравился образ — закажите такой же.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=15">
+</head>
+<body data-page="projects">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ Спецпроекты</div>
+  <h1 style="font-size:clamp(40px,5vw,72px)">Спецпроекты</h1>
+  <p>Обложки, съёмки и&nbsp;показы, где&nbsp;вещи Анны Ивановой выбирают актрисы и&nbsp;журналы. Увидели образ&nbsp;— закажите такой&nbsp;же.</p>
+</div></div>
+
+<section style="padding-top:48px">
+  <div class="wrap">
+    <div class="proj-grid" id="grid"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/data.js?v=15"></script>
+<script src="js/main.js?v=15"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('grid').innerHTML = PROJECTS.map(p =>
+    `<a class="proj" href="project.html?id=${p.id}">${phTone(p.tone, '')}<div class="proj-cap"><small>${p.type} · ${p.media}</small><b>${nb(p.title)}</b></div></a>`).join('');
+});
+</script>
+</body>
+</html>

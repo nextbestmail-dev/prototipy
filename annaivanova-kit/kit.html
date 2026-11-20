@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Как это устроено в Яндекс KIT — ANNAIVANOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=15">
+<style>
+.adv{list-style:none;padding:0;margin:14px 0}.adv li{padding:11px 0 11px 22px;border-bottom:1px solid var(--line);position:relative}.adv li:before{content:"\\";position:absolute;left:0;color:var(--oxblood);font-family:var(--label)}
+.kt{overflow-x:auto;margin:20px 0}
+.kt table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.kt th,.kt td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.kt th{font:400 12px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.kt .y{color:#2f6b3a}.kt .c{color:var(--oxblood)}.kt .o{color:var(--muted)}
+.kit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}
+.kit-grid div{border-top:1px solid var(--ink);padding-top:14px}
+.kit-grid b{display:block;font:400 24px/1.15 var(--display);margin-bottom:8px}
+@media(max-width:800px){.kit-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="info">
+<div id="site-header"></div>
+
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ Как это устроено</div>
+  <h1 style="font-size:clamp(40px,5vw,64px)">Тот же сайт на&nbsp;Яндекс KIT</h1>
+  <p class="lead">Это вариант прототипа для бесплатной платформы Яндекса. Структура, дизайн и&nbsp;подача те&nbsp;же, что во&nbsp;второй версии. Меняется основа, на&nbsp;которой работают магазин, оплата и&nbsp;админка. И&nbsp;одно: билеты на&nbsp;вечера продаются на&nbsp;wfolio, потому что KIT их&nbsp;продавать не&nbsp;разрешает.</p>
+</div></div>
+
+<section>
+  <div class="wrap">
+    <h2>Что выигрывает Модный дом</h2>
+    <div class="kit-grid">
+      <div><b>Платформа бесплатно</b><p>Нет ни&nbsp;ежемесячной платы, ни&nbsp;комиссии с&nbsp;продаж. Платится только приём оплаты и&nbsp;доставка, как и&nbsp;сейчас.</p></div>
+      <div><b>За&nbsp;работу отвечает Яндекс</b><p>Обновления, защита и&nbsp;скорость сайта на&nbsp;стороне Яндекса. Программист для&nbsp;поддержки не&nbsp;нужен.</p></div>
+      <div><b>Всё ваше</b><p>Домен annaivanova.com, покупатели и&nbsp;заказы принадлежат вам. У&nbsp;Яндекса остаётся только код сайта.</p></div>
+      <div><b>Покупка в&nbsp;один клик</b><p>Данные подставляются из&nbsp;Яндекс ID, оплата через Яндекс Пэй, частями через Сплит.</p></div>
+      <div><b>«Честный знак»</b><p>KIT умеет выводить коды маркировки из&nbsp;оборота при&nbsp;продаже и&nbsp;проверять их&nbsp;перед продажей.</p></div>
+      <div><b>Команда меняет сама</b><p>Товары, баннеры, коллекции и&nbsp;статьи меняются в&nbsp;редакторе Яндекса, без&nbsp;кода.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Чем делается каждый раздел</h2>
+    <p><span class="y">●</span> штатно в&nbsp;KIT&nbsp;&nbsp;<span class="c">●</span> своя секция по&nbsp;нашему дизайну (HTML и&nbsp;CSS в&nbsp;редакторе кода KIT)&nbsp;&nbsp;<span class="o">●</span> вне KIT</p>
+    <div class="kt"><table>
+      <tr><th>Раздел</th><th>Как сделано</th><th>Чем</th></tr>
+      <tr><td>Главная: первый экран с&nbsp;видео, коллекция, Анна, Модный дом</td><td class="c">● своя секция</td><td>Кастомные секции KIT, видео по&nbsp;ссылке с&nbsp;видеосервиса</td></tr>
+      <tr><td>Магазин «Метель», фильтры, размеры</td><td class="y">● штатно</td><td>Каталог, коллекции, фильтры, варианты товара по&nbsp;размеру; шрифты и&nbsp;цвета в&nbsp;теме</td></tr>
+      <tr><td>Карточка вещи, видео с&nbsp;показа, «С&nbsp;этим носят»</td><td class="y">● штатно</td><td>Карточка товара и&nbsp;подборки; рассказ Анны в&nbsp;описании</td></tr>
+      <tr><td>Корзина и&nbsp;оплата</td><td class="y">● штатно</td><td>Чекаут KIT: Яндекс Пэй, Сплит, онлайн-касса</td></tr>
+      <tr><td>«Уточнить у&nbsp;менеджера»</td><td class="c">● своя секция</td><td>Кнопки WhatsApp, Telegram, Max с&nbsp;готовым текстом. Отправки корзины менеджеру в&nbsp;KIT нет</td></tr>
+      <tr><td>История коллекции, коллекции разных лет</td><td class="y">● штатно</td><td>Блог KIT и&nbsp;свои секции для&nbsp;разворотов с&nbsp;фото</td></tr>
+      <tr><td>Анна Иванова, Модный дом, спецпроекты</td><td class="c">● своя секция</td><td>Отдельные страницы из&nbsp;кастомных секций</td></tr>
+      <tr><td>Афиша</td><td class="c">● своя секция</td><td>Страница с&nbsp;событиями; кнопка «Купить билет» ведёт на&nbsp;wfolio</td></tr>
+      <tr><td>Продажа билетов</td><td class="o">● вне KIT</td><td>wfolio, как сейчас. KIT запрещает продавать билеты на&nbsp;мероприятия</td></tr>
+      <tr><td>Gift Edit: подарочные карты, платки</td><td class="y">● штатно</td><td>Подарочная карта как&nbsp;физический товар в&nbsp;конверте. Электронные сертификаты KIT продавать запрещает</td></tr>
+      <tr><td>Пошив по&nbsp;меркам</td><td class="y">● штатно</td><td>Раздел «Услуги»: заявка из&nbsp;карточки, оплата отдельно через менеджера</td></tr>
+      <tr><td>Outlet</td><td class="y">● штатно</td><td>Отдельная коллекция со&nbsp;скидками, вход из&nbsp;подвала</td></tr>
+      <tr><td>Промокоды, клуб</td><td class="y">● штатно</td><td>Промокоды, скидки, личный кабинет покупателя</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Что стоит знать</h2>
+    <ul class="adv" style="max-width:760px">
+      <li>Платформа пока в&nbsp;бете: Яндекс развивает её&nbsp;и&nbsp;может менять правила.</li>
+      <li>Если когда-нибудь уходить с&nbsp;KIT, сайт придётся собирать заново. Домен, покупатели и&nbsp;заказы при этом остаются ваши.</li>
+      <li>Вещи и&nbsp;билеты покупаются в&nbsp;разных местах: вещи на&nbsp;сайте, билеты на&nbsp;wfolio.</li>
+      <li>Самостоятельно команда соберёт в&nbsp;KIT магазин на&nbsp;шаблоне. Подачу как&nbsp;в&nbsp;этом прототипе (свои секции, истории, страницы Анны и&nbsp;дома) делаем мы.</li>
+    </ul>
+    <p class="demo-note" style="margin-top:20px">По&nbsp;официальному сайту kit.yandex.ru и&nbsp;справке Яндекс KIT, ноябрь 2026.</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/data.js?v=15"></script>
+<script src="js/main.js?v=15"></script>
+</body>
+</html>
