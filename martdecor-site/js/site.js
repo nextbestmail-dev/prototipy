@@ -131,8 +131,6 @@
     function pause(ms) { resumeAt = Date.now() + (ms || 0); }
     measure(); addEventListener('resize', measure); addEventListener('load', measure);
     ts.addEventListener('scroll', function () { wrap(); if (hold || dragging || Date.now() < resumeAt) pos = ts.scrollLeft; });
-    ts.addEventListener('mouseenter', function () { hold = true; });
-    ts.addEventListener('mouseleave', function () { hold = false; pause(600); });
     ts.addEventListener('touchstart', function () { hold = true; }, { passive: true });
     ts.addEventListener('touchend', function () { hold = false; pause(2500); }, { passive: true });
     ts.addEventListener('wheel', function () { pause(1500); }, { passive: true });
@@ -145,7 +143,7 @@
     function step(t) {
       var dt = last ? Math.min(t - last, 50) : 0; last = t;
       if (!still && !hold && !dragging && Date.now() >= resumeAt && half) {
-        pos += dt * 0.04;
+        pos += dt * 0.045;
         if (pos > half * 2 - ts.clientWidth - 4) pos -= half;
         ts.scrollLeft = pos;
       }
