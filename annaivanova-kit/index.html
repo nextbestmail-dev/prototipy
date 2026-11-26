@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/style.css?v=16">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -21,6 +21,10 @@
   </div>
   <div class="banner-in" id="banner-in"></div>
 </div>
+
+<section class="cat-strip" aria-label="Категории">
+  <div class="wrap"><div class="strip-row" id="cat-strip"></div></div>
+</section>
 
 <section class="manifest">
   <div class="wrap">
@@ -49,15 +53,6 @@
   </div>
 </section>
 
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><h2>Категории</h2></div>
-      <a href="catalog.html" class="link">Весь&nbsp;каталог</a>
-    </div>
-    <div class="cats" id="cats"></div>
-  </div>
-</section>
 
 <div class="d-teaser">
   <div data-ph="choc|Портрет Анны Ивановой|"></div>
@@ -111,6 +106,20 @@
 
 <section style="padding-top:0">
   <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Клуб ANNAIVANOVA</div><h2>Друг <i class="sl">\</i> Муза <i class="sl">\</i> Амбассадор</h2></div>
+      <a href="info.html#club" class="link">Условия клуба</a>
+    </div>
+    <div class="club-home">
+      <a href="info.html#club"><b>Друг</b><small>от&nbsp;50&nbsp;000&nbsp;₽ покупок</small><span>Ранний доступ к&nbsp;предложениям и&nbsp;онлайн-подбор образов</span></a>
+      <a href="info.html#club"><b>Муза</b><small>от&nbsp;250&nbsp;000&nbsp;₽</small><span>Скидка 10%, приоритетный доступ к&nbsp;новым коллекциям, встречи с&nbsp;дизайнером</span></a>
+      <a href="info.html#club" class="dark"><b>Амбассадор</b><small>от&nbsp;500&nbsp;000&nbsp;₽</small><span>Скидка 15%, сопровождение дизайнера, приватные примерки</span></a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
     <div class="sub">
       <div><div class="eyebrow">−10% на&nbsp;первую покупку</div><h2 style="font-size:40px">Новые коллекции&nbsp;— раньше всех</h2></div>
       <form onsubmit="event.preventDefault();this.querySelector('input').value='';toast('Готово (демо): промокод отправлен на почту')">
@@ -122,8 +131,8 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="js/data.js?v=15"></script>
-<script src="js/main.js?v=15"></script>
+<script src="js/data.js?v=16"></script>
+<script src="js/main.js?v=16"></script>
 <script>
 /* Баннер: если впереди мероприятие — афиша, иначе новая коллекция.
    На сайте режим выбирается сам по дате; в прототипе его можно переключить. */
@@ -138,6 +147,7 @@ function paintBanner(mode) {
        <a href="https://annaivanova.wfolio.pro/product/RrKwX26r" target="_blank" rel="noopener" class="btn">Билет · ${RUB(ev.price)}</a>`
     : `<div class="eyebrow">Осень-зима 2027 <i>\\</i> предзаказ</div>
        <h1>«Метель»</h1>
+       <div class="motto">«Словно снег в вечернем свете»</div>
        <div class="meta">Новая коллекция Анны Ивановой</div>
        <a href="story.html?id=metel" class="btn">Смотреть коллекцию</a>`;
   document.querySelectorAll('.banner-demo button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
@@ -149,8 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
     `<a class="proj" href="project.html?id=${p.id}">${phTone(p.tone, '')}<div class="proj-cap"><small>${p.type} · ${p.media}</small><b>${nb(p.title)}</b></div></a>`).join('');
   document.getElementById('fw-goods').innerHTML = ['fw-01', 'fw-04', 'fw-02', 'fw-10'].map(byId).map(cardHTML).join('');
   const tones = { dresses: 'metal', jackets: 'grey', blouses: 'sky', bottoms: 'blue', outer: 'black', acc: 'paper' };
-  document.getElementById('cats').innerHTML = CATEGORIES.filter(c => c.id !== 'gift').map(c =>
-    `<a class="cat" href="catalog.html?cat=${c.id}">${phTone(tones[c.id], '')}<b>${c.name}</b></a>`).join('');
+  const short = { dresses: 'Платья', jackets: 'Жакеты', blouses: 'Блузы', bottoms: 'Брюки и юбки', outer: 'Плащи', acc: 'Аксессуары' };
+  document.getElementById('cat-strip').innerHTML = CATEGORIES.filter(c => c.id !== 'gift').map(c =>
+    `<a class="strip-cat" href="catalog.html?cat=${c.id}">${phTone(tones[c.id], '')}<span>${short[c.id] || c.name}</span></a>`).join('')
+    + `<a class="strip-cat" href="gifts.html">${phTone('red', '')}<span>Gift Edit</span></a>`;
 });
 </script>
 </body>
