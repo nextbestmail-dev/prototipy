@@ -1,12 +1,4 @@
-// Упражнения — названия с обложек видео в ВК (посты 137–172, сентябрь–ноябрь 2026)
-var TRACKS = [
-// v — видео в группе ВК, d — текст из поста
-  { img: "p137_1", t: "Красивые ягодицы", s: "Упражнение из видео, ВК 02.09.2026", m: "ягодицы", v: "456239255", d: "Одно из упражнений онлайн-проекта: занимайся по 20 минут в день в любое удобное время, не выходя из дома." },
-  { img: "p139_1", t: "Красивый рельеф спины", s: "Упражнение из видео, ВК 02.09.2026", m: "спина", v: "456239257", d: "Из курса на 30 дней: снижение отёков, повышение выносливости и гармоничная работа со всеми группами мышц." },
-  { img: "p140_1", t: "Базовое упражнение для стройных ног", s: "Упражнение из видео, ВК 02.09.2026", m: "ноги", v: "456239258", d: "Базовое упражнение для стройных ног — его можно делать дома, без зала и тренажёров." },
-  { img: "p141_1", t: "Красивая походка и изящная фигура", s: "Упражнение из видео, ВК 05.09.2026", m: "всё тело", v: "456239259", d: "Тренировки не выходя из дома: каждую неделю новая нагрузка, 3–4 раза в неделю по 20 минут." },
-  { img: "p169_1", t: "Красивые бёдра и повышение выносливости", s: "Упражнение из видео, ВК 12.10.2026", m: "бёдра", v: "456239305", d: "Занимайся со мной онлайн дома или в Саратове в спорткомплексе — выбирай свой формат." }
-];
+function $(s) { return document.querySelector(s); }
 
 // Отзывы — дословно со скриншотов в посте ВК 577 (19.09.2025)
 var REVIEWS = [
@@ -20,52 +12,6 @@ var QUIZ = [
   { q: "Что для тебя сейчас главное?", o: [["ti-scale", "Похудеть и подтянуть фигуру", "slim"], ["ti-stretching", "Спина, гибкость, снять зажимы", "back"], ["ti-users", "Энергия и компания единомышленниц", "club"]] },
   { q: "Сколько времени готова уделять?", o: [["ti-clock", "20 минут 3–4 раза в неделю", "online"], ["ti-calendar", "Три вечера в неделю в зале", "club"], ["ti-sun", "Утро на свежем воздухе", "club"]] }
 ];
-
-function $(s) { return document.querySelector(s); }
-
-// Плейлист
-var cur = 0;
-function renderTracks() {
-  $("#tracks").innerHTML = TRACKS.map(function (x, i) {
-    return '<div class="track' + (i === cur ? " playing" : "") + '" data-i="' + i + '"><span class="n">' + (i + 1) + '</span><img src="img/' + x.img + '.jpg" alt=""><div><b>' + typo(x.t) + '</b><small>' + typo(x.s) + '</small></div><span class="meta">' + x.m + '</span><i class="ti ti-heart like"></i></div>';
-  }).join("");
-}
-function setTrack(i) {
-  cur = (i + TRACKS.length) % TRACKS.length;
-  $("#nowImg").src = "img/" + TRACKS[cur].img + ".jpg";
-  $("#nowTitle").textContent = typo(TRACKS[cur].t);
-  $("#bar").style.width = ((cur + 1) / TRACKS.length * 100) + "%";
-  renderTracks();
-}
-// Окно с упражнением: обложка, текст из поста и ссылка на видео в ВК
-function openEx(i) {
-  var x = TRACKS[i];
-  $("#exImg").src = "img/" + x.img + ".jpg";
-  $("#exTag").textContent = x.m;
-  $("#exTitle").textContent = typo(x.t);
-  $("#exText").textContent = typo(x.d);
-  $("#exVid").href = "https://vk.com/video-228220720_" + x.v;
-  $("#ex").classList.add("on");
-  $("#bar").style.width = ((i + 1) / TRACKS.length * 100) + "%";
-}
-function closeEx() { $("#ex").classList.remove("on"); }
-$("#ex").addEventListener("click", function (e) {
-  if (e.target === this || e.target.closest(".ex-x") || e.target.closest("[data-close]")) closeEx();
-});
-document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeEx(); });
-renderTracks();
-$("#bar").style.width = (100 / TRACKS.length) + "%";
-$("#tracks").addEventListener("click", function (e) {
-  if (e.target.classList.contains("like")) { e.target.classList.toggle("on"); e.target.classList.toggle("ti-heart-filled"); return; }
-  var t = e.target.closest(".track"); if (!t) return;
-  setTrack(+t.dataset.i); openEx(cur);
-});
-document.querySelectorAll(".player [data-p]").forEach(function (b) {
-  b.addEventListener("click", function () {
-    var p = b.dataset.p;
-    if (p === "play") openEx(cur); else setTrack(cur + (p === "next" ? 1 : -1));
-  });
-});
 
 // Отзывы
 $("#revList").innerHTML = REVIEWS.map(function (r) {
@@ -116,10 +62,28 @@ var io = new IntersectionObserver(function (es) {
 }, { threshold: .12 });
 document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 
-// Подсветка дока
-var dockLinks = document.querySelectorAll(".dock a");
-window.addEventListener("scroll", function () {
-  var y = window.scrollY + 200, on = dockLinks[0];
-  dockLinks.forEach(function (a) { var t = document.querySelector(a.getAttribute("href")); if (t && t.offsetTop <= y) on = a; });
-  dockLinks.forEach(function (a) { a.classList.toggle("on", a === on); });
-});
+// Набор в онлайн-проект: открыт или закрыт.
+// Настя меняет две ячейки в своей Google Таблице: B1 — «открыт» или «закрыт», B2 — до какого числа (например, «5 декабря»).
+// Сюда вставить ссылку на таблицу. Пока пусто — показывается «набор закрыт» и лист ожидания.
+var NABOR_SHEET = "";
+function setNabor(open, until) {
+  var box = $("#nabor"), btn = $("#naborBtn"), ic = box.querySelector(".nabor-st i");
+  box.dataset.state = open ? "open" : "closed";
+  ic.className = "ti " + (open ? "ti-flame" : "ti-hourglass");
+  $("#naborTxt").innerHTML = open ? (until ? "Идёт набор до&nbsp;" + until : "Идёт набор") : "Набор закрыт&nbsp;· скоро новый поток";
+  btn.innerHTML = open ? "Войти в&nbsp;проект" : "Записаться в&nbsp;лист ожидания";
+  btn.dataset.fmt = open ? "Закрытый онлайн-проект" : "Лист ожидания онлайн-проекта";
+}
+(function () {
+  var test = new URLSearchParams(location.search).get("nabor"); // для проверки: ?nabor=open
+  if (test) { setNabor(test === "open", "5 декабря"); return; }
+  var m = NABOR_SHEET.match(/\/d\/([\w-]+)/); if (!m) return;
+  fetch("https://docs.google.com/spreadsheets/d/" + m[1] + "/gviz/tq?tqx=out:csv&range=A1:B2", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+    .then(function (t) {
+      var rows = t.trim().split(/\r?\n/).map(function (l) { return l.split('","').map(function (x) { return x.replace(/^"|"$/g, "").trim(); }); });
+      var st = ((rows[0] || [])[1] || "").toLowerCase(), until = (rows[1] || [])[1] || "";
+      setNabor(st.indexOf("откр") === 0, until);
+    })
+    .catch(function () {}); // таблица не открылась — остаётся «набор закрыт»
+})();
