@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Избранное — ANNAIVANOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=15">
+</head>
+<body data-page="fav">
+<div id="site-header"></div>
+<div class="page-head"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> \ Избранное</div>
+  <h1 style="font-size:clamp(40px,5vw,64px)">Избранное</h1>
+  <p>Вещи, которые вы отложили. Список хранится в&nbsp;этом браузере.</p>
+</div></div>
+<section style="padding-top:32px"><div class="wrap">
+  <div class="goods c3" id="fav-goods"></div>
+  <div id="fav-empty" hidden><p>Пока пусто. Нажмите на&nbsp;сердечко у&nbsp;вещи в&nbsp;магазине, чтобы отложить её.</p><a href="catalog.html" class="btn">В&nbsp;магазин</a></div>
+</div></section>
+<div id="site-footer"></div>
+<script src="js/data.js?v=15"></script>
+<script src="js/main.js?v=15"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const items = favRead().map(byId).filter(Boolean);
+  document.getElementById('fav-goods').innerHTML = items.map(cardHTML).join('');
+  document.getElementById('fav-empty').hidden = items.length > 0;
+});
+</script>
+</body>
+</html>

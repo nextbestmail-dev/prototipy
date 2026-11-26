@@ -24,9 +24,19 @@ function cartAdd(id, size, qty = 1) {
   cartWrite(c);
   toast('Добавлено в корзину');
 }
+const FAV_KEY = 'ai_fav_v1';
+function favRead() { try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; } catch (e) { return []; } }
+function favHas(id) { return favRead().includes(id); }
+function favToggle(id, btn) {
+  let f = favRead(); f = f.includes(id) ? f.filter(x => x !== id) : f.concat(id);
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(f)); } catch (e) {}
+  if (btn) { btn.classList.toggle('on', f.includes(id)); btn.setAttribute('aria-pressed', f.includes(id)); }
+  document.querySelectorAll('.fav-count').forEach(el => el.textContent = f.length || '');
+  if (typeof toast === 'function') toast(f.includes(id) ? 'Добавлено в избранное' : 'Убрано из избранного');
+}
 function cartCount() { return cartRead().reduce((s, i) => s + i.qty, 0); }
 function cartSum() { return cartRead().reduce((s, i) => s + (byId(i.id) ? byId(i.id).price * i.qty : 0), 0); }
-function paintCount() { document.querySelectorAll('.cart-count').forEach(el => el.textContent = cartCount()); }
+function paintCount() { document.querySelectorAll('.cart-count').forEach(el => el.textContent = cartCount()); document.querySelectorAll('.fav-count').forEach(el => el.textContent = favRead().length || ''); }
 
 /* ---------- уведомление ---------- */
 let toastTimer;
@@ -61,6 +71,7 @@ function paintChrome(active) {
     <a href="index.html" class="logo" aria-label="ANNAIVANOVA, на главную">ANNA<span>\\</span>IVANOVA</a>
     <div class="head-act">
       <a href="#" class="hide-m" onclick="openFitting();return false">Примерка</a>
+      <a href="fav.html" class="fav-link" aria-label="Избранное">&#9825; <span class="fav-count"></span></a>
       <a href="cart.html">Корзина <span class="cart-count">0</span></a>
     </div>
   </div></header>`;
@@ -148,6 +159,7 @@ function cardHTML(p) {
       <div class="card-media"><div class="tags">${tags.join('')}</div>${ph(p, COLLECTIONS[p.coll].short)}</div>
       <h3>${nb(p.name)}</h3>
     </a>
+    <button class="fav-btn${favHas(p.id) ? ' on' : ''}" aria-label="В избранное" aria-pressed="${favHas(p.id)}" onclick="favToggle('${p.id}', this)">&#9825;</button>
     ${priceHTML(p)}
     ${ed}
   </article>`;
